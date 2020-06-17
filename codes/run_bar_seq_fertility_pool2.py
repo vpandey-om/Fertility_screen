@@ -63,7 +63,7 @@ def stepwiseAnalysis():
 
     ## we will do diffrent kind of error analysis
     import pdb;pdb.set_trace()
-    error_analysis(filtered_count_df,manfest_df,prev_to_new,db_df)
+    error_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,filtered_count_df_des)
 
 
 
