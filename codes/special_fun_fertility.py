@@ -96,6 +96,7 @@ def preprocessing(manifests_df,count_df):
            final_df_des.loc[:,sam]=req_df.loc[:,two_reads].copy()
            print('Please check there is only one reads for the sample: %s'%ngi)
        else:
+
            print('Number of reads are mismatched for the sample: %s'%ngi)
 
     return final_df,final_df_des,final_df_two_read,manifests_df
@@ -726,6 +727,54 @@ def calculate_mean_sd_groupby_blood(df,manfest_df,grp_cols,day_pos,days=['d0','d
     # d13_df_mean,d13_df_sd=multi_to_one_df(tmp_mn_log,tmp_sd,day13_cols,day=days[1])
 
     return listofvar
+
+
+
+def propagate_error_gDNA_extraction_method(df,manfest_df,grp_cols,day_pos,days=['d0']):
+
+    ''' We are going to calculate mean and SD of slected columns '''
+
+    # df_log=np.log2(df)
+
+    # tmp_mn_log=pd.DataFrame(index=df.index)
+    ###
+    final_mean=pd.DataFrame(index=df.index)
+    final_CV=pd.DataFrame(index=df.index)
+    df_sample=pd.DataFrame(index=['num'])
+
+    # vars=manfest_df['dr'].unique().tolist()
+    # vars.remove('NA')
+    ### get columns that contains
+
+    ###
+
+    grp_cols.remove('e')
+
+
+
+    for k,v in manfest_df.groupby(grp_cols).indices.items():
+        if k[day_pos]in days:
+            key='_'.join(k)
+
+            tmp_mani=manfest_df.iloc[v].copy()
+            for dr,dr_v in tmp_mani.groupby('e').indices.items():
+                tmp_mn=pd.DataFrame(index=df.index)
+                tmp_var=pd.DataFrame(index=df.index)
+                tmp_mn[key+'_'+dr]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+                tmp_var[key+'_'+dr]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+                ### check whether there is zero variance
+                # tmp_var[tmp_var<1e-10]=1e-10;
+                # tmp_mn_log[key+'_'+dr]=df_log[tmp_mani.index[dr_v]].mean(axis=1).copy()
+                # df_sample[key+'_'+dr]=tmp_mani.index[dr_v].shape[0]
+                # [mean_df,sd_max,var_max]=getCombined_mean_variance(tmp_mn,tmp_var,df_sample)
+
+                # [mean_df,sd_max,var_max]=weighted_mean_variance(tmp_mn_log,tmp_var)
+                final_mean[key+'_'+dr]=tmp_mn
+                final_CV[key+'_'+dr]=np.square(tmp_var.copy()/tmp_mn.copy())
+    final_mean_log=np.log2(final_mean)
+    final_var_log=(final_CV)/((final_mean*final_mean)*((np.log(10)**2)*np.log10(2)))
+
+    return final_mean_log, final_var_log
 
 
 
@@ -1708,6 +1757,38 @@ def error_analysis_mosquito_feed(df,manfest_df,prev_to_new,db_df,plot_info=None)
 
 
 
+def plot_gDNA_error(m_df, v_df):
+    sex=['GCKO2','g145480']
+    feed=['mf1','mf2']
+    gDNA=['p','q']
+    cols=m_df.columns
+    titles=m_df.columns.str.replace('NA_NA','')
+    count=0
+    fig = make_subplots(rows=4, cols=2,subplot_titles=tuple(titles))
+
+    for k in range(4):
+        for i in range(2):
+            x=cols[count]
+            y=cols[count]
+            count=count+1
+
+            trace = go.Scatter(
+            x = m_df[x],
+            y = v_df[x],
+            mode = 'markers',
+            marker=dict(size=5,color='red'),
+            name='(# of markers=%d)'%m_df.shape[0],
+            opacity=0.7,
+            text=m_df.index)
+            fig.append_trace(trace,row=k+1, col=i+1)
+
+            # Update xaxis properties
+            # fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,0.8])
+            fig.update_yaxes(title_text="relative error",row=k+1, col=i+1,range=[0,0.8])
+            fig.update_xaxes(title_text="relative abundance",row=k+1, col=i+1)
+            #
+    fig.update_layout(height=2000, width=1000, title_text="gDNA extraction error analysis")
+    fig.show()
 
 
 
@@ -1752,6 +1833,14 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
+    ## for pool2 and pool4
+
+    if (plot_info['pool']=='pool2') or (plot_info['pool']=='pool4'):
+        
+        grp_cols=['sex','d','mf','dr','e','t']
+        day_pos=grp_cols.index('d')
+        gDNA_mean_df, gDNA_mean_df_var=propagate_error_gDNA_extraction_method(rel_df,manfest_df,grp_cols,day_pos)
+        plot_gDNA_error(gDNA_mean_df, gDNA_mean_df_var)
     ##
     plot_each_step_mean_var(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2)
 
