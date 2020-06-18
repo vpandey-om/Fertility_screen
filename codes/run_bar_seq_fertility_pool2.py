@@ -55,7 +55,7 @@ def stepwiseAnalysis():
     ### we are going to perform relative abundance analysis
     ## prev_to_new this is the pickle information which is used when we change old to new ID
     ## db_df: this is the dataframe contains name and description
-
+    print('hello vikash kumar')
     ## if you we do not want to plot then plot_info=None
     # plot_info={'pdf':out_folder+"/relative_abundance_of_pool2.pdf",'d':['d0','d13'],'mf':['mf1','mf2'],'sex':['GCKO2','g145480']}
     # plot_info=None
