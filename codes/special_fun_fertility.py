@@ -10,6 +10,8 @@ from scipy import stats
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 from sklearn.neighbors import KernelDensity
+import scipy.stats as st
+import scipy.special as sp
 
 
 plot_folder='../Figures/'
@@ -1792,6 +1794,77 @@ def plot_gDNA_error(m_df, v_df):
 
 
 
+def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01):
+    # cmb_fitness['GCKO'][0] is RGR final
+    # cmb_fitness['GCKO'][1] is varaiace final
+    ## upcut: for Non essential
+    ## lowcut: for essential
+    ## pval : for non essential
+    ## pval1: for essential
+
+    for k in cmb_fitness.keys():
+        key1=k
+        break
+
+    viz_df=pd.DataFrame(index=cmb_fitness[key1][0].index)
+
+    upcut=np.log2(upcut)
+    lowcut=np.log2(lowcut)
+
+    # pheno_pval={}
+
+    for key,item in cmb_fitness.items():
+
+    # we will calculate p-vlaue and z score
+
+        m=item[0]
+        s=item[1]
+        z=(upcut-m)/s
+        df = pd.DataFrame(m, columns=[key])
+        df[(key,'SD')]=s
+        df['z_score']=z
+        # df['pvalue']=1-sp.ndtr(df['z_score'])
+        # df['pvalue_2tail'] = 2*(1 - sp.ndtr(df['z_score']))
+        df['pvalue']=  (1 - st.norm.cdf(z))
+
+       # we will calculate p value form 0.1
+        z = (lowcut - m) / s
+        df['z_score_2'] = z
+        df['pvalue_2'] = (1 - st.norm.cdf(z))
+
+        # select fast growing, NE, E, middle
+        # if pvalue<0.05 and relative fitness >0
+        df_fast=df[(df['pvalue'] < pval) & (df[key] > upcut)]
+        df_ambiguous1=df[(df['pvalue'] < pval) & (df[key] < upcut)]
+        NE_df=df[(df['pvalue'] > pval)]
+        df_subset1= df[(df['pvalue_2'] >pval1)]
+        df_ambiguous2 = df[(df['pvalue_2'] < pval1) & (df[key] > lowcut)]
+        E_df=df[(df['pvalue_2'] < pval1)]
+
+        # non essential genes
+        NE=(NE_df.index)
+        # essential genes
+        E=E_df.index
+        # dropIdx=NE.union(E)
+        # # other genes
+        # df_other=df.drop(index=dropIdx)
+        #
+        # other=df_other.index
+
+        viz_df[key+'_pheno'] = 'NA'
+        viz_df.loc[E,key+'_pheno'] = 'E'
+        viz_df.loc[NE,key+'_pheno'] = 'NE'
+        viz_df[key+'_RGR'] = m
+        viz_df[key+'_sd'] = s
+        viz_df[key+'_var'] = item[2]
+
+        # pheno_pval['E']=E
+        # pheno_pval['NE'] = NE
+        # pheno_pval['other'] = other
+        #import pdb;pdb.set_trace()  # we are checking the pvalues for normal genes .
+
+    return viz_df
+
 
 def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
     ''' We are going to do relative growth rate analysis'''
@@ -1808,6 +1881,17 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     ### convert old pbanka to new ids
     geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(rel_df.index,prev_to_new,db_df)
     rel_df=rel_df.rename(old_to_new_ids, axis='index')
+
+    # newIds for control genes
+    control_genes=['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']
+    ctrl_genes=[]
+    for c in control_genes:
+        if c in prev_to_new.keys():
+            ctrl_genes.append(prev_to_new[c])
+        else:
+            ctrl_genes.append(c)
+
+
 
     ## now we are going to propagate error
     grp_cols=['sex','d','mf','dr','b','t']
@@ -1833,10 +1917,40 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
+    ##  we are going to compute rleative growth rate  ###
+
+    mf1_RGR,mf1_var=calculate_RGR(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d13_mf1,var_df_d13_mf1,ctrl_genes)
+    mf2_RGR,mf2_var=calculate_RGR(mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf2,var_df_d13_mf2,ctrl_genes)
+    ### now combined fitness for mf1 and mf2
+    # take mf1 and mf2 in one dtaframe
+
+
+    cmb_fitness={}
+    backgrounds=['GCKO2','g145480']
+
+    for b in backgrounds:
+        rgr_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1','mf2'])
+        var_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1','mf2'])
+        col_mf1 = getColumnsFormDF(mf1_RGR, [b])
+        col_mf2 = getColumnsFormDF(mf2_RGR, [b])
+
+        rgr_temp.loc[:,'mf1']=mf1_RGR.loc[:,col_mf1[0].to_list()[0]].copy()
+        rgr_temp.loc[:,'mf2']=mf2_RGR.loc[:,col_mf2[0].to_list()[0]].copy()
+        var_temp.loc[:,'mf1']=mf1_var.loc[:,col_mf1[0].to_list()[0]].copy()
+        var_temp.loc[:,'mf2']=mf2_var.loc[:,col_mf2[0].to_list()[0]].copy()
+
+
+        cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp,var_temp)
+
+    ## calculate combined fitness
+
+    pheno_call_df=getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01)
+
+    import pdb;pdb.set_trace()
     ## for pool2 and pool4
 
     if (plot_info['pool']=='pool2') or (plot_info['pool']=='pool4'):
-        
+
         grp_cols=['sex','d','mf','dr','e','t']
         day_pos=grp_cols.index('d')
         gDNA_mean_df, gDNA_mean_df_var=propagate_error_gDNA_extraction_method(rel_df,manfest_df,grp_cols,day_pos)
@@ -1890,6 +2004,47 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     fig.append_trace(trace_d13_male,row=2, col=2)
 
     fig.show()
+
+
+
+def calculate_RGR(m_df_d0,var_df_d0,m_df_d13,var_df_d13,control_genes):
+    ''' computing relative growth rate by divideing day13/day0'''
+    # all relative abundance are on log scale
+    m_df_d13.columns=m_df_d13.columns.str.replace('d13_','')
+    var_df_d13.columns=var_df_d13.columns.str.replace('d13_','')
+    m_df_d0.columns=m_df_d0.columns.str.replace('d0_','')
+    var_df_d0.columns=var_df_d0.columns.str.replace('d0_','')
+    rel_fitness=m_df_d13-m_df_d0
+    rel_var=var_df_d13+var_df_d0
+
+    control_gene_info={}
+    for col in rel_fitness.columns:
+        control_fitness=rel_fitness.loc[control_genes,[col]].copy()
+        control_var=rel_var.loc[control_genes,[col]].copy()
+        l=gaussianMeanAndVariance(control_fitness.T,control_var.T)
+        control_gene_info[col]=l # l[0] mean l[1]  SD   l[2] variance
+
+    #  we want to normalize by control genes
+    normalized_fit=rel_fitness.copy()
+    normalized_var=rel_var.copy()
+
+    for col in rel_fitness.columns:
+        ctr_mean=control_gene_info[col][0][col]  #  0 mean
+        ctr_var=control_gene_info[col][2][col]  # 1 variance
+
+        # this is the relative mean
+        normalized_fit.loc[:,col]=rel_fitness.loc[:,col].sub(ctr_mean)
+        # relative variance on log scale
+
+        normalized_var.loc[:,col]=rel_var.loc[:,col].add(ctr_var)
+
+    return normalized_fit,normalized_var
+
+
+
+
+
+
 
 
 
@@ -2931,8 +3086,8 @@ def stepByStep_barSeqAnalysis():
             tcols = getColumnsFormDF(normalized_fit, [string])
             tm=normalized_fit[tcols[0]].copy()
             terr=normalized_var[tcols[0]].copy()
-
-            cmb_fitness[(b,t)]=gaussianMeanAndVariance(tm,terr)
+            import pdb;pdb.set_trace()
+            cmb_fitness[b]=gaussianMeanAndVariance(tm,terr)
 
     # #plotrelFitness(cmb_fitness)
     # ##########  This function  is used for preparing plots for fertility website
