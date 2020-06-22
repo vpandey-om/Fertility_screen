@@ -62,9 +62,9 @@ def stepwiseAnalysis():
     # relative_abundance_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
 
     ## we will do diffrent kind of error analysis
-    
+
     # error_analysis(filtered_count_df,manfest_df,prev_to_new,db_df)
-    plot_info={'pool':'pool4'}
+    plot_info={'pool':'pool4','file':out_folder+'/pool4_repeat.xlsx'}
     relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
 
 

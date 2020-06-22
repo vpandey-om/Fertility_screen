@@ -64,7 +64,7 @@ def stepwiseAnalysis():
     ## we will do diffrent kind of error analysis
     # import pdb;pdb.set_trace()
     # error_analysis(filtered_count_df,manfest_df,prev_to_new,db_df)
-    plot_info={'pool':'pool2'}
+    plot_info={'pool':'pool2','file':out_folder+'/pool2_repeat.xlsx'}
     relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
 
 

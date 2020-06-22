@@ -319,6 +319,60 @@ def calculate_mean_sd_groupby_tube(df,manfest_df,grp_cols,day_pos,days=['NA']):
 
     return listofvar
 
+
+
+def propagate_error_cuvette(df,manfest_df,grp_cols,day_pos,days=['NA']):
+
+    ''' We are going to calculate mean and SD of slected columns '''
+    df_log=np.log2(df)
+    tmp_mn=pd.DataFrame(index=df.index)
+    tmp_var=pd.DataFrame(index=df.index)
+    tmp_mn_log=pd.DataFrame(index=df.index)
+    ###
+    final_mean=pd.DataFrame(index=df.index)
+    final_CV=pd.DataFrame(index=df.index)
+    df_sample=pd.DataFrame(index=['num'])
+
+    vars=manfest_df['dr'].unique().tolist()
+    vars.remove('NA')
+    ### get columns that contains
+
+    ###
+
+    grp_cols.remove('t')
+    for k,v in manfest_df.groupby(grp_cols).indices.items():
+        if k[day_pos]in days:
+            key='_'.join(k)
+
+            tmp_mani=manfest_df.iloc[v].copy()
+            for dr,dr_v in tmp_mani.groupby('t').indices.items():
+
+                tmp_mn[key+'_'+dr]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+                tmp_var[key+'_'+dr]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+                ### check whether there is zero variance
+                # tmp_var[tmp_var<1e-10]=1e-10;
+                tmp_mn_log[key+'_'+dr]=df_log[tmp_mani.index[dr_v]].mean(axis=1).copy()
+                df_sample[key+'_'+dr]=tmp_mani.index[dr_v].shape[0]
+
+            [mean_df,sd_max,var_max]=getCombined_mean_variance(tmp_mn,tmp_var,df_sample)
+
+            # [mean_df,sd_max,var_max]=weighted_mean_variance(tmp_mn_log,tmp_var)
+
+            final_mean[key]=mean_df.copy()
+            final_CV[key]=var_max.copy()
+
+
+            # we are going to apply weighted varaiance analysis
+            # tmp_sd[key]=np.square((df[manfest_df.index[v]].std(axis=1).copy())/(df[manfest_df.index[v]].mean(axis=1).copy()))
+            # print('hello',manfest_df.iloc[v,:])
+
+    final_mean_log=np.log2(final_mean)
+    final_var_log=(final_CV)/((final_mean*final_mean)*((np.log(10)**2)*np.log10(2)))
+
+
+
+    return final_mean_log,final_var_log
+
 def weighted_mean_variance(rel_fit,rel_err):
 
     ''' With this analysis we would like to analyze weigted varaiace analysis'''
@@ -1766,7 +1820,7 @@ def plot_gDNA_error(m_df, v_df):
     cols=m_df.columns
     titles=m_df.columns.str.replace('NA_NA','')
     count=0
-    fig = make_subplots(rows=4, cols=2,subplot_titles=tuple(titles))
+    fig = make_subplots(rows=4, cols=3,subplot_titles=tuple(titles))
 
     for k in range(4):
         for i in range(2):
@@ -1788,10 +1842,27 @@ def plot_gDNA_error(m_df, v_df):
             # fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,0.8])
             fig.update_yaxes(title_text="relative error",row=k+1, col=i+1,range=[0,0.8])
             fig.update_xaxes(title_text="relative abundance",row=k+1, col=i+1)
-            #
-    fig.update_layout(height=2000, width=1000, title_text="gDNA extraction error analysis")
-    fig.show()
 
+
+        trace = go.Scatter(
+        x = m_df[cols[count-1]],
+        y = m_df[cols[count-2]],
+        mode = 'markers',
+        marker=dict(size=5,color='red'),
+        name='(# of markers=%d)'%m_df.shape[0],
+        opacity=0.7,
+        text=m_df.index)
+        fig.append_trace(trace,row=k+1, col=3)
+
+        # Update xaxis properties
+        # fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,0.8])
+        fig.update_yaxes(title_text="relative abundance (q)",row=k+1, col=3,range=[-15,0])
+        fig.update_xaxes(title_text="relative abundance (p)",row=k+1, col=3,range=[-15,0])
+
+            #
+    fig.update_layout(height=2000, width=1500, title_text="gDNA extraction error analysis")
+    fig.show()
+    import pdb;pdb.set_trace()
 
 
 def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01):
@@ -1866,6 +1937,124 @@ def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01):
     return viz_df
 
 
+
+
+def testforRepeat(pheno_call_df,mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,cuvette_mean_df,cuvette_var_df,rel_cut=-10.5,plot_info=None):
+    ''' test diffrent level of errors and comapre with combined errors'''
+
+    cutoff_zero=-13.5 ### when relative abundance is too small
+
+
+    input=[mean_df_d0_mf1,mean_df_d0_mf2]
+    input_var=[var_df_d0_mf1,var_df_d0_mf2]
+    output=[mean_df_d13_mf1,mean_df_d13_mf2]
+    output_var=[var_df_d13_mf1,var_df_d13_mf2]
+    feeds=[]
+    # backgrounds=['GCKO2','g145480']
+
+    result=pd.DataFrame(index=mean_df_d0_mf1.index)
+    result2=pd.DataFrame(index=mean_df_d0_mf1.index)
+
+    for i,f in enumerate(['mf1','mf2']):
+        for col in input[i].columns:
+            result[col+ '_'+f+'_mean']=np.nan
+            result[col+ '_'+f+'_var']=np.nan
+            result2[col+ '_'+f+'_mean']=np.nan
+            result2[col+ '_'+f+'_var']=np.nan
+            # result2=result.copy()
+
+            result2.loc[:,col+'_'+f+'_mean']=input[i].loc[:,col].copy()
+            result2.loc[:,col+'_'+f+'_var']=input_var[i].loc[:,col].copy()
+
+            m=input_var[i].loc[:,col].mean()
+            s=input_var[i].loc[:,col].std()
+
+
+            s1=set(input[i].loc[input[i].loc[:,col]<rel_cut,:].index)
+            s2=set(input_var[i].loc[input_var[i].loc[:,col]> m+2*s,:].index)
+            s3=set(input[i].loc[input[i].loc[:,col]<cutoff_zero,:].index)
+            genes=(s1&s2)|s3
+            result.loc[genes,col+ '_'+f+'_mean']=input[i].loc[genes,col].copy()
+            result.loc[genes,col+ '_'+f+'_var']=input_var[i].loc[genes,col].copy()
+
+    for i,f in enumerate(['mf1','mf2']):
+        for col in output[i].columns:
+            result[col+ '_'+f+'_mean']=np.nan
+            result[col+ '_'+f+'_var']=np.nan
+            result2[col+ '_'+f+'_mean']=np.nan
+            result2[col+ '_'+f+'_var']=np.nan
+
+            result2.loc[:,col+'_'+f+'_mean']=output[i].loc[:,col].copy()
+            result2.loc[:,col+'_'+f+'_var']=output_var[i].loc[:,col].copy()
+
+            m=output_var[i].loc[:,col].mean()
+            s=output_var[i].loc[:,col].std()
+
+
+            s1=set(output[i].loc[output[i].loc[:,col]<rel_cut,:].index)
+            s2=set(output_var[i].loc[output_var[i].loc[:,col]> m+2*s,:].index)
+            s3=set(output[i].loc[output[i].loc[:,col]<cutoff_zero,:].index)
+            genes=(s1&s2)|s3
+            result.loc[genes,col+ '_'+f+'_mean']=output[i].loc[genes,col].copy()
+            result.loc[genes,col+ '_'+f+'_var']=output_var[i].loc[genes,col].copy()
+
+
+
+
+    # # for combined fitness
+    rgr_cols=['GCKO2_RGR', 'g145480_RGR']
+    var_cols=['GCKO2_var', 'g145480_var']
+    for i,col in enumerate(rgr_cols):
+        result['final_'+col]=np.nan
+        result['final_'+var_cols[i]]=np.nan
+
+        result2['final_'+col]=pheno_call_df.loc[:,col].copy()
+        result2['final_'+var_cols[i]]=pheno_call_df.loc[:,var_cols[i]].copy()
+        m=pheno_call_df.loc[:,var_cols[i]].mean()
+        s=pheno_call_df.loc[:,var_cols[i]].std()
+        # s1=set(pheno_call_df.loc[pheno_call_df.loc[:,col]<rel_cut,:].index)
+        s2=set(pheno_call_df.loc[pheno_call_df.loc[:,var_cols[i]]> m+2*s,:].index)
+        # s3=set(pheno_call_df.loc[pheno_call_df.loc[:,col]<cutoff_zero,:].index)
+        genes=s2
+        result.loc[genes,'final_'+col]=pheno_call_df.loc[genes,col].copy()
+        result.loc[genes,'final_'+var_cols[i]]=pheno_call_df.loc[genes,var_cols[i]].copy()
+    # result2.loc[:,col+'_'+f+'_mean']=output[i][result2.index,col].copy()
+    # result2.loc[:,col+'_'+f+'_var']=output_var[i][result2.index,col].copy()
+    # # for col in pheno_call_df
+
+    ## for cuvette analysis
+
+    for col in cuvette_mean_df.columns:
+        result[col+ '_cuvette_mean']=np.nan
+        result[col+ '_cuvette_var']=np.nan
+
+        result2[col+ '_cuvette_mean']=cuvette_mean_df.loc[:,col].copy()
+        result2[col+ '_cuvette_var']=cuvette_var_df.loc[:,col].copy()
+
+
+
+        m=cuvette_var_df.loc[:,col].mean()
+        s=cuvette_var_df.loc[:,col].std()
+
+
+        s1=set(cuvette_mean_df.loc[cuvette_mean_df.loc[:,col]<rel_cut,:].index)
+        s2=set(cuvette_var_df.loc[cuvette_var_df.loc[:,col]> m+2*s,:].index)
+        s3=set(cuvette_mean_df.loc[cuvette_mean_df.loc[:,col]<cutoff_zero,:].index)
+        genes=(s1&s2)|s3
+        result.loc[genes,col+ '_'+f+'_mean']=cuvette_mean_df.loc[genes,col].copy()
+        result.loc[genes,col+ '_'+f+'_var']=cuvette_var_df.loc[genes,col].copy()
+
+    result=result.dropna(how='all')
+
+    if 'file' in plot_info.keys():
+        with pd.ExcelWriter(plot_info['file']) as writer:
+            result.to_excel(writer, sheet_name='filter')
+            result2.to_excel(writer, sheet_name='all')
+
+
+    print('repeat is done')
+
+
 def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
     ''' We are going to do relative growth rate analysis'''
 
@@ -1919,8 +2108,15 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
 
     ##  we are going to compute rleative growth rate  ###
 
-    mf1_RGR,mf1_var=calculate_RGR(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d13_mf1,var_df_d13_mf1,ctrl_genes)
-    mf2_RGR,mf2_var=calculate_RGR(mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf2,var_df_d13_mf2,ctrl_genes)
+    ## propgate error for transfection cuvette
+    grp_cols=['sex','d','mf','dr','b','t']
+    day_pos=grp_cols.index('d')
+    days=['NA']
+    cuvette_mean_df,cuvette_var_df=propagate_error_cuvette(rel_df,manfest_df,grp_cols,day_pos,days)
+    ##
+
+    mf1_RGR,mf1_var=calculate_RGR(mean_df_d0_mf1.copy(),var_df_d0_mf1.copy(),mean_df_d13_mf1.copy(),var_df_d13_mf1.copy(),ctrl_genes)
+    mf2_RGR,mf2_var=calculate_RGR(mean_df_d0_mf2.copy(),var_df_d0_mf2.copy(),mean_df_d13_mf2.copy(),var_df_d13_mf2.copy(),ctrl_genes)
     ### now combined fitness for mf1 and mf2
     # take mf1 and mf2 in one dtaframe
 
@@ -1946,7 +2142,10 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
 
     pheno_call_df=getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01)
 
-    import pdb;pdb.set_trace()
+    # test variance of comined and variance with each step using cutoff
+    rel_cut=-10.5
+    testforRepeat(pheno_call_df,mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,cuvette_mean_df,cuvette_var_df,rel_cut,plot_info)
+
     ## for pool2 and pool4
 
     if (plot_info['pool']=='pool2') or (plot_info['pool']=='pool4'):
@@ -1956,6 +2155,7 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
         gDNA_mean_df, gDNA_mean_df_var=propagate_error_gDNA_extraction_method(rel_df,manfest_df,grp_cols,day_pos)
         plot_gDNA_error(gDNA_mean_df, gDNA_mean_df_var)
     ##
+
     plot_each_step_mean_var(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2)
 
     ## compute relative ratio betwen day13 and day0
@@ -2003,7 +2203,9 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
 
     fig.append_trace(trace_d13_male,row=2, col=2)
 
-    fig.show()
+    # fig.show()
+
+    return pheno_call_df
 
 
 
