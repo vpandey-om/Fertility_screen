@@ -3097,7 +3097,7 @@ def plotInSnsNew(viz_df):
     viz_df['GCKO2_d13_pheno']=viz_df['GCKO2_d13_pheno'].replace({'E': 'IF', 'NE': 'FF', 'NA': 'RF'})
     # viz_df['Published_cross_phenotype']=viz_df['Published_cross_phenotype'].replace({'N': 'NA'})
 
-
+    
     ##################### BAR PLOTS BEGINS
 
 

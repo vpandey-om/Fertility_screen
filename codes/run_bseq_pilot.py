@@ -97,7 +97,7 @@ def relative_growth_rate_analysis_pilot(df,manfest_df,prev_to_new,db_df,plot_inf
     grp_cols=['sex','d','mf','dr','b','t']
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
-    
+
     ##
     plot_each_step_mean_var(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2)
 
@@ -138,7 +138,7 @@ def stepwiseAnalysis():
 
     filtered_count_df = final_df.drop(remove_genes)
     filtered_count_df.to_csv(out_folder+"/filterd_count_matrix_pilot1.txt",sep='\t')
-
+    import pdb;pdb.set_trace()
     ### we are going to perform relative abundance analysis
     ## prev_to_new this is the pickle information which is used when we change old to new ID
     ## db_df: this is the dataframe contains name and description
