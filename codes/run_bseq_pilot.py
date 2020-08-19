@@ -138,7 +138,7 @@ def stepwiseAnalysis():
 
     filtered_count_df = final_df.drop(remove_genes)
     filtered_count_df.to_csv(out_folder+"/filterd_count_matrix_pilot1.txt",sep='\t')
-    import pdb;pdb.set_trace()
+    
     ### we are going to perform relative abundance analysis
     ## prev_to_new this is the pickle information which is used when we change old to new ID
     ## db_df: this is the dataframe contains name and description

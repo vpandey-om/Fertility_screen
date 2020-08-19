@@ -199,7 +199,7 @@ def relative_abundance_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
     rel_df=df.copy()
     rel_df=rel_df.drop(columns=['Gene','Barcodes'])
     rel_df= rel_df + 1
-    rel_df=rel_df.div(rel_df.sum(axis=1), axis=0)
+    rel_df=rel_df.div(rel_df.sum(axis=0), axis=1)
     rel_df=np.log2(rel_df)
 
     ### convert old pbanka to new ids
@@ -227,7 +227,9 @@ def relative_abundance_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
 
 
     #### we would like to plot on pdf file
+    import pdb; pdb.set_trace()
     if not (plot_info==None):
+        # import pdb;pdb.set_trace()
         plot_relative_abunndance_daywise(sex_list,geneConv_new,plot_info)
 
 
@@ -893,11 +895,7 @@ def propagate_error_day0_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d0
 
     ''' We are going to calculate mean and SD for combined analyis from PCR to mosquitofeed '''
     df_log=np.log2(df)
-    tmp_mn_mf1=pd.DataFrame(index=df.index)
-    tmp_var_mf1=pd.DataFrame(index=df.index)
 
-    tmp_mn_mf2=pd.DataFrame(index=df.index)
-    tmp_var_mf2=pd.DataFrame(index=df.index)
 
     ###
     final_mean_mf1=pd.DataFrame(index=df.index)
@@ -915,18 +913,29 @@ def propagate_error_day0_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d0
     grp_cols.remove('mf')
 
     grp_cols.remove('b')
+
     for k,v in manfest_df.groupby(grp_cols).indices.items():
         if k[day_pos]in days:
             key='_'.join(k)
 
             tmp_mani=manfest_df.iloc[v].copy()
+            tmp_mn_mf1=pd.DataFrame(index=df.index)
+            tmp_var_mf1=pd.DataFrame(index=df.index)
 
+            tmp_mn_mf2=pd.DataFrame(index=df.index)
+            tmp_var_mf2=pd.DataFrame(index=df.index)
             for dr,dr_v in tmp_mani.groupby([ 'b','mf']).indices.items():
+
+
+
 
                 if dr[1]=='mf1':
                     dr_j='_'.join(dr)
                     tmp_mn_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
-                    tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+                    if df[tmp_mani.index[dr_v]].shape[1]==1:
+                        tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1,ddof=0).copy()
+                    else:
+                        tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
                 elif dr[1]=='mf2':
                     dr_j='_'.join(dr)
                     tmp_mn_mf2[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
@@ -934,6 +943,21 @@ def propagate_error_day0_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d0
                 else:
                     continue
 
+            # for dr,dr_v in tmp_mani.groupby([ 'mf']).indices.items():
+            #
+            #     if dr=='mf1':
+            #         dr_j='_'.join(dr)
+            #         tmp_mn_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+            #         if df[tmp_mani.index[dr_v]].shape[1]==1:
+            #             tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1,ddof=0).copy()
+            #         else:
+            #             tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+            #     elif dr=='mf2':
+            #         dr_j='_'.join(dr)
+            #         tmp_mn_mf2[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+            #         tmp_var_mf2[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+            #     else:
+            #         continue
 
             [mean_df,sd_max,var_max]=getCombined_mean_variance(tmp_mn_mf1,tmp_var_mf1,df_sample)
 
@@ -1003,10 +1027,7 @@ def propagate_error_day13_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d
 
     ''' We are going to calculate mean and SD for combined analyis from PCR to mosquitofeed '''
     df_log=np.log2(df)
-    tmp_mn_mf1=pd.DataFrame(index=df.index)
-    tmp_var_mf1=pd.DataFrame(index=df.index)
-    tmp_mn_mf2=pd.DataFrame(index=df.index)
-    tmp_var_mf2=pd.DataFrame(index=df.index)
+
 
 
     ###
@@ -1030,8 +1051,12 @@ def propagate_error_day13_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d
             key='_'.join(k)
 
             tmp_mani=manfest_df.iloc[v].copy()
-
+            tmp_mn_mf1=pd.DataFrame(index=df.index)
+            tmp_var_mf1=pd.DataFrame(index=df.index)
+            tmp_mn_mf2=pd.DataFrame(index=df.index)
+            tmp_var_mf2=pd.DataFrame(index=df.index)
             for dr,dr_v in tmp_mani.groupby([ 'dr','mf']).indices.items():
+
                 if dr[1]=='mf1':
                     dr_j='_'.join(dr)
                     tmp_mn_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
@@ -1043,6 +1068,18 @@ def propagate_error_day13_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d
                 else:
                     continue
 
+            # for dr,dr_v in tmp_mani.groupby([ 'mf']).indices.items():
+            #     import pdb; pdb.set_trace()
+            #     if dr=='mf1':
+            #         dr_j='_'.join(dr)
+            #         tmp_mn_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+            #         tmp_var_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+            #     elif dr=='mf2':
+            #         dr_j='_'.join(dr)
+            #         tmp_mn_mf2[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
+            #         tmp_var_mf2[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].var(axis=1).copy()
+            #     else:
+            #         continue
 
             [mean_df,sd_max,var_max]=getCombined_mean_variance(tmp_mn_mf1,tmp_var_mf1,df_sample)
 
@@ -1580,7 +1617,7 @@ def error_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
 
 
 
-def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
+def plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info):
     ''' We will plot genes sex-specific wise '''
 
     #### input ####
@@ -1588,14 +1625,14 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
     # geneConv: when we want to give name of gene
     # out_pdf: will generated pdf file
     ########
-    out_pdf=plot_info['pdf']
+    out_pdf=plot_info['rel_file']
     mf=plot_info['mf']
     day=plot_info['d']
     sex=plot_info['sex']
 
     pdf = matplotlib.backends.backend_pdf.PdfPages(out_pdf)
     n=2
-    genes=sex_list[0].index;
+    genes=mean_df_d0_mf1.index;
 
     labels=[]
     for gene in genes:
@@ -1624,24 +1661,24 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
 
 
             ### mf1 female
-            y=[sex_list[0].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[0]],sex_list[0].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[0]]]
-            yerr=[sex_list[1].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[0]],sex_list[1].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[0]]]
-            plt.errorbar(x,y, yerr=yerr, fmt='b--')
-
-            ### mf2 female
-            y=[sex_list[0].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[1]],sex_list[0].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[1]]]
-            yerr=[sex_list[1].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[1]],sex_list[1].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[1]]]
+            y=[mean_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+            yerr=[var_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],var_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
             plt.errorbar(x,y, yerr=yerr, fmt='r--')
 
+            ### mf2 female
+            y=[mean_df_d0_mf2.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf2.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+            yerr=[var_df_d0_mf2.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],var_df_d13_mf2.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+            plt.errorbar(x,y, yerr=yerr, fmt='r-')
+
             ### mf1 male
-            y=[sex_list[0].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[0]],sex_list[0].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[0]]]
-            yerr=[sex_list[1].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[0]],sex_list[1].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[0]]]
-            plt.errorbar(x,y, yerr=yerr, fmt='b-')
+            y=[mean_df_d0_mf1.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf1.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+            yerr=[var_df_d0_mf1.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],var_df_d13_mf1.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+            plt.errorbar(x,y, yerr=yerr, fmt='b--')
 
             ### mf2 male
-            y=[sex_list[0].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[1]],sex_list[0].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[1]]]
-            yerr=[sex_list[1].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[1]],sex_list[1].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[1]]]
-            plt.errorbar(x,y, yerr=yerr, fmt='r-')
+            y=[mean_df_d0_mf2.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf2.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+            yerr=[var_df_d0_mf2.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],var_df_d13_mf2.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+            plt.errorbar(x,y, yerr=yerr, fmt='b-')
 
 
             plt.ylabel('log2 relative fitness')
@@ -1650,7 +1687,7 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
             plt.xticks([1, 1.5, 2],['day0', '', 'day13'],fontsize=15)
 
             plt.ylim(-18, 1)
-
+            plt.grid(False)
             k=k+1
         pdf.savefig(fig)
 
@@ -1666,24 +1703,24 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
 
 
         ### mf1 female
-        y=[sex_list[0].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[0]],sex_list[0].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[0]]]
-        yerr=[sex_list[1].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[0]],sex_list[1].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[0]]]
-        plt.errorbar(x,y, yerr=yerr, fmt='b--')
-
-        ### mf2 female
-        y=[sex_list[0].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[1]],sex_list[0].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[1]]]
-        yerr=[sex_list[1].loc[genes[k],sex[0]+'_'+day[0]+'_'+mf[1]],sex_list[1].loc[genes[k],sex[0]+'_'+day[1]+'_'+mf[1]]]
+        y=[mean_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+        yerr=[var_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],var_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
         plt.errorbar(x,y, yerr=yerr, fmt='r--')
 
+        ### mf2 female
+        y=[mean_df_d0_mf2.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf2.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+        yerr=[var_df_d0_mf2.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],var_df_d13_mf2.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
+        plt.errorbar(x,y, yerr=yerr, fmt='r-')
+
         ### mf1 male
-        y=[sex_list[0].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[0]],sex_list[0].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[0]]]
-        yerr=[sex_list[1].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[0]],sex_list[1].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[0]]]
-        plt.errorbar(x,y, yerr=yerr, fmt='b-')
+        y=[mean_df_d0_mf1.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf1.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+        yerr=[var_df_d0_mf1.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],var_df_d13_mf1.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+        plt.errorbar(x,y, yerr=yerr, fmt='b--')
 
         ### mf2 male
-        y=[sex_list[0].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[1]],sex_list[0].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[1]]]
-        yerr=[sex_list[1].loc[genes[k],sex[1]+'_'+day[0]+'_'+mf[1]],sex_list[1].loc[genes[k],sex[1]+'_'+day[1]+'_'+mf[1]]]
-        plt.errorbar(x,y, yerr=yerr, fmt='r-')
+        y=[mean_df_d0_mf2.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf2.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+        yerr=[var_df_d0_mf2.loc[genes[k],sex[1]+'_'+day[0]+'_NA_NA'],var_df_d13_mf2.loc[genes[k],sex[1]+'_'+day[1]+'_NA_NA']]
+        plt.errorbar(x,y, yerr=yerr, fmt='b-')
 
 
 
@@ -1693,7 +1730,7 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
         plt.xticks([1, 1.5, 2],['day0', '', 'day13'],fontsize=15)
 
         plt.ylim(-18, 1)
-
+        plt.grid(False)
         k=k+1
         pdf.savefig(fig)
     pdf.close()
@@ -1782,7 +1819,7 @@ def error_analysis_mosquito_feed(df,manfest_df,prev_to_new,db_df,plot_info=None)
     # trace_bi=plot_dissection_error(df_m,df_s,days,col='red')
     # fig1 = make_subplots(rows=1, cols=1,subplot_titles=("Blood input error"))
 
-    import pdb;pdb.set_trace()
+    # import pdb;pdb.set_trace()
     ### DO FOR D13
     grp_cols=['sex','d','mf','dr','b','t']
     day_pos=grp_cols.index('d')
@@ -1809,6 +1846,39 @@ def error_analysis_mosquito_feed(df,manfest_df,prev_to_new,db_df,plot_info=None)
 
     cmb_df=pd.concat([day13_filtered_mean,day13_filtered_var],axis=1    )
     cmb_df.to_csv('filtered genes and conditions_d13.txt',sep='\t',index=None)
+
+
+
+
+def apply_filter_testInput(pheno_call_df,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12):
+    ''' test diffrent level of errors and comapre with combined errors'''
+    sex=['GCKO2','g145480']
+    for s in sex:
+        aa=mean_df_d0_mf1.columns.str.contains(s)
+        if aa.any():
+            mf1_gene=mean_df_d0_mf1[mean_df_d0_mf1.iloc[:,np.where(aa)[0][0]]<rel_cut].index
+        aa=mean_df_d0_mf1.columns.str.contains(s)
+        if aa.any():
+            mf2_gene=mean_df_d0_mf2[mean_df_d0_mf2.iloc[:,np.where(aa)[0][0]]<rel_cut].index
+        ## get common genes
+
+        comm=set(mf1_gene) & set(mf2_gene)
+        only_mf1=set(mf1_gene) - set(mf2_gene)
+        only_mf2=set(mf2_gene) - set(mf1_gene)
+
+
+        if len(comm)>0:
+            pheno_call_df.loc[comm,s+'_pheno']='No Power'
+            pheno_call_df.loc[comm,s+'_relative_filter']='applied'
+            pheno_call_df.loc[comm,s+'_feed']='no data'
+        if len(only_mf1)>0:
+            pheno_call_df.loc[only_mf1,s+'_feed']='Mf2'
+
+        if len(only_mf2)>0:
+            pheno_call_df.loc[only_mf2,s+'_feed']='Mf1'
+
+    return pheno_call_df
+
 
 
 
@@ -1862,10 +1932,10 @@ def plot_gDNA_error(m_df, v_df):
             #
     fig.update_layout(height=2000, width=1500, title_text="gDNA extraction error analysis")
     fig.show()
-    import pdb;pdb.set_trace()
 
 
-def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01):
+
+def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.1,pval=0.01,pval1=0.01):
     # cmb_fitness['GCKO'][0] is RGR final
     # cmb_fitness['GCKO'][1] is varaiace final
     ## upcut: for Non essential
@@ -1908,10 +1978,10 @@ def getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01):
         df_fast=df[(df['pvalue'] < pval) & (df[key] > upcut)]
         df_ambiguous1=df[(df['pvalue'] < pval) & (df[key] < upcut)]
         NE_df=df[(df['pvalue'] > pval)]
+
         df_subset1= df[(df['pvalue_2'] >pval1)]
         df_ambiguous2 = df[(df['pvalue_2'] < pval1) & (df[key] > lowcut)]
         E_df=df[(df['pvalue_2'] < pval1)]
-
         # non essential genes
         NE=(NE_df.index)
         # essential genes
@@ -2063,7 +2133,7 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     rel_df=df.copy()
     rel_df=rel_df.drop(columns=['Gene','Barcodes'])
     rel_df= rel_df + 1
-    rel_df=rel_df.div(rel_df.sum(axis=1), axis=0)
+    rel_df=rel_df.div(rel_df.sum(axis=0), axis=1)
     rel_df_log=np.log2(rel_df)
 
 
@@ -2072,7 +2142,7 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     rel_df=rel_df.rename(old_to_new_ids, axis='index')
 
     # newIds for control genes
-    control_genes=['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']
+    control_genes= plot_info['control_genes']
     ctrl_genes=[]
     for c in control_genes:
         if c in prev_to_new.keys():
@@ -2099,6 +2169,7 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     var_df_d13_log=(var_df_d13)/((mean_df_d13*mean_df_d13)*((np.log(10)**2)*np.log10(2)))
 
     ### we are going to compute each mosquito feed
+
     grp_cols=['sex','d','mf','dr','b','t']
     day_pos=grp_cols.index('d')
     mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2=propagate_error_day0_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
@@ -2107,6 +2178,9 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
     ##  we are going to compute rleative growth rate  ###
+
+    ### plot propagated relative abundance.
+    propagated_relative_baundance_plot(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,plot_info)
 
     ## propgate error for transfection cuvette
     grp_cols=['sex','d','mf','dr','b','t']
@@ -2139,12 +2213,18 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
         cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp,var_temp)
 
     ## calculate combined fitness
+    pheno_call_df=applyPhenocall_CI(cmb_fitness,lower_cut=np.log2(0.45),upper_cut=np.log2(2.05))
+    # pheno_call_df=getPvalZscore(cmb_fitness,upcut=1,lowcut=0.4,pval=0.05,pval1=0.05)
 
-    pheno_call_df=getPvalZscore(cmb_fitness,upcut=1,lowcut=0.03,pval=0.01,pval1=0.01)
+    ### aplly filter of relative input
+    pheno_call_df=apply_filter_testInput(pheno_call_df,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12)
+
+    ### once again apply filter on feeds
+    pheno_call_df2=apply_filter_on_feeds(pheno_call_df,mf1_RGR,mf1_var,mf2_RGR,mf2_var,mean_df_d0_mf1,mean_df_d0_mf2)
 
     # test variance of comined and variance with each step using cutoff
-    rel_cut=-10.5
-    testforRepeat(pheno_call_df,mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,cuvette_mean_df,cuvette_var_df,rel_cut,plot_info)
+    # rel_cut=-12
+    # testforRepeat(pheno_call_df,mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,cuvette_mean_df,cuvette_var_df,rel_cut,plot_info)
 
     ## for pool2 and pool4
 
@@ -2205,7 +2285,146 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
 
     # fig.show()
 
-    return pheno_call_df
+    return pheno_call_df2,[mean_df_d0_mf1,mean_df_d0_mf2]
+
+def apply_filter_on_feeds(pheno_call_df,mf1_RGR,mf1_var,mf2_RGR,mf2_var,mean_df_d0_mf1,mean_df_d0_mf2):
+    ''' apply_filter_on_feeds '''
+
+
+    cmb_fit_final={}
+    backgrounds=['GCKO2','g145480']
+
+    for b in backgrounds:
+        cmb_fitness={}
+        col_mf1 = getColumnsFormDF(mf1_RGR, [b])
+        col_mf2 = getColumnsFormDF(mf2_RGR, [b])
+
+
+
+        ### select both feeds
+
+        pheno_both=pheno_call_df[(pheno_call_df[b+'_feed']=='Mf1 and Mf2')| (pheno_call_df[b+'_feed']=='no data')]
+        pheno_mf1=pheno_call_df[pheno_call_df[b+'_feed']=='Mf1']
+        pheno_mf2=pheno_call_df[pheno_call_df[b+'_feed']=='Mf2']
+
+        if len(pheno_both.index)>0:
+            rgr_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1','mf2'])
+            var_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1','mf2'])
+            rgr_temp.loc[:,'mf1']=mf1_RGR.loc[:,col_mf1[0].to_list()[0]].copy()
+            rgr_temp.loc[:,'mf2']=mf2_RGR.loc[:,col_mf2[0].to_list()[0]].copy()
+            var_temp.loc[:,'mf1']=mf1_var.loc[:,col_mf1[0].to_list()[0]].copy()
+            var_temp.loc[:,'mf2']=mf2_var.loc[:,col_mf2[0].to_list()[0]].copy()
+            cmb_fitness[b+'_both']=gaussianMeanAndVariance(rgr_temp.loc[pheno_both.index,:].copy(),var_temp.loc[pheno_both.index,:].copy())
+
+        if len(pheno_mf1.index)>0:
+            rgr_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1'])
+            var_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf1'])
+            rgr_temp.loc[:,'mf1']=mf1_RGR.loc[:,col_mf1[0].to_list()[0]].copy()
+            var_temp.loc[:,'mf1']=mf1_var.loc[:,col_mf1[0].to_list()[0]].copy()
+            cmb_fitness[b+'_mf1']=gaussianMeanAndVariance(rgr_temp.loc[pheno_mf1.index,:].copy(),var_temp.loc[pheno_mf1.index,:].copy())
+        if len(pheno_mf2.index)>0:
+            rgr_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf2'])
+            var_temp=pd.DataFrame(index=mf1_RGR.index,columns=['mf2'])
+            rgr_temp.loc[:,'mf2']=mf2_RGR.loc[:,col_mf2[0].to_list()[0]].copy()
+            var_temp.loc[:,'mf2']=mf2_var.loc[:,col_mf2[0].to_list()[0]].copy()
+            cmb_fitness[b+'_mf2']=gaussianMeanAndVariance(rgr_temp.loc[pheno_mf2.index,:].copy(),var_temp.loc[pheno_mf2.index,:].copy())
+            ## calculate combined fitness
+
+        cmb_fit_final=combine_both_feeds(cmb_fit_final,cmb_fitness,b)
+
+    pheno_call_df2=applyPhenocall_CI(cmb_fit_final,lower_cut=np.log2(0.45),upper_cut=np.log2(2.05))
+
+    # for b in backgrounds:
+    #     pheno_call_df2.loc[pheno_call_df.index,b+'_relative_filter']=pheno_call_df.loc[pheno_call_df.index,b+'_relative_filter'].copy()
+    #     pheno_call_df2.loc[pheno_call_df.index,b+'_feed']=pheno_call_df.loc[pheno_call_df.index,b+'_feed'].copy()
+    pheno_call_df2=apply_filter_testInput(pheno_call_df2,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12)
+    return pheno_call_df2
+
+def combine_both_feeds(cmb_fit_final,cmb_fitness,b):
+    try:
+        mn_list=[]
+        sd_list=[]
+        var_list=[]
+        for k in  cmb_fitness.keys():
+            mn_list.append(cmb_fitness[k][0])
+            sd_list.append(cmb_fitness[k][1])
+            var_list.append(cmb_fitness[k][2])
+        if len(mn_list)>0:
+            mn=pd.concat(mn_list)
+            sd=pd.concat(sd_list)
+            var=pd.concat(var_list)
+            cmb_fit_final[b]=[mn,sd,var]
+    except:
+        import pdb; pdb.set_trace()
+    return cmb_fit_final
+
+
+
+
+def singleMeanAndVariance(rel_fit,rel_err):
+    mean_df=rel_fit.iloc[:,0]
+    var_max=rel_err.iloc[:,0]
+    sd_max=var_max.apply(np.sqrt)
+
+    return mean_df,sd_max,var_max
+
+
+def applyPhenocall_CI(fit_df,lower_cut=-1,upper_cut=1):
+    ''' This function is used for define the pheno_call '''
+
+    print('phenocall_test')
+    for k in fit_df.keys():
+        key1=k
+        break
+
+    viz_df=pd.DataFrame(index=fit_df[key1][0].index)
+
+    for key,item in fit_df.items():
+
+        # we will calculate p-vlaue and z score
+        m=item[0]
+        s=item[1]
+        diff_max=m+2*s
+        diff_min=m-2*s
+        ##
+        viz_df[key+'_RGR'] = m
+        viz_df[key+'_sd'] = s
+        viz_df[key+'_var'] = item[2]
+        viz_df[key+'_diff_max'] = m+2*s
+        viz_df[key+'_diff_min'] = m-2*s
+
+        viz_df[key+'_pheno'] = 'No Power'
+        viz_df[key+'_relative_filter'] = 'Not applied'
+        viz_df[key+'_feed'] = 'Mf1 and Mf2'
+
+        red_df=viz_df[(viz_df[key+'_diff_max'] < lower_cut) & (viz_df[key+'_diff_min'] < lower_cut)]
+
+        # not_red_df=viz_df[(viz_df[key+'_diff_max'] < upper_cut) & (viz_df[key+'_diff_min'] > lower_cut)]
+        not_red_df=viz_df[(viz_df[key+'_diff_min'] > lower_cut)]
+
+        increased_df=viz_df[(viz_df[key+'_diff_max'] > upper_cut) & (viz_df[key+'_diff_min'] > upper_cut)]
+
+        viz_df.loc[red_df.index,key+'_pheno'] = 'Reduced'
+        viz_df.loc[not_red_df.index,key+'_pheno'] = 'Not Reduced'
+        viz_df.loc[increased_df.index,key+'_pheno'] = 'Increased'
+    return viz_df
+
+
+def propagated_relative_baundance_plot(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,plot_info):
+     '''  We are going to plot propagated relative abundance plot  '''
+
+     if 'rel_file' in plot_info.keys():
+         print('plotting propagated relative abundance')
+         geneConv=plot_info['geneConv']
+         #plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
+
+         ## plot selected genes
+         # selected_genes=['PBANKA_1024600','PBANKA_0501200','PBANKA_0101100','PBANKA_1422100','PBANKA_0616700','PBANKA_1359700', 'PBANKA_1359600','PBANKA_0510600']
+         # plot_propgated_relative_abunndance(mean_df_d0_mf1.loc[selected_genes,:],var_df_d0_mf1.loc[selected_genes,:],mean_df_d0_mf2.loc[selected_genes,:],var_df_d0_mf2.loc[selected_genes,:],mean_df_d13_mf1.loc[selected_genes,:],var_df_d13_mf1.loc[selected_genes,:],mean_df_d13_mf2.loc[selected_genes,:],var_df_d13_mf2.loc[selected_genes,:],geneConv,plot_info)
+         #
+         #
+
+
 
 
 
@@ -2221,18 +2440,23 @@ def calculate_RGR(m_df_d0,var_df_d0,m_df_d13,var_df_d13,control_genes):
 
     control_gene_info={}
     for col in rel_fitness.columns:
+
         control_fitness=rel_fitness.loc[control_genes,[col]].copy()
         control_var=rel_var.loc[control_genes,[col]].copy()
         l=gaussianMeanAndVariance(control_fitness.T,control_var.T)
         control_gene_info[col]=l # l[0] mean l[1]  SD   l[2] variance
 
+    #     print ('control_fitness', col, control_fitness[abs(control_fitness)[col]>0.75])
+    #
+
+    print(control_gene_info)
     #  we want to normalize by control genes
     normalized_fit=rel_fitness.copy()
     normalized_var=rel_var.copy()
 
     for col in rel_fitness.columns:
         ctr_mean=control_gene_info[col][0][col]  #  0 mean
-        ctr_var=control_gene_info[col][2][col]  # 1 variance
+        ctr_var=control_gene_info[col][2][col]  # 2 variance
 
         # this is the relative mean
         normalized_fit.loc[:,col]=rel_fitness.loc[:,col].sub(ctr_mean)
@@ -2474,7 +2698,9 @@ def plot_each_step_mean_var(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d
     fig.append_trace(trace_d13_mf2_kde_male,row=4, col=4)
 
     # Update xaxis properties
-    fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,0.8])
+    # fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,0.8])
+    # for pool6
+    fig.update_yaxes(title_text="relative error",row=1, col=1,range=[0,1.25])
     fig.update_yaxes(title_text="relative error ",row=2, col=1,range=[0,0.8])
     fig.update_yaxes(title_text="relative error "    ,row=3, col=1,range=[0,0.8])
     fig.update_yaxes(title_text="relative error "    ,row=4, col=1,range=[0,0.8])
@@ -2528,7 +2754,6 @@ def plot_relative_abunndance_daywise(sex_list,geneConv,plot_info):
     mf=plot_info['mf']
     day=plot_info['d']
     sex=plot_info['sex']
-
     pdf = matplotlib.backends.backend_pdf.PdfPages(out_pdf)
     n=2
     genes=sex_list[0].index;
@@ -2852,28 +3077,32 @@ def calDissectionRatio(df_m,df_sd,time,time2,mf,backgrounds):
 
 def gaussianMeanAndVariance(rel_fit,rel_err):
 
-    weight = rel_err.rdiv(1)
+    if len(rel_fit.columns)==1:
+        mean_df,sd_max,var_max=singleMeanAndVariance(rel_fit,rel_err)
+    else:
 
-    nume_df=pd.DataFrame(rel_fit.values * weight.values, columns=rel_fit.columns, index=rel_fit.index)
-    nume= nume_df.sum(axis=1)
-    deno=weight.sum(axis=1)
-    # calculate mean
-    mean_df=nume/deno
+        weight = rel_err.rdiv(1)
 
-    # calculate first varaiance
-    var1= weight.sum(axis=1).rdiv(1)
+        nume_df=pd.DataFrame(rel_fit.values * weight.values, columns=rel_fit.columns, index=rel_fit.index)
+        nume= nume_df.sum(axis=1)
+        deno=weight.sum(axis=1)
+        # calculate mean
+        mean_df=nume/deno
 
-    # claculate second variance
-    term1=rel_fit.iloc[:, 0:].sub(mean_df, axis=0).pow(2,axis=1)
-    term3=term1.div(rel_err,axis=0)
-    term4=term3.sum(axis=1)
-    term2=(1/(rel_fit.shape[1]-1))
+        # calculate first varaiance
+        var1= weight.sum(axis=1).rdiv(1)
+
+        # claculate second variance
+        term1=rel_fit.iloc[:, 0:].sub(mean_df, axis=0).pow(2,axis=1)
+        term3=term1.div(rel_err,axis=0)
+        term4=term3.sum(axis=1)
+        term2=(1/(rel_fit.shape[1]-1))
 
 
-    var2=var1*term4*term2
+        var2=var1*term4*term2
 
-    var_max=pd.concat([var1, var2], axis=1).max(axis=1)
-    sd_max=var_max.apply(np.sqrt)
+        var_max=pd.concat([var1, var2], axis=1).max(axis=1)
+        sd_max=var_max.apply(np.sqrt)
 
     return [mean_df,sd_max,var_max]
 
@@ -3097,7 +3326,7 @@ def plotInSnsNew(viz_df):
     viz_df['GCKO2_d13_pheno']=viz_df['GCKO2_d13_pheno'].replace({'E': 'IF', 'NE': 'FF', 'NA': 'RF'})
     # viz_df['Published_cross_phenotype']=viz_df['Published_cross_phenotype'].replace({'N': 'NA'})
 
-    
+
     ##################### BAR PLOTS BEGINS
 
 
