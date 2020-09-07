@@ -22,7 +22,7 @@ prev_to_new=pickle.load(open(data_folder+'/prevTonew_PBANKA.pickle','rb'))
 db_df=pd.read_csv(data_folder+'/PBANKA_id_conversion.txt', sep='\t')
 db_df=db_df.fillna('NA')
 ## end of databse information
-relative_growth_rate_analysis_repeat
+
 
 
 

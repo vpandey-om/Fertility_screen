@@ -22,7 +22,7 @@ prev_to_new=pickle.load(open(data_folder+'/prevTonew_PBANKA.pickle','rb'))
 db_df=pd.read_csv(data_folder+'/PBANKA_id_conversion.txt', sep='\t')
 db_df=db_df.fillna('NA')
 ## end of databse information
-relative_growth_rate_analysis_repeat
+
 
 
 
@@ -45,7 +45,7 @@ def stepwiseAnalysis():
     # input_df: these are genes which was used for pool phenotypes
     percent=0.9 ## this parameters is used to test whether count is too small for 90 % of input samples. Those will be deleted.
     filtered_count_df,filtered_df_read,filtered_count_df_des=filter_input_dropout(final_count_df,final_count_df_des,final_count_df_two_read,input_df,manfest_df,percent)
-    
+
     ######  write filtered and unfiltered files
     # final_count_df_two_read.to_csv(out_folder+"/unfilterd_count_matrix_pool2.txt",sep='\t')
     filtered_count_df_des.to_csv(out_folder+"/filterd_count_matrix_pool7_2.txt",sep='\t')
@@ -70,7 +70,7 @@ def stepwiseAnalysis():
     geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
     plot_info={'pool':'pool7_2','file':out_folder+'/pool7_2_repeat.xlsx','rel_file':out_folder+'/pool7_2_propagated_error_relative_abundance.pdf','d':['d0','d13'],
     'mf':['mf1','mf2'],'sex':['GCKO2'],'geneConv':geneConv_new,
-    'control_genes':['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
+    'control_genes':['PBANKA_1319700' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
     pheno_call_df,input_df=relative_growth_rate_analysis_repeat(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
     return pheno_call_df,input_df
 

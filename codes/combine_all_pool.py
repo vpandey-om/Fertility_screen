@@ -29,6 +29,10 @@ db_df=db_df.fillna('NA')
 ## end of databse information
 colorsIdx = {'No Power': '#cccccc', 'Not Reduced': '#b2e2e2','Reduced':'#d8b365', 'Increased':'#238b45'}
 
+from fertility_pool5_2 import stepwiseAnalysis  as pool5_2
+from fertility_pool7_2 import stepwiseAnalysis  as pool7_2
+
+
 def pre_process_pilot(manifests_df,count_df):
 
     ''' We will take average of the two reads '''
@@ -440,13 +444,116 @@ def pool6():
     return pheno_call_df,input_df
 
 
+##### pool 5 to 7
+
+def pool5():
+    ''' We are going do analyis of pool1 data of Claire '''
+
+    ### these are the input files
+    manifests_df=pd.read_csv(data_folder+"/manifest_pool5_1.txt",sep='\t')
+    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool5.txt",sep='\t')
+    input_df=pd.read_csv(data_folder+'/input_pool5.txt', sep='\t')
+
+
+    #### end of the input section
+    # final_count_df: read1 and read2 are added
+    # final_count_df_two_read: reads are sperated
+    # manfest_df: maifest_df
+    final_count_df,final_count_df_des,final_count_df_two_read,manfest_df=preprocessing(manifests_df,count_df)
+
+    ####  Dropouts and input check
+    # input_df: these are genes which was used for pool phenotypes
+    percent=0.9 ## this parameters is used to test whether count is too small for 90 % of input samples. Those will be deleted.
+    filtered_count_df,filtered_df_read,filtered_count_df_des=filter_input_dropout(final_count_df,final_count_df_des,final_count_df_two_read,input_df,manfest_df,percent)
+
+    ######  write filtered and unfiltered files
+    # final_count_df_two_read.to_csv(out_folder+"/unfilterd_count_matrix_pool2.txt",sep='\t')
+    filtered_count_df_des.to_csv(out_folder+"/filterd_count_matrix_pool5_1.txt",sep='\t')
+
+    ### we are going to perform relative abundance analysis
+    ## prev_to_new this is the pickle information which is used when we change old to new ID
+    ## db_df: this is the dataframe contains name and description
+
+    # if you we do not want to plot then plot_info=None
+    # plot_info={'pdf':out_folder+"/relative_abundance_of_pool6.pdf",'d':['d0','d13'],'mf':['mf1','mf2'],'sex':['GCKO2','g145480']}
+    # # plot_info=None
+    # relative_abundance_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    #
+    # # ## we will do diffrent kind of error analysis
+
+    # drop P17509_1003 from manifest and final_count_matrix
+    # filtered_count_df=filtered_count_df.drop(columns='P17509_1003').copy()
+    # manfest_df=manfest_df.drop('P17509_1003').copy()
+    #
+    #
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    plot_info={'pool':'pool5_1','file':out_folder+'/pool5_1_repeat.xlsx','rel_file':out_folder+'/pool5_1_propagated_error_relative_abundance.pdf','d':['d0','d13'],
+    'mf':['mf1','mf2'],'sex':['GCKO2','g145480'],'geneConv':geneConv_new,
+    'control_genes':['PBANKA_1404100' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
+    pheno_call_df,input_df=relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+
+    return pheno_call_df,input_df
+
+
+### pool7
+
+
+def pool7():
+    ''' We are going do analyis of pool1 data of Claire '''
+
+    ### these are the input files
+    manifests_df=pd.read_csv(data_folder+"/manifest_pool7_1.txt",sep='\t')
+    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
+    input_df=pd.read_csv(data_folder+'/input_pool7.txt', sep='\t')
+
+
+    #### end of the input section
+    # final_count_df: read1 and read2 are added
+    # final_count_df_two_read: reads are sperated
+    # manfest_df: maifest_df
+    final_count_df,final_count_df_des,final_count_df_two_read,manfest_df=preprocessing(manifests_df,count_df)
+
+    ####  Dropouts and input check
+    # input_df: these are genes which was used for pool phenotypes
+    percent=0.9 ## this parameters is used to test whether count is too small for 90 % of input samples. Those will be deleted.
+    filtered_count_df,filtered_df_read,filtered_count_df_des=filter_input_dropout(final_count_df,final_count_df_des,final_count_df_two_read,input_df,manfest_df,percent)
+
+    ######  write filtered and unfiltered files
+    # final_count_df_two_read.to_csv(out_folder+"/unfilterd_count_matrix_pool2.txt",sep='\t')
+    filtered_count_df_des.to_csv(out_folder+"/filterd_count_matrix_pool7_1.txt",sep='\t')
+
+    ### we are going to perform relative abundance analysis
+    ## prev_to_new this is the pickle information which is used when we change old to new ID
+    ## db_df: this is the dataframe contains name and description
+
+    # if you we do not want to plot then plot_info=None
+    # plot_info={'pdf':out_folder+"/relative_abundance_of_pool6.pdf",'d':['d0','d13'],'mf':['mf1','mf2'],'sex':['GCKO2','g145480']}
+    # # plot_info=None
+    # relative_abundance_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    #
+    # # ## we will do diffrent kind of error analysis
+
+    # drop P17509_1003 from manifest and final_count_matrix
+    # filtered_count_df=filtered_count_df.drop(columns='P17509_1003').copy()
+    # manfest_df=manfest_df.drop('P17509_1003').copy()
+    #
+    #
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    plot_info={'pool':'pool7_1','file':out_folder+'/pool7_1_repeat.xlsx','rel_file':out_folder+'/pool7_1_propagated_error_relative_abundance.pdf','d':['d0','d13'],
+    'mf':['mf1','mf2'],'sex':['GCKO2','g145480'],'geneConv':geneConv_new,
+    'control_genes':['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
+    pheno_call_df,input_df=relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    return pheno_call_df,input_df
+
+
+
 
 def calPvalQval(pheno_call_df,cutoff=0):
     ''' pheno_call_df'''
 
     ## select no_power and Both feed noisy
-
-
     sex=['GCKO2','g145480']
     for b in sex:
         noisy_df=pheno_call_df[(pheno_call_df[b+'_pheno']=='No Power') & (pheno_call_df[b+'_feed']=='no data')].copy()
@@ -461,15 +568,13 @@ def calPvalQval(pheno_call_df,cutoff=0):
         fdr=mtest.multipletests(pvalue, alpha=0.05, method='fdr_bh')
 
         pheno_call_df[b+'_pvalue']=np.nan
+        pheno_call_df[b+'_zvalue']=np.nan
         pheno_call_df[b+'_fdr']=np.nan
         pheno_call_df.loc[genes,b+'_pvalue']=pvalue;
         pheno_call_df.loc[genes,b+'_fdr']=fdr[1];
+        pheno_call_df.loc[genes,b+'_zvalue']=z;
 
     return pheno_call_df
-
-
-
-
 
 def combinepools():
     ''' Combining all pools relative abundance and relative growth rate  '''
@@ -494,20 +599,36 @@ def combinepools():
     pheno_call_pool6,input_df_pool6=pool6()
     pheno_call_pool6['pool']='pool6'
     print ('pool6 finished\n\n')
+    ###
+    pheno_call_pool5,input_df_pool5=pool5()
+    pheno_call_pool5['pool']='pool5'
+    print ('pool5 finished\n\n')
+
+    pheno_call_pool7,input_df_pool7=pool7()
+    pheno_call_pool7['pool']='pool7'
+    print ('pool7 finished\n\n')
+    pheno_call_pool5_2,input_df_pool5_2=pool5_2()
+    pheno_call_pool5_2['pool']='pool5_2'
+    print ('pool5_2 finished\n\n')
+    pheno_call_pool7_2,input_df_pool7_2=pool7_2()
+    pheno_call_pool7_2['pool']='pool7_2'
+    print ('pool7_2 finished\n\n')
 
 
-    pheno_all=pd.concat([pheno_call_pilot,pheno_call_pool1, pheno_call_pool2,pheno_call_pool3,pheno_call_pool4,pheno_call_pool6])
+
+    pheno_all=pd.concat([pheno_call_pilot,pheno_call_pool1, pheno_call_pool2,pheno_call_pool3,pheno_call_pool4,pheno_call_pool6,pheno_call_pool5,pheno_call_pool7,pheno_call_pool5_2,pheno_call_pool7_2])
     #pheno_all=pd.concat([pheno_call_pool1, pheno_call_pool2,pheno_call_pool3,pheno_call_pool4,pheno_call_pool6])
     # pheno_all=pd.concat([pheno_call_pilot,pheno_call_pool6])
     # pheno_all=pheno_all.replace({'GCKO2_pheno': {'NA': 'No power', 'NE': 'Fertility','E':'Reduced Fertility'}})
     # pheno_all=pheno_all.replace({'g145480_pheno': {'NA': 'No power', 'NE': 'Fertility','E':'Reduced Fertility'}})
     # ### plot female
     ####### Combine one gene for all pheno types
+    ### test input cutoff
+    #test_for_input_cutoff(input_df_pilot,input_df_pool1, input_df_pool2,input_df_pool3,input_df_pool4,input_df_pool6)
 
-    test_for_input_cutoff(input_df_pilot,input_df_pool1, input_df_pool2,input_df_pool3,input_df_pool4,input_df_pool6)
     pheno_all2=apply_weighted_mean(pheno_all)
     pheno_all2=calPvalQval(pheno_all2,cutoff=0)
-
+    import pdb; pdb.set_trace()
 
 
     ### set color
@@ -579,7 +700,7 @@ def combinepools():
         for item in xx.columns[xx.columns.str.contains(b)].to_list():
             order_col.append(item)
     yy=xx[order_col]
-    yy.to_csv(out_folder+'/Phenotype_call.txt',sep='\t')
+    yy.to_csv(out_folder+'/Phenotype_call_final.txt',sep='\t')
 
 
 
@@ -676,76 +797,134 @@ def pilot_call():
     fig_g145480= px.scatter(xx,x=xx.index,y='g145480_RGR',color="g145480_pheno",color_discrete_map=colorsIdx,error_y='g145480_sd',hover_name='Gene IDs')
     fig_g145480.show()
 
+def applyMeanVar_nodata(b,combine_pheno_call,tmp_not_applied,cmb_fitness):
+    rgr_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
+    var_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
+
+    rgr_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_RGR'].copy()
+
+    var_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_var'].copy()
+
+    cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp.T.copy(),var_temp.T.copy())
+
+    ## find call
+    m=cmb_fitness[b][0][b]
+    s=cmb_fitness[b][1][b]
+    v=cmb_fitness[b][2][b]
+
+    ##
+    diff_max=m+2*s
+    diff_min=m-2*s
+    pheno_type='No Power'
+
+    return m,s,v,diff_max,diff_min,pheno_type
+
+def applyMeanVar_final(b,combine_pheno_call,tmp_not_applied,cmb_fitness):
+    rgr_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
+    var_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
+
+    rgr_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_RGR'].copy()
+
+    var_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_var'].copy()
+
+    cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp.T.copy(),var_temp.T.copy())
+
+    ## find call
+    m=cmb_fitness[b][0][b]
+    s=cmb_fitness[b][1][b]
+    v=cmb_fitness[b][2][b]
+
+    ##
+    lower_cut=np.log2(0.45)
+    upper_cut=np.log2(2.05)
+    diff_max=m+2*s
+    diff_min=m-2*s
+
+    if (diff_max<lower_cut) and  (diff_min<lower_cut):
+        pheno_type='Reduced'
+    # elif (diff_max< upper_cut) and  (diff_min >lower_cut) :
+    #     pheno_type='Not Reduced'
+    elif (diff_min >lower_cut) :
+        pheno_type='Not Reduced'
+    elif (diff_max>upper_cut) and  (diff_min>upper_cut) :
+        pheno_type='Increased'
+    else:
+        pheno_type='No Power'
+
+    return m,s,v,diff_max,diff_min,pheno_type
+
+
+def add_experiment(uq_gene,tmp,b,combine_pheno_call,cmb_fitness):
+
+    combine_pheno_call_copy=combine_pheno_call.copy()
+
+    tmp_not_applied=tmp[tmp[b+'_relative_filter']=='Not applied']
+    if len(tmp_not_applied.index)>1:
+        m,s,v,diff_max,diff_min,pheno_type=applyMeanVar_final(b,combine_pheno_call_copy,tmp_not_applied,cmb_fitness)
+        combine_pheno_call_copy.loc[uq_gene,b+'_RGR']=m
+        combine_pheno_call_copy.loc[uq_gene,b+'_sd']=s
+        combine_pheno_call_copy.loc[uq_gene,b+'_var']=v
+        combine_pheno_call_copy.loc[uq_gene,b+'_diff_max']=diff_max
+        combine_pheno_call_copy.loc[uq_gene,b+'_diff_min']=diff_min
+        combine_pheno_call_copy.loc[uq_gene,b+'_pheno']=pheno_type
+        combine_pheno_call_copy.loc[uq_gene,b+'_relative_filter']=tmp[b+'_relative_filter'].str.cat(sep=',')
+        combine_pheno_call_copy.loc[uq_gene,b+'_feed']=tmp[b+'_feed'].str.cat(sep=',')
+        combine_pheno_call_copy.loc[uq_gene,'pool']=tmp['pool'].str.cat(sep=',')
+    elif len(tmp_not_applied.index)==1:
+        combine_pheno_call_copy.loc[uq_gene,b+'_RGR']=tmp_not_applied.loc[uq_gene,b+'_RGR'].copy()
+        combine_pheno_call_copy.loc[uq_gene,b+'_sd']=tmp_not_applied.loc[uq_gene,b+'_sd'].copy()
+        combine_pheno_call_copy.loc[uq_gene,b+'_var']=tmp_not_applied.loc[uq_gene,b+'_var'].copy()
+        combine_pheno_call_copy.loc[uq_gene,b+'_diff_max']=tmp_not_applied.loc[uq_gene,b+'_diff_max'].copy()
+        combine_pheno_call_copy.loc[uq_gene,b+'_diff_min']=tmp_not_applied.loc[uq_gene,b+'_diff_min'].copy()
+        combine_pheno_call_copy.loc[uq_gene,b+'_pheno']=tmp_not_applied.loc[uq_gene,b+'_pheno']
+        combine_pheno_call_copy.loc[uq_gene,b+'_relative_filter']=tmp[b+'_relative_filter'].str.cat(sep=',')
+        combine_pheno_call_copy.loc[uq_gene,b+'_feed']=tmp[b+'_feed'].str.cat(sep=',')
+        combine_pheno_call_copy.loc[uq_gene,'pool']=tmp['pool'].str.cat(sep=',')
+    else:
+        if len(tmp.index)>1:
+            ## apply mean var final
+            # if not (b=='g145480'):
+            #     print(b,uq_gene)
+            # else:
+            #     import pdb; pdb.set_trace()
+            m,s,v,diff_max,diff_min,pheno_type=applyMeanVar_nodata(b,combine_pheno_call_copy,tmp,cmb_fitness)
+            combine_pheno_call_copy.loc[uq_gene,b+'_RGR']=m
+            combine_pheno_call_copy.loc[uq_gene,b+'_sd']=s
+            combine_pheno_call_copy.loc[uq_gene,b+'_var']=v
+            combine_pheno_call_copy.loc[uq_gene,b+'_diff_max']=diff_max
+            combine_pheno_call_copy.loc[uq_gene,b+'_diff_min']=diff_min
+            combine_pheno_call_copy.loc[uq_gene,b+'_pheno']=pheno_type
+            combine_pheno_call_copy.loc[uq_gene,b+'_relative_filter']=tmp[b+'_relative_filter'].str.cat(sep=',')
+            combine_pheno_call_copy.loc[uq_gene,b+'_feed']=tmp[b+'_feed'].str.cat(sep=',')
+            combine_pheno_call_copy.loc[uq_gene,'pool']=tmp['pool'].str.cat(sep=',')
+        else:
+            print('all pools have bad data for gene = %s'%uq_gene)
+    return combine_pheno_call_copy
 
 def apply_weighted_mean(pheno_all):
     ''' Combine repeated analysis'''
     unique_genes=pheno_all.index.unique()
     backgrounds=['GCKO2','g145480']
     combine_pheno_call=pd.DataFrame(index=unique_genes,columns=pheno_all.columns)
-
+    combine_pheno_save=combine_pheno_call.copy()
     for uq_gene in unique_genes:
-
         tmp=pheno_all[pheno_all.index==uq_gene].copy()
         if len(tmp.index)>1:
+
             ## apply weighted sum and variance
             ## filter only not_applied for combining data
-
+            # if uq_gene == 'PBANKA_1109600':
+            #      import pdb; pdb.set_trace()
             cmb_fitness={}
             for b in backgrounds:
-                tmp_not_applied=tmp[tmp[b+'_relative_filter']=='Not applied']
-                if len(tmp_not_applied.index)>1:
-                    rgr_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
-                    var_temp=pd.DataFrame(index=tmp_not_applied.index,columns=[b])
-
-                    rgr_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_RGR'].copy()
-
-                    var_temp.loc[:,b]=tmp_not_applied.loc[:,b+'_var'].copy()
-
-                    cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp.T.copy(),var_temp.T.copy())
-
-                    ## find call
-                    m=cmb_fitness[b][0][b]
-                    s=cmb_fitness[b][1][b]
-                    v=cmb_fitness[b][2][b]
-
-                    ##
-                    lower_cut=np.log2(0.45)
-                    upper_cut=np.log2(2.05)
-                    diff_max=m+2*s
-                    diff_min=m-2*s
-
-                    if (diff_max<lower_cut) and  (diff_min<lower_cut):
-                        pheno_type='Reduced'
-                    # elif (diff_max< upper_cut) and  (diff_min >lower_cut) :
-                    #     pheno_type='Not Reduced'
-                    elif (diff_min >lower_cut) :
-                        pheno_type='Not Reduced'
-                    elif (diff_max>upper_cut) and  (diff_min>upper_cut) :
-                        pheno_type='Increased'
-                    else:
-                        pheno_type='No Power'
-
-                    combine_pheno_call.loc[uq_gene,b+'_RGR']=m
-                    combine_pheno_call.loc[uq_gene,b+'_sd']=s
-                    combine_pheno_call.loc[uq_gene,b+'_var']=v
-                    combine_pheno_call.loc[uq_gene,b+'_diff_max']=diff_max
-                    combine_pheno_call.loc[uq_gene,b+'_diff_min']=diff_min
-                    combine_pheno_call.loc[uq_gene,b+'_pheno']=pheno_type
-                    combine_pheno_call.loc[uq_gene,b+'_relative_filter']=tmp[b+'_relative_filter'].str.cat(sep=',')
-                    combine_pheno_call.loc[uq_gene,b+'_feed']=tmp[b+'_feed'].str.cat(sep=',')
-                    combine_pheno_call.loc[uq_gene,'pool']=tmp['pool'].str.cat(sep=',')
-                elif len(tmp_not_applied.index)==1:
-                    combine_pheno_call.loc[uq_gene,:]=tmp_not_applied.loc[uq_gene,:].copy()
-                    combine_pheno_call.loc[uq_gene,b+'_relative_filter']=tmp[b+'_relative_filter'].str.cat(sep=',')
-                    combine_pheno_call.loc[uq_gene,b+'_feed']=tmp[b+'_feed'].str.cat(sep=',')
-                    combine_pheno_call.loc[uq_gene,'pool']=tmp['pool'].str.cat(sep=',')
-                else:
-                    print('all pools have bad data for gene = %s'%uq_gene)
-
+                    combine_pheno_call=add_experiment(uq_gene,tmp,b,combine_pheno_call,cmb_fitness)
+                    combine_pheno_save=combine_pheno_call.copy()
+                    ## still we can combine based on tmp
                 ##
         else:
             combine_pheno_call.loc[uq_gene,:]=pheno_all.loc[uq_gene,:].copy()
-    return combine_pheno_call
+            combine_pheno_save=combine_pheno_call.copy()
+    return combine_pheno_save
 
 if __name__ == '__main__':
     combinepools()

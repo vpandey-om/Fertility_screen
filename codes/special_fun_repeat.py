@@ -100,7 +100,7 @@ def relative_growth_rate_analysis_repeat(df,manfest_df,prev_to_new,db_df,plot_in
         rgr_temp.loc[:,'mf2']=mf2_RGR.loc[:,col_mf2[0].to_list()[0]].copy()
         var_temp.loc[:,'mf1']=mf1_var.loc[:,col_mf1[0].to_list()[0]].copy()
         var_temp.loc[:,'mf2']=mf2_var.loc[:,col_mf2[0].to_list()[0]].copy()
-
+        
 
         cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp,var_temp)
 
@@ -127,7 +127,7 @@ def relative_growth_rate_analysis_repeat(df,manfest_df,prev_to_new,db_df,plot_in
     #     gDNA_mean_df, gDNA_mean_df_var=propagate_error_gDNA_extraction_method(rel_df,manfest_df,grp_cols,day_pos)
     #     plot_gDNA_error(gDNA_mean_df, gDNA_mean_df_var)
     ##
-    import pdb; pdb.set_trace()
+
     plot_each_step_mean_var_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2)
 
     ## compute relative ratio betwen day13 and day0
@@ -187,7 +187,7 @@ def propagated_relative_abundance_plot_each_sex(mean_df_d0_mf1,var_df_d0_mf1,mea
      if 'rel_file' in plot_info.keys():
          print('plotting propagated relative abundance')
          geneConv=plot_info['geneConv']
-         plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
+         #plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
 
 
 
@@ -235,6 +235,7 @@ def plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_
             x=[1,2]
 
 
+
             ### mf1 female
             y=[mean_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],mean_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
             yerr=[var_df_d0_mf1.loc[genes[k],sex[0]+'_'+day[0]+'_NA_NA'],var_df_d13_mf1.loc[genes[k],sex[0]+'_'+day[1]+'_NA_NA']]
@@ -258,7 +259,7 @@ def plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_
 
             plt.ylabel('log2 relative fitness')
             plt.title(labels[k])
-            plt.legend(('mf1_GCKO2', 'mf2_GCKO2','mf1_145480', 'mf2_145480'))
+            plt.legend(('mf1_GCKO2', 'mf2_GCKO2'))
             plt.xticks([1, 1.5, 2],['day0', '', 'day13'],fontsize=15)
 
             plt.ylim(-18, 1)
@@ -268,11 +269,10 @@ def plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_
 
     ## for the remaing one
 
+
+
     fig = plt.figure(figsize=(15,15))
     for i in range(1,rem+1):
-
-
-
         plt.subplot(n, n, i)
         x=[1,2]
 
@@ -301,7 +301,7 @@ def plot_propgated_relative_abunndance_sex(mean_df_d0_mf1,var_df_d0_mf1,mean_df_
 
         plt.ylabel('log2 relative fitness')
         plt.title(labels[k])
-        plt.legend(('mf1_GCKO2', 'mf2_GCKO2','mf1_g145480', 'mf2_g145480'))
+        plt.legend(('mf1_GCKO2', 'mf2_GCKO2'))
         plt.xticks([1, 1.5, 2],['day0', '', 'day13'],fontsize=15)
 
         plt.ylim(-18, 1)

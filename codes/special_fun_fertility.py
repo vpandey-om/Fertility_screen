@@ -2332,7 +2332,7 @@ def apply_filter_on_feeds(pheno_call_df,mf1_RGR,mf1_var,mf2_RGR,mf2_var,mean_df_
     # for b in backgrounds:
     #     pheno_call_df2.loc[pheno_call_df.index,b+'_relative_filter']=pheno_call_df.loc[pheno_call_df.index,b+'_relative_filter'].copy()
     #     pheno_call_df2.loc[pheno_call_df.index,b+'_feed']=pheno_call_df.loc[pheno_call_df.index,b+'_feed'].copy()
-    pheno_call_df2=apply_filter_testInput(pheno_call_df2,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12)
+    pheno_call_df2=apply_filter_testInput(pheno_call_df2,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12,sex=backgrounds)
     return pheno_call_df2
 
 def combine_both_feeds(cmb_fit_final,cmb_fitness,b):
@@ -2411,7 +2411,7 @@ def propagated_relative_baundance_plot(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_m
      if 'rel_file' in plot_info.keys():
          print('plotting propagated relative abundance')
          geneConv=plot_info['geneConv']
-         plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
+         #plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
 
          ## plot selected genes
          # selected_genes=['PBANKA_1024600','PBANKA_0501200','PBANKA_0101100','PBANKA_1422100','PBANKA_0616700','PBANKA_1359700', 'PBANKA_1359600','PBANKA_0510600']
