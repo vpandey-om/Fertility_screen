@@ -1,0 +1,15 @@
+NGI Sample ID	Sample name	Sample description	sex	pr	t	d	e	b	mf	dr
+P17902_1003	PbFertility4_r_3	PbFertility4_r_3_GCKO2_t_r1	GCKO2	r1	t	NA	NA	NA	NA	NA
+P17902_1008	PbFertility4_r_8	PbFertility4_r_8_GCKO2_d0_b_mf1_r1	GCKO2	r1	NA	d0	NA	NA	mf1	NA
+P17902_1009	PbFertility4_r_9	PbFertility4_r_9_GCKO2_d0_b_mf2_r1	GCKO2	r1	NA	d0	NA	NA	mf2	NA
+P17902_1018	PbFertility4_r_18	PbFertility4_r_18_GCKO2_d13_mf1.1_r1	GCKO2	r1	NA	d13	NA	NA	mf1	dr1
+P17902_1019	PbFertility4_r_19	PbFertility4_r_19_GCKO2_d13_mf1.2_r1	GCKO2	r1	NA	d13	NA	NA	mf1	dr2
+P17902_1020	PbFertility4_r_20	PbFertility4_r_20_GCKO2_d13_mf2.1_r1	GCKO2	r1	NA	d13	NA	NA	mf2	dr1
+P17902_1021	PbFertility4_r_21	PbFertility4_r_21_GCKO2_d13_mf2.2_r1	GCKO2	r1	NA	d13	NA	NA	mf2	dr2
+P17902_1024	PbFertility4_r_24	PbFertility4_r_24_GCKO2_t_r2	GCKO2	r2	t	NA	NA	NA	NA	NA
+P17902_1029	PbFertility4_r_29	PbFertility4_r_29_GCKO2_d0_b_mf1_r2	GCKO2	r2	NA	d0	NA	NA	mf1	NA
+P17902_1030	PbFertility4_r_30	PbFertility4_r_30_GCKO2_d0_b_mf2_r2	GCKO2	r2	NA	d0	NA	NA	mf2	NA
+P17902_1039	PbFertility4_r_39	PbFertility4_r_39_GCKO2_d13_mf1.1_r2	GCKO2	r2	NA	d13	NA	NA	mf1	dr1
+P17902_1040	PbFertility4_r_40	PbFertility4_r_40_GCKO2_d13_mf1.2_r2	GCKO2	r2	NA	d13	NA	NA	mf1	dr2
+P17902_1041	PbFertility4_r_41	PbFertility4_r_41_GCKO2_d13_mf2.1_r2	GCKO2	r2	NA	d13	NA	NA	mf2	dr1
+P17902_1042	PbFertility4_r_42	PbFertility4_r_42_GCKO2_d13_mf2.2_r2	GCKO2	r2	NA	d13	NA	NA	mf2	dr2

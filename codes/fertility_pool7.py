@@ -22,13 +22,19 @@ db_df=pd.read_csv(data_folder+'/PBANKA_id_conversion.txt', sep='\t')
 db_df=db_df.fillna('NA')
 ## end of databse information
 
+
+
+
+
+
+
 def stepwiseAnalysis():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool4.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_170620_pool4.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool4.txt', sep='\t')
+    manifests_df=pd.read_csv(data_folder+"/manifest_pool7_1.txt",sep='\t')
+    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
+    input_df=pd.read_csv(data_folder+'/input_pool7.txt', sep='\t')
 
 
     #### end of the input section
@@ -44,27 +50,31 @@ def stepwiseAnalysis():
 
     ######  write filtered and unfiltered files
     # final_count_df_two_read.to_csv(out_folder+"/unfilterd_count_matrix_pool2.txt",sep='\t')
-    filtered_count_df_des.to_csv(out_folder+"/filterd_count_matrix_pool4.txt",sep='\t')
+    filtered_count_df_des.to_csv(out_folder+"/filterd_count_matrix_pool7_1.txt",sep='\t')
 
     ### we are going to perform relative abundance analysis
     ## prev_to_new this is the pickle information which is used when we change old to new ID
     ## db_df: this is the dataframe contains name and description
 
-    ## if you we do not want to plot then plot_info=None
-    plot_info={'pdf':out_folder+"/relative_abundance_of_pool4.pdf",'d':['d0','d13'],'mf':['mf1','mf2'],'sex':['GCKO2','g145480']}
-    # plot_info=None
-    relative_abundance_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    # if you we do not want to plot then plot_info=None
+    # plot_info={'pdf':out_folder+"/relative_abundance_of_pool6.pdf",'d':['d0','d13'],'mf':['mf1','mf2'],'sex':['GCKO2','g145480']}
+    # # plot_info=None
+    # relative_abundance_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    #
+    # # ## we will do diffrent kind of error analysis
 
-    ## we will do diffrent kind of error analysis
-
-    # error_analysis(filtered_count_df,manfest_df,prev_to_new,db_df)
-    # plot_info={'pool':'pool4','file':out_folder+'/pool4_repeat.xlsx'}
-    # relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
-
-
-
-
-
+    # drop P17509_1003 from manifest and final_count_matrix
+    # filtered_count_df=filtered_count_df.drop(columns='P17509_1003').copy()
+    # manfest_df=manfest_df.drop('P17509_1003').copy()
+    #
+    #
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
+    plot_info={'pool':'pool7_1','file':out_folder+'/pool7_1_repeat.xlsx','rel_file':out_folder+'/pool7_1_propagated_error_relative_abundance.pdf','d':['d0','d13'],
+    'mf':['mf1','mf2'],'sex':['GCKO2','g145480'],'geneConv':geneConv_new,
+    'control_genes':['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
+    pheno_call_df,input_df=relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+    return pheno_call_df,input_df
 
     ### we are going to start analysing
     # ### now we are going to combine two dataframe with categorical data sets

@@ -277,8 +277,11 @@ def pool2():
     geneConv,old_to_new_ids,geneConv_new=getNewIdfromPrevID(filtered_count_df.index,prev_to_new,db_df)
     plot_info={'pool':'pool2','file':out_folder+'/pool2_repeat.xlsx','rel_file':out_folder+'/pool2_propagated_error_relative_abundance.pdf','d':['d0','d13'],
     'mf':['mf1','mf2'],'sex':['GCKO2','g145480'],'geneConv':geneConv_new,
-    'control_genes':['PBANKA_0402200' , 'PBANKA_0808100' , 'PBANKA_010110' , 'PBANKA_0417700']}
+    'control_genes':['PBANKA_102460' , 'PBANKA_050120' , 'PBANKA_010110' , 'PBANKA_142210']}
     pheno_call_df,input_df=relative_growth_rate_analysis(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
+
+
+
 
     return pheno_call_df,input_df
 

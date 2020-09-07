@@ -1613,10 +1613,6 @@ def error_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None):
 
 
 
-
-
-
-
 def plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info):
     ''' We will plot genes sex-specific wise '''
 
@@ -1850,9 +1846,8 @@ def error_analysis_mosquito_feed(df,manfest_df,prev_to_new,db_df,plot_info=None)
 
 
 
-def apply_filter_testInput(pheno_call_df,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12):
+def apply_filter_testInput(pheno_call_df,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-12,sex=['GCKO2','g145480']):
     ''' test diffrent level of errors and comapre with combined errors'''
-    sex=['GCKO2','g145480']
     for s in sex:
         aa=mean_df_d0_mf1.columns.str.contains(s)
         if aa.any():
@@ -2287,12 +2282,12 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
 
     return pheno_call_df2,[mean_df_d0_mf1,mean_df_d0_mf2]
 
-def apply_filter_on_feeds(pheno_call_df,mf1_RGR,mf1_var,mf2_RGR,mf2_var,mean_df_d0_mf1,mean_df_d0_mf2):
+def apply_filter_on_feeds(pheno_call_df,mf1_RGR,mf1_var,mf2_RGR,mf2_var,mean_df_d0_mf1,mean_df_d0_mf2, backgrounds=['GCKO2','g145480']):
     ''' apply_filter_on_feeds '''
 
 
     cmb_fit_final={}
-    backgrounds=['GCKO2','g145480']
+
 
     for b in backgrounds:
         cmb_fitness={}
@@ -2416,7 +2411,7 @@ def propagated_relative_baundance_plot(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_m
      if 'rel_file' in plot_info.keys():
          print('plotting propagated relative abundance')
          geneConv=plot_info['geneConv']
-         #plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
+         plot_propgated_relative_abunndance(mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2,mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2,geneConv,plot_info)
 
          ## plot selected genes
          # selected_genes=['PBANKA_1024600','PBANKA_0501200','PBANKA_0101100','PBANKA_1422100','PBANKA_0616700','PBANKA_1359700', 'PBANKA_1359600','PBANKA_0510600']

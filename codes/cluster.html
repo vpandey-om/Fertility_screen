@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row"
+        <div class="col-md-8">
+            <div class="chart" id="bargraph">
+              <script>
+                  var graphs = {{plot | safe}};
+
+                  Plotly.plot('bargraph',graphs,{});
+
+                  myPlot = document.getElementById('bargraph');
+                  myPlot.on('plotly_click', function(data){
+                    // this data is the point which was clicked
+                  // console.log(data.points[0].data.text);
+                  var entry = {
+                      name: data.points[0].data.text,
+                      };
+
+
+                      $.ajax({
+                        url: '/pbedb/dendogram',
+                        data: JSON.stringify(entry),
+                        type: 'POST',
+                        contentType:'application/json',
+                        success: function(data) {
+                          var graphs = JSON.parse(data)
+                          // console.log(graphs);
+                          Plotly.newPlot('dendograph',graphs,{});
+                          myPlot2 = document.getElementById('dendograph');
+                          // // console.log(graphs);
+                          // // console.log(myPlot2);
+                          //
+                          myPlot2.on('plotly_click', function(data){
+                            // this data is the point which was clicked
+                          console.log(data);
+                           var gene = {
+                              name: data.points[0].text,
+                              };
+
+
+                              $.ajax({
+                                url: '/pbedb/clustergeneClick',
+                                data: JSON.stringify(gene),
+                                type: 'POST',
+                                contentType:'application/json',
+                                // success: function(data1,data2,data3,data4) {
+                                success: function(data) {
+                                  // console.log(data.data1);
+
+                                  var fig_ap2time=JSON.parse(data.data1)
+                                  var fig_ap2KO=JSON.parse(data.data2)
+                                  var fig_pheno=JSON.parse(data.data3)
+                                  var fig_atlas_stage=JSON.parse(data.data4)
+                                  var fig_atlas_gene=JSON.parse(data.data5)
+                                  //
+                                  Plotly.newPlot('box_plot_time',fig_ap2time,{});
+                                  Plotly.newPlot('box_plot_ap2ko',fig_ap2KO,{});
+                                  Plotly.newPlot('pie_and_table',fig_pheno,{});
+                                  Plotly.newPlot('atlas_stage',fig_atlas_stage,{});
+                                  Plotly.newPlot('atlas_gene',fig_atlas_gene,{});
+                                  // myPlot2 = document.getElementById('dendograph');
+                                  //
+                                  // console.log(data);
+                                  // Plotly.newPlot('dendograph',graphs,{});
+                                },
+                                error: function(error) {
+                                  console.log(error);
+                                }
+
+                              });
+
+
+
+                          });
+
+
+                        },
+                        error: function(error) {
+                          console.log(error);
+                        }
+                        // .done(function(data) {
+                        // // Plotly.plot('dendograph',data,{});
+                        // console.log(data);
+
+                        // }
+                      });
+
+                  //
+                  // java acript for  sending data to routes
+                  // fetch(`${window.origin}/cluster/get_cluster`, {
+                  // fetch(`${window.origin}/dendogram`, {
+                  //     method: "POST",
+                  //     credentials: "include",
+                  //     body: JSON.stringify(entry),
+                  //     cache: "no-cache",
+                  //     headers: new Headers({
+                  //       "content-type": "application/json"
+                  //     })
+                  //     })
+                    //   .then(function (response) {
+                    //     if (response.status !== 200) {
+                    //       console.log(`Looks like there was a problem. Status code: ${response.status}`);
+                    //       return;
+                    //     }
+                    //     response.json().then(function (data) {
+                    //     console.log(data);
+                    //   });
+                    // })
+                    // .catch(function (error) {
+                    //   console.log("Fetch error: " + error);
+                    // });
+
+                  });
+
+                  //  now we are going to do gene click event
+                  myPlot2 = document.getElementById('dendograph');
+                  console.log(myPlot2);
+
+
+
+              </script>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row"
+        <div class="col-md-8">
+            <div class="chart" id="dendograph">
+                <!-- <script>
+                    var graphs2 = {{plot2 | safe}};
+
+                    Plotly.plot('dendograph',graphs2,{});
+
+                </script> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="container">
+    <div class="row"
+        <div class="col-md-6">
+            <div class="chart" id="box_plot_time">
+                <!-- <script>
+                    var graphs2 = {{plot2 | safe}};
+
+                    Plotly.plot('dendograph',graphs2,{});
+
+                </script> -->
+            <!-- </div>
+        </div>
+    </div>
+</div>  -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="chart" id="box_plot_time">
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="chart" id="box_plot_ap2ko">
+
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row"
+        <div class="col-md-8">
+            <div class="chart" id="pie_and_table">
+                <!-- <script>
+                    var graphs2 = {{plot2 | safe}};
+
+                    Plotly.plot('dendograph',graphs2,{});
+
+                </script> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="chart" id="atlas_stage">
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="chart" id="atlas_gene">
+
+          </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content%}
