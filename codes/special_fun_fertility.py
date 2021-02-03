@@ -1863,7 +1863,8 @@ def apply_filter_testInput(pheno_call_df,mean_df_d0_mf1,mean_df_d0_mf2,rel_cut=-
 
 
         if len(comm)>0:
-            pheno_call_df.loc[comm,s+'_pheno']='No Power'
+            # pheno_call_df.loc[comm,s+'_pheno']='No Power'
+            pheno_call_df.loc[comm,s+'_pheno']='No Data'
             pheno_call_df.loc[comm,s+'_relative_filter']='applied'
             pheno_call_df.loc[comm,s+'_feed']='no data'
         if len(only_mf1)>0:
@@ -2364,9 +2365,9 @@ def singleMeanAndVariance(rel_fit,rel_err):
     return mean_df,sd_max,var_max
 
 
-def applyPhenocall_CI(fit_df,lower_cut=-1,upper_cut=1):
+def applyPhenocall_CI(fit_df,lower_cut=-1,upper_cut=1,cut_para={'GCKO2':{'lower':-1.6,'upper':1},'g145480':{'lower':-1,'upper':1}}):
     ''' This function is used for define the pheno_call '''
-
+    #
     print('phenocall_test')
     for k in fit_df.keys():
         key1=k
@@ -2375,8 +2376,12 @@ def applyPhenocall_CI(fit_df,lower_cut=-1,upper_cut=1):
     viz_df=pd.DataFrame(index=fit_df[key1][0].index)
 
     for key,item in fit_df.items():
-
         # we will calculate p-vlaue and z score
+        if k =='GCKO2':
+            lower_cut=cut_para['GCKO2']['lower']
+        else:
+            lower_cut=cut_para['g145480']['lower']
+
         m=item[0]
         s=item[1]
         diff_max=m+2*s
@@ -2396,12 +2401,11 @@ def applyPhenocall_CI(fit_df,lower_cut=-1,upper_cut=1):
 
         # not_red_df=viz_df[(viz_df[key+'_diff_max'] < upper_cut) & (viz_df[key+'_diff_min'] > lower_cut)]
         not_red_df=viz_df[(viz_df[key+'_diff_min'] > lower_cut)]
-
-        increased_df=viz_df[(viz_df[key+'_diff_max'] > upper_cut) & (viz_df[key+'_diff_min'] > upper_cut)]
+        # increased_df=viz_df[(viz_df[key+'_diff_max'] > upper_cut) & (viz_df[key+'_diff_min'] > upper_cut)]
 
         viz_df.loc[red_df.index,key+'_pheno'] = 'Reduced'
         viz_df.loc[not_red_df.index,key+'_pheno'] = 'Not Reduced'
-        viz_df.loc[increased_df.index,key+'_pheno'] = 'Increased'
+        # viz_df.loc[increased_df.index,key+'_pheno'] = 'Increased'
     return viz_df
 
 

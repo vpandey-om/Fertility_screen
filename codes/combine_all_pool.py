@@ -563,16 +563,21 @@ def calPvalQval(pheno_call_df,cutoff=0):
         m=actual_df[b+'_RGR'].values
         s=actual_df[b+'_sd'].values
         z=(cutoff-m)/s
+        z1=abs(z)
         pvalue=  (1 - st.norm.cdf(z.tolist()))
-
+        pvalue2=  (1 - st.norm.cdf(z1.tolist())) *2
         fdr=mtest.multipletests(pvalue, alpha=0.05, method='fdr_bh')
-
+        fdr2=mtest.multipletests(pvalue2, alpha=0.05, method='fdr_bh')
+        pheno_call_df[b+'_pvalue2']=np.nan
         pheno_call_df[b+'_pvalue']=np.nan
         pheno_call_df[b+'_zvalue']=np.nan
         pheno_call_df[b+'_fdr']=np.nan
+        pheno_call_df[b+'_fdr2']=np.nan
         pheno_call_df.loc[genes,b+'_pvalue']=pvalue;
         pheno_call_df.loc[genes,b+'_fdr']=fdr[1];
         pheno_call_df.loc[genes,b+'_zvalue']=z;
+        pheno_call_df.loc[genes,b+'_pvalue2']=pvalue2;
+        pheno_call_df.loc[genes,b+'_fdr2']=fdr2[1];
 
     return pheno_call_df
 
@@ -628,16 +633,28 @@ def combinepools():
 
     pheno_all2=apply_weighted_mean(pheno_all)
     pheno_all2=calPvalQval(pheno_all2,cutoff=0)
-    import pdb; pdb.set_trace()
 
+    # import pdb; pdb.set_trace()
 
     ### set color
 
     # colorsIdx = {'No power': '#f5f5f5', 'Not': '#5ab4ac','Reduced Fertility':'#d8b365'}
-
+    ### filter no data entries
+    write_df=pheno_all2.copy()
+    feeds=['g145480_feed','GCKO2_feed']
+    sex_df=[]
+    for f in feeds:
+        xx=pheno_all2[f].str.split(',').apply(lambda x: set(x))
+        bool_ind=[False if item==set(['no data']) else True  for item in xx ]
+        tmp=pheno_all2[bool_ind].copy()
+        sex_df.append(tmp)
     ### plot female
-    xx=pheno_all2.sort_values(by=['GCKO2_RGR']).copy()
+    xx=sex_df[1].sort_values(by=['GCKO2_RGR']).copy()
+    write_df=write_df.sort_values(by=['GCKO2_RGR']).copy()
+    write_df=write_df.reset_index()
+    write_df['Gene IDs']=write_df['pbanka_id']+'_'+write_df['pool']
     xx=xx.reset_index()
+
     xx['Gene IDs']=xx['pbanka_id']+'_'+xx['pool']
     fig_GCKO2 = px.scatter(xx,x=xx.index,y='GCKO2_RGR',color="GCKO2_pheno",color_discrete_map=colorsIdx,error_y='GCKO2_sd',hover_name='Gene IDs',render_mode="svg")
     #fig_GCKO2 = px.scatter(xx,x=xx.index,y='GCKO2_RGR',color="GCKO2_pheno",color_discrete_map=colorsIdx,error_y='GCKO2_sd')
@@ -659,7 +676,7 @@ def combinepools():
 
     fig_GCKO2.show()
     ## plot male
-    xx=pheno_all2.sort_values(by=['g145480_RGR']).copy()
+    xx=sex_df[0].sort_values(by=['g145480_RGR']).copy()
     xx=xx.reset_index()
     xx['Gene IDs']=xx['pbanka_id']+'_'+xx['pool']
     fig_g145480= px.scatter(xx,x=xx.index,y='g145480_RGR',color="g145480_pheno",color_discrete_map=colorsIdx,error_y='g145480_sd',hover_name='Gene IDs',render_mode="svg")
@@ -685,6 +702,8 @@ def combinepools():
     # plt.show()
     # import pdb; pdb.set_trace()
     ### add gene anotation file
+    #xx=sex_df[0].copy()
+    xx=write_df.copy()
     xx['gene_product']='NA'
     xx['gene_symbol']='NA'
     for idx,pbanka_id in enumerate(xx['pbanka_id']):
@@ -835,8 +854,11 @@ def applyMeanVar_final(b,combine_pheno_call,tmp_not_applied,cmb_fitness):
     v=cmb_fitness[b][2][b]
 
     ##
-    lower_cut=np.log2(0.45)
-    upper_cut=np.log2(2.05)
+    if b=='g145480':
+        lower_cut=-1#np.log2(0.45)
+    else:
+        lower_cut=-1.6#np.log2(0.45)
+    upper_cut=np.log2(2)
     diff_max=m+2*s
     diff_min=m-2*s
 
@@ -846,8 +868,8 @@ def applyMeanVar_final(b,combine_pheno_call,tmp_not_applied,cmb_fitness):
     #     pheno_type='Not Reduced'
     elif (diff_min >lower_cut) :
         pheno_type='Not Reduced'
-    elif (diff_max>upper_cut) and  (diff_min>upper_cut) :
-        pheno_type='Increased'
+    # elif (diff_max>upper_cut) and  (diff_min>upper_cut) :
+    #     pheno_type='Increased'
     else:
         pheno_type='No Power'
 
