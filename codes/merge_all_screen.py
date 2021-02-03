@@ -5,23 +5,33 @@ import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 ###
-fertility_screen_file='/Users/vikash/git-hub/Fertility_screen/Figures/Phenotype_call.txt'
+fertility_screen_file='/Users/vikash/git_hub/Fertility_screen/Figures/Phenotype_call_final.txt'
 fertility_df=pd.read_csv(fertility_screen_file,sep='\t')
 ## Gametocyte screen data
-gam_screen_file='/Users/vikash/git-hub/Fertility_screen/Figures/Gametocyte_screen.txt'
-gam_df=pd.read_csv(gam_screen_file,sep='\t')
+# gam_screen_file='/Users/vikash/git_hub/Fertility_screen/Figures/Gametocyte_screen.txt'
+# gam_df=pd.read_csv(gam_screen_file,sep='\t')
 
 
 
 
 ## read combined df from the database
+# POSTGRES = {
+#     'user': 'vpandey',
+#     'pw': 'om16042020',
+#     'db': 'pbe_db',
+#     'host': 'localhost',
+#     'port': '5432',
+# }
+
+
 POSTGRES = {
-    'user': 'vpandey',
+    'user': 'vikash',
     'pw': 'om16042020',
     'db': 'pbe_db',
     'host': 'localhost',
     'port': '5432',
 }
+
 
 DATABASE_URI='postgresql+psycopg2://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
 engine = create_engine(DATABASE_URI)
@@ -133,6 +143,6 @@ xx=final_df2[NA_columns]
 NAidx=xx.index[xx.isnull().all(1)]
 notNAidx=xx.index[~xx.isnull().all(1)]
 result_df=final_df2.loc[np.concatenate([notNAidx,NAidx]),:].copy()
-result_df.to_csv('/Users/vikash/git-hub/Fertility_screen/Figures/all_screening_data.txt',sep='\t')
+# result_df.to_csv('/Users/vikash/git-hub/Fertility_screen/Figures/all_screening_data.txt',sep='\t')
 res_df=final_df2.loc[np.concatenate([notNAidx]),:].copy()
-res_df.to_csv('/Users/vikash/git-hub/pbeDB/data/all_screening_data_without_nan.txt',sep='\t',index=None)
+res_df.to_csv('/Users/vikash/pbeDB/data/all_screening_data_without_nan.txt',sep='\t',index=None)
