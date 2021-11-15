@@ -1,0 +1,19 @@
+NGI Sample ID	Sample name	Sample description	pr	t	d	s	r	b	pellet	sup
+P19551_1001	PbMaleFertility1_1_d_t_r1	PbMaleFertility1_1_d_t_r1	pr1	t	d	NA	NA	NA	NA	NA
+P19551_1003	PbMaleFertility1_3_b1_d1_r1	PbMaleFertility1_3_b1_d1_r1	pr1	NA	d	NA	r1	b1	NA	NA
+P19551_1004	PbMaleFertility1_4_b2_d1_r1	PbMaleFertility1_4_b2_d1_r1	pr1	NA	d	NA	r1	b2	NA	NA
+P19551_1005	PbMaleFertility1_5_pellet_d1_r1	PbMaleFertility1_5_pellet_d1_r1	pr1	NA	d	NA	r1	NA	pel	NA
+P19551_1006	PbMaleFertility1_6_sup_d1_r1	PbMaleFertility1_6_sup_d1_r1	pr1	NA	d	NA	r1	NA	NA	sup
+P19551_1007	PbMaleFertility1_7_b1_d2_r1	PbMaleFertility1_7_b1_d2_r1	pr1	NA	d	NA	r2	b1	NA	NA
+P19551_1008	PbMaleFertility1_8_b2_d2_r1	PbMaleFertility1_8_b2_d2_r1	pr1	NA	d	NA	r2	b2	NA	NA
+P19551_1009	PbMaleFertility1_9_pellet_d2_r1	PbMaleFertility1_9_pellet_d2_r1	pr1	NA	d	NA	r2	NA	pel	NA
+P19551_1010	PbMaleFertility1_10_sup_d2_r1	PbMaleFertility1_10_sup_d2_r1	pr1	NA	d	NA	r2	NA	NA	sup
+P19551_1019	PbMaleFertility1_19_d_t_r2	PbMaleFertility1_19_d_t_r2	pr2	t	d	NA	NA	NA	NA	NA
+P19551_1021	PbMaleFertility1_21_b1_d1_r2	PbMaleFertility1_21_b1_d1_r2	pr2	NA	d	NA	r1	b1	NA	NA
+P19551_1022	PbMaleFertility1_22_b2_d1_r2	PbMaleFertility1_22_b2_d1_r2	pr2	NA	d	NA	r1	b2	NA	NA
+P19551_1023	PbMaleFertility1_23_pellet_d1_r2	PbMaleFertility1_23_pellet_d1_r2	pr2	NA	d	NA	r1	NA	pel	NA
+P19551_1024	PbMaleFertility1_24_sup_d1_r2	PbMaleFertility1_24_sup_d1_r2	pr2	NA	d	NA	r1	NA	NA	sup
+P19551_1025	PbMaleFertility1_25_b1_d2_r2	PbMaleFertility1_25_b1_d2_r2	pr2	NA	d	NA	r2	b1	NA	NA
+P19551_1026	PbMaleFertility1_26_b2_d2_r2	PbMaleFertility1_26_b2_d2_r2	pr2	NA	d	NA	r2	b2	NA	NA
+P19551_1027	PbMaleFertility1_27_pellet_d2_r2	PbMaleFertility1_27_pellet_d2_r2	pr2	NA	d	NA	r2	NA	pel	NA
+P19551_1028	PbMaleFertility1_28_sup_d2_r2	PbMaleFertility1_28_sup_d2_r2	pr2	NA	d	NA	r2	NA	NA	sup

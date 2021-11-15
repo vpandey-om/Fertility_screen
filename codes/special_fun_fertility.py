@@ -152,6 +152,7 @@ def filter_input_dropout(df,df_s,df_read,input_df,manfest_df,percent=0.9,rel_cut
                 day_cols.append(manfest_df.index[id])
 
     #####
+
     tmp=filtered_count_df.copy()
     tmp=tmp.drop(columns=['Gene','Barcodes','pbanka_id'])
     tmp=tmp.div(tmp.sum(axis=0))
@@ -178,7 +179,6 @@ def filter_input_dropout(df,df_s,df_read,input_df,manfest_df,percent=0.9,rel_cut
 
     df_s.set_index('pbanka_id',inplace=True)
     filltered_df_s=df_s.loc[filtered_count_df.index,:].copy()
-
 
     return filtered_count_df,filtered_df_read,filltered_df_s
 
@@ -925,10 +925,6 @@ def propagate_error_day0_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d0
             tmp_mn_mf2=pd.DataFrame(index=df.index)
             tmp_var_mf2=pd.DataFrame(index=df.index)
             for dr,dr_v in tmp_mani.groupby([ 'b','mf']).indices.items():
-
-
-
-
                 if dr[1]=='mf1':
                     dr_j='_'.join(dr)
                     tmp_mn_mf1[key+'_'+dr_j]=df[tmp_mani.index[dr_v]].mean(axis=1).copy()
