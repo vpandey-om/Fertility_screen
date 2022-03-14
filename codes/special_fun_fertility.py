@@ -913,7 +913,6 @@ def propagate_error_day0_each_mossifeed(df,manfest_df,grp_cols,day_pos,days=['d0
     grp_cols.remove('mf')
 
     grp_cols.remove('b')
-
     for k,v in manfest_df.groupby(grp_cols).indices.items():
         if k[day_pos]in days:
             key='_'.join(k)
@@ -2169,6 +2168,9 @@ def relative_growth_rate_analysis(df,manfest_df,prev_to_new,db_df,plot_info=None
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
+    saveres=[[mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2],[mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2]]
+
+    pickle.dump(saveres,open(plot_info['pool']+'.p','wb'))
     ##  we are going to compute rleative growth rate  ###
 
     ### plot propagated relative abundance.

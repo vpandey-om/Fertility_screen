@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 code=os.getcwd()
 upLevel=code.replace('codes','') ####### we are going to upper level of code directory
 sys.path.insert(0,upLevel+'/data')

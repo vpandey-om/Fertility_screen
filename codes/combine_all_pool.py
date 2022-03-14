@@ -98,6 +98,11 @@ def relative_growth_rate_analysis_pilot(df,manfest_df,prev_to_new,db_df,plot_inf
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
+
+    saveres=[[mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2],[mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2]]
+
+    pickle.dump(saveres,open(plot_info['pool']+'.p','wb'))
+    
     ##  we are going to compute rleative growth rate  ###
 
     ### plot propagated relative abundance.
@@ -788,6 +793,7 @@ def test_for_input_cutoff(input_df_pilot,input_df_pool1, input_df_pool2,input_df
 
 def pilot_call():
     pheno_call_pilot=pilot()
+    import pdb; pdb.set_trace()
     pheno_call_pilot.index.name='pbanka_id'
     pheno_call_pilot['pool']='pilot'
     print ('pilot finished\n\n')

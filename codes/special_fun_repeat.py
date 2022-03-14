@@ -68,6 +68,11 @@ def relative_growth_rate_analysis_repeat(df,manfest_df,prev_to_new,db_df,plot_in
     day_pos=grp_cols.index('d')
     mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2=propagate_error_day13_each_mossifeed(rel_df,manfest_df,grp_cols,day_pos)
 
+    saveres=[[mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2],[mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2]]
+
+    pickle.dump(saveres,open(plot_info['pool']+'.p','wb'))
+
+
     ##  we are going to compute rleative growth rate  ###
 
     ### plot propagated relative abundance.
@@ -100,7 +105,7 @@ def relative_growth_rate_analysis_repeat(df,manfest_df,prev_to_new,db_df,plot_in
         rgr_temp.loc[:,'mf2']=mf2_RGR.loc[:,col_mf2[0].to_list()[0]].copy()
         var_temp.loc[:,'mf1']=mf1_var.loc[:,col_mf1[0].to_list()[0]].copy()
         var_temp.loc[:,'mf2']=mf2_var.loc[:,col_mf2[0].to_list()[0]].copy()
-        
+
 
         cmb_fitness[b]=gaussianMeanAndVariance(rgr_temp,var_temp)
 
