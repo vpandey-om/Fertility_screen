@@ -372,6 +372,30 @@ def applyPhenocall_CI_male_pool(mdf,vdf, key='sup_vs_b1', lower_cut=-1):
     return viz_df
 
 
+def plot_error_scatter(xseries,yseries,xlab,ylab,filename):
+
+    plt.figure()
+    plt.scatter(xseries.values,yseries.values, marker='o', c='b')
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
+    plt.savefig(filename,
+                format='pdf',dpi=300)
+    plt.close()
+
+def plot_error_hist(xseries,xlab,filename):
+
+    plt.figure()
+    plt.hist(xseries.values)
+    plt.xlabel(xlab)
+    plt.ylabel('Frequency')
+    plt.savefig(filename,
+                format='pdf',dpi=300)
+
+    plt.close()
+
+
+
+
 def relative_growth_rate_analysis_male_pool(df,manfest_df,prev_to_new,db_df,plot_info=None):
     ''' We are going to do relative growth rate analysis'''
 
@@ -408,6 +432,19 @@ def relative_growth_rate_analysis_male_pool(df,manfest_df,prev_to_new,db_df,plot
     list_mean_df=[mean_df_b1,mean_df_b2,mean_df_pel,mean_df_sup]
     list_var_df=[var_df_b1,var_df_b2,var_df_pel,var_df_sup]
 
+    xlab='Relative abundance'
+    ylab='Relative error'
+    folder='/Users/vpandey/projects/githubs/Fertility_screen_2/preFinals/motility/'
+
+    plot_error_scatter(mean_df_b1,var_df_b1,xlab,ylab,folder+'b1_scatter.pdf')
+    plot_error_hist(mean_df_b1,xlab,folder+'b1_hist.pdf')
+    plot_error_scatter(mean_df_b2,var_df_b2,xlab,ylab,folder+'b2_scatter.pdf')
+    plot_error_hist(mean_df_b2,xlab,folder+'b2_hist.pdf')
+    plot_error_scatter(mean_df_pel,var_df_pel,xlab,ylab,folder+'pel_scatter.pdf')
+    plot_error_hist(mean_df_pel,xlab,folder+'pel_hist.pdf')
+    plot_error_scatter(mean_df_sup,var_df_sup,xlab,ylab,folder+'sup_scatter.pdf')
+    plot_error_hist(mean_df_sup,xlab,folder+'sup_hist.pdf')
+    
 
     if 'rel_file' in plot_info.keys():
         print('plotting propagated relative abundance')
@@ -661,10 +698,6 @@ def stepwiseAnalysis_slowpool():
     relative_growth_rate_analysis_male_pool(filtered_count_df,manfest_df,prev_to_new,db_df,plot_info)
 
 
-
-
-
-
 if __name__ == '__main__':
-    #stepwiseAnalysis()
-    stepwiseAnalysis_slowpool()
+    stepwiseAnalysis()
+    #stepwiseAnalysis_slowpool()

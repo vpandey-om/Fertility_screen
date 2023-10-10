@@ -235,21 +235,71 @@ if __name__ == '__main__':
     allGenes=[item for sublist in genes for item in sublist]
     df_res=pd.DataFrame()
     df_res['Genes']=allGenes
-    df_res['Fertility rate']=RGRs
+    df_res['Relative fertility']=RGRs
     df_res['Sex']=Sexes
     df_res['published']=Cross
+    sex_rename={'GCKO2':'Female','g145480':'Male','Cl15cy':'WT'}
+    df_res['Sex']=df_res['Sex'].replace(sex_rename)
+    df_res['shape']="o"
+    sns.set(font="Arial",font_scale =2)
+    sns.set_style("white")
+    colors=['#FFFFFF', '#FFFFFF', '#FFFFFF']
+    colors1=['#AF58BA', '#009ADE', '#FFC61E','#636363']
+    ### shape wise
 
+    plt.figure()
+    tmp=df_res[df_res['published']=='NA']
+    sns.stripplot(x="Sex", y="Relative fertility", data=tmp,color='#636363',marker="o")
+
+    tmp=df_res[df_res['published']=='F']
+    sns.stripplot(x="Sex", y="Relative fertility", data=tmp,color='#636363',marker="^")
+
+    tmp=df_res[df_res['published']=='M']
+    sns.stripplot(x="Sex", y="Relative fertility", data=tmp,color='#636363',marker="s")
+
+    tmp=df_res[df_res['published']=='FM']
+    sns.stripplot(x="Sex", y="Relative fertility", data=tmp,color='#636363',marker="h")
+
+    sns.violinplot(x="Sex", y='Relative fertility', data=df_res,inner='box',
+                         order=['Female','Male','WT'],palette=colors) ## 'quartile' 'box'
+    plt.legend().remove()
+    plt.tick_params(axis='x', rotation=0)
+    # plt.xlabel('Gametocyte', fontsize=20,labelpad=10)
+    plt.xlabel('')
+    plt.ylabel('')
+    plt.ylim((-18,8))
+
+    plt.savefig(out_folder+'/pilot_violin_shape.pdf',
+                format='pdf',dpi=300)
+    plt.close()
+
+
+
+    # sns.set_style("white")
     ## combine data
     # pheno_call_df[pheno_call_df.index.isin(pub_cross['Gene_ID_new'].to_list())]
-    colors=['#F7F7F7', '#CCCCCC', '#969696']
-    colors1=['#1a9850', '#d73027', '#fee08b','#d8daeb']
-    ax = sns.stripplot(x="Sex", y="Fertility rate", hue="published", data=df_res,hue_order=['F','M','FM','NA'],palette=colors1)
+    s=5
+    plt.figure()
+    tmp=df_res[df_res['published']=='NA']
+    sns.stripplot(x="Sex", y="Relative fertility", color='#636363', data=tmp,size=s)
+    tmp=df_res[df_res['published']=='F']
+    sns.stripplot(x="Sex", y="Relative fertility", color='#AF58BA', data=tmp,size=s)
+    tmp=df_res[df_res['published']=='M']
+    sns.stripplot(x="Sex", y="Relative fertility", color='#009ADE', data=tmp,size=s)
+    tmp=df_res[df_res['published']=='FM']
+    sns.stripplot(x="Sex", y="Relative fertility", color='#FFC61E', data=tmp,size=s)
     # sns.stripplot(x="Sex", y='Fertility rate', data=df_res,color="black", edgecolor="gray",hue="published")
 
-    sns_plot = sns.violinplot(x="Sex", y='Fertility rate', data=df_res,inner='box',
-                         order=['GCKO2','g145480','Cl15cy'],palette=colors) ## 'quartile' 'box'
+    sns.violinplot(x="Sex", y='Relative fertility', data=df_res,inner='box',
+                         order=['Female','Male','WT'],palette=colors) ## 'quartile' 'box'
+    #sns.stripplot(x="Sex", y="Relative fertility", hue="published", data=tmp,hue_order=['F','M','FM','NA'],palette=colors1)
+    plt.legend().remove()
+    plt.tick_params(axis='x', rotation=0)
+    # plt.xlabel('Gametocyte', fontsize=20,labelpad=10)
+    plt.xlabel('')
+    plt.ylabel('')
+    plt.ylim((-18,8))
 
-
-    figure = sns_plot.get_figure()
-    figure.savefig(out_folder+'/pilot_violin.pdf', dpi=300)
+    plt.savefig(out_folder+'/pilot_violin.pdf',
+                format='pdf',dpi=300)
     plt.close()

@@ -4,18 +4,22 @@ from matplotlib.markers import MarkerStyle
 from pylab import *
 # plt.style.use('seaborn-whitegrid')
 cmap = cm.get_cmap('seismic', 5)
+from matplotlib.font_manager import FontProperties
+import matplotlib as mpl
 
+# Set the default font family to Arial
+mpl.rcParams['font.family'] = 'Arial'
 ## import final xlsx file then plot s curve
 fertility_df=pd.read_excel('/Users/vpandey/projects/githubs/Fertility_screen/preFinals/Phenotype_call_final_100621.xlsx',sheet_name='data')
 
 ## choice of color
-
+# arial_font = FontProperties(family='Arial', size=1)
 
 # get male dataframe
 female_columns=['GCKO2_RGR','GCKO2_sd','GCKO2_pheno']
 
 
-def plotScurve(df,pheno_names=None,pheno_colors=None,pheno_legends=None,plot_df='test.pdf'):
+def plotScurve(df,ylab,pheno_names=None,pheno_colors=None,pheno_legends=None,plot_df='test.pdf'):
     ## sort dataframe
     if not pheno_names:
         pheno_names=df['pheno'].unique()
@@ -28,18 +32,25 @@ def plotScurve(df,pheno_names=None,pheno_colors=None,pheno_legends=None,plot_df=
     sorted_df=df.sort_values(by=['rgr']).copy()
     sorted_df['x']=np.arange(sorted_df.shape[0])
     # get for each phenoype and plot
-    ax = subplot(1,1,1)
+    fig, ax = plt.subplots(figsize=[8, 2.75])
+    # ax = subplot(1,1,1)
 
     for i,item in enumerate(pheno_names):
         p_df=sorted_df[sorted_df['pheno']==item].copy()
+        # h1=ax.errorbar(p_df['x'].values, p_df['rgr'].values, yerr=p_df['sd'].values*2, fmt='o', color=pheno_colors[i],
+        #          ecolor=pheno_colors[i], elinewidth=1, capsize=3,label=pheno_legends[i],ms=2)
         h1=ax.errorbar(p_df['x'].values, p_df['rgr'].values, yerr=p_df['sd'].values*2, fmt='o', color=pheno_colors[i],
-                 ecolor=pheno_colors[i], elinewidth=1, capsize=3,label=pheno_legends[i],ms=2)
+                 ecolor=pheno_colors[i], elinewidth=1, capsize=3,ms=2)
 
-    handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles[::-1], labels[::-1])
-    plt.grid(axis='y', color='0.95')
-    plt.xlabel('Ranked genes [1-%d]'%sorted_df.shape[0], fontsize=16)
-    plt.ylabel('Fertility rate', fontsize=16)
+    # handles, labels = ax.get_legend_handles_labels()
+    # ax.legend(handles[::-1], labels[::-1])
+    # plt.grid(axis='y', color='0.95')
+    # plt.xlabel('Ranked genes [1-%d]'%sorted_df.shape[0], fontsize=16)
+    fsize=18
+    # plt.xlabel('Ranked genes', fontsize=fsize)
+    # plt.ylabel(ylab, fontsize=fsize)
+    plt.xticks(fontsize=fsize)
+    plt.yticks(fontsize=fsize)
     plt.ylim(-18, 8)
     # plt.xlim(-14, 1150)
     ## reoder legends
@@ -60,9 +71,15 @@ def plot_half_circle(df,plot_df='test.df'):
     for i in df.index:
         marker_style = dict(color=df.loc[i,'female_color'],markersize=6, markerfacecoloralt=df.loc[i,'male_color'],markeredgecolor='#F5F5F5',alpha=0.8,markeredgewidth=0.2)
         ax.plot(df.loc[i,'g145480_RGR'],  df.loc[i,'GCKO2_RGR'], 'o',fillstyle='left', **marker_style)
+    fsize=30
+    # plt.xlabel('Relative male fertility',fontsize=fsize)
+    # plt.ylabel('Relative female fertility',fontsize=fsize)
 
-    plt.xlabel('Male fertility',fontsize=15)
-    plt.ylabel('Female fertility',fontsize=15)
+    ticks=[5, 0, -5, -10, -15]
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    plt.xticks(fontsize=fsize)
+    plt.yticks(fontsize=fsize)
     # ax.set_xlabel('Male fertility',fontsize=15)
     # ax.set_ylabel('Female fertility',fontsize=15)
     # ax.tick_params(axis='y',labelsize=15)
@@ -103,11 +120,12 @@ male_df=male_df[~(male_df['pheno']=='No data')].copy()
 
 pheno_names=['Not reduced','Reduced',]
 pheno_colors=['#66C2A5','#FC8D62']
+pheno_colors=['#0571b0','#ca0020']
 pheno_legends=['Not reduced','Reduced']
+# color_gam_dict={'Reduced':'#ca0020','Not reduced':'#0571b0'}
+plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/male_S_2.pdf'
 
-plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/male_S.pdf'
-
-plotScurve(male_df,pheno_names,pheno_colors,pheno_legends,plot_df)
+plotScurve(male_df,'Relative male fertility',pheno_names,pheno_colors,pheno_legends,plot_df)
 
 
 ### for female fertility
@@ -119,9 +137,9 @@ female_df=female_df.rename(columns = {'GCKO2_RGR': 'rgr','GCKO2_sd':'sd','GCKO2_
 # remove columns with no data
 female_df=female_df[~(female_df['pheno']=='No data')].copy()
 
-plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_S.pdf'
+plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_S_2.pdf'
 
-plotScurve(female_df,pheno_names,pheno_colors,pheno_legends,plot_df)
+plotScurve(female_df,'Relative female fertility',pheno_names,pheno_colors,pheno_legends,plot_df)
 
 ## get common between male and female
 common_df=fertility_df[~((fertility_df['g145480_pheno_new']=='No data') | (fertility_df['GCKO2_pheno_new']=='No data'))]
@@ -133,10 +151,10 @@ common_df['female_color']=common_df['GCKO2_pheno_new']  ## Not reduced
 
 common_df=common_df.replace({'male_color': dict(zip(pheno_names, pheno_colors)),
 'female_color': dict(zip(pheno_names, pheno_colors))})
-plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/male_female_half_circle.pdf'
+plot_df='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/male_female_half_circle_2.pdf'
 plot_half_circle(common_df,plot_df)
 
-
+import pdb; pdb.set_trace()
 
 
 
@@ -180,8 +198,4 @@ plot_half_circle(common_df,plot_df)
 #
 #
 
-
-
-
 ####
-import pdb; pdb.set_trace()

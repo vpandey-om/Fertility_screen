@@ -5,10 +5,17 @@ from scipy import stats
 import itertools
 import numpy as np
 import pickle
-
+# import pylab
+# pylab.rcParams['xtick.major.pad']='30'
+# pylab.rcParams['ytick.major.pad']='4'
 prev_to_new=pickle.load(open('/Users/vpandey/projects/githubs/Fertility_screen/data/prevTonew_PBANKA.pickle','rb'))
 new_to_prev = dict((v,k) for k,v in prev_to_new.items())
 
+colors=['#AF58BA', '#009ADE', '#FFC61E']
+colorv=['#FFFFFF', '#FFFFFF', '#FFFFFF']
+# color_gam=['#636363', '#636363', '#636363']
+# color_gam=['#66C2A5','#FC8D62']
+color_gam_dict={'Reduced':'#FC8D62','Not reduced':'#66C2A5'}
 def get_subset_data(df,col_name,gene_list,types=['Female','Male','Female and male']):
     ## find common genes
     res_df=df.copy()
@@ -84,7 +91,7 @@ def compute_ttest(df,col='FG RGR', types=['Female','Male','Female and male']):
     df[col.replace(' RGR','')+'_t_statistic']=tvals
     return df
 
-folder='/Users/vpandey/projects/githubs/Fertility_screen/preFinals/'
+folder='/Users/vpandey/projects/githubs/Fertility_screen_2/preFinals/'
 
 df=pd.read_csv('/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_only_genes.txt',sep='\t',header=None)
 female_only=df[0].tolist()
@@ -132,26 +139,102 @@ plt.close()
 
 joint_df_required=joint_df[(joint_df['gam']=='Male')| (joint_df['gam']=='Female')| (joint_df['gam']=='Female and male')]
 
-df_MG=compute_ttest(joint_df_required,col="g145480_RGR")
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="gam", y="g145480_RGR", data=joint_df_required,color="black", edgecolor="gray")
+df_MG=compute_ttest(joint_df_required,col='GFP_log2change')
 
-sns_plot = sns.violinplot(x="gam", y="g145480_RGR", data=joint_df_required,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'maleFertility_vs_gam.pdf', dpi=300)
+### plot for male
+male_tmp=joint_df_required.copy()
+rename_sex={'Female':'Female','Male':'Male','Female and male':'Both sexes'}
+male_tmp['gam']=male_tmp['gam'].replace(rename_sex)
+male_tmp['Gametocyte']=male_tmp['gam'].copy()
+male_tmp['Relative male fertility']=male_tmp['g145480_RGR'].copy()
+male_tmp['Phenotypes']=male_tmp['g145480_pheno_new'].copy()
+
+
+
+# Relative female fertility (y), Female/Male/Both sexes (x)
+# sns.set(font="Arial",font_scale =2,rc = {'figure.figsize':(6,8)})
+sns.set(font="Arial",font_scale =2)
+sns.set_style("white")
+
+
+# sns.set_context("talk", font_scale=1.2)
+plt.figure()
+
+# sns.stripplot(x="Gametocyte", y="Relative male fertility", data=male_tmp,palette=color_gam_dict,  hue='Phenotypes',edgecolor="gray",size=8)
+
+sns.violinplot(x="Gametocyte", y="Relative male fertility", data=male_tmp,inner='box',palette=colorv,order=['Female','Male','Both sexes']) ## 'quartile' 'box'
+
+# sns.swarmplot(y="Relative male fertility",
+#                 x="Gametocyte",
+#                 data=male_tmp,
+#                    hue='Phenotypes',edgecolor="gray",size=8,palette=color_gam_dict,order=['Female','Male','Both sexes'])
+
+sns.stripplot(y="Relative male fertility",
+                x="Gametocyte",
+                data=male_tmp,
+                   hue='Phenotypes',edgecolor="gray",size=8,palette=color_gam_dict,order=['Female','Male','Both sexes'])
+
+
+
+# figure = sns_plot.get_figure()
+
+plt.legend().remove()
+plt.tick_params(axis='x', rotation=0)
+# plt.xlabel('Gametocyte', fontsize=20,labelpad=10)
+plt.xlabel('')
+plt.ylabel('')
+plt.ylim((-18,8))
+
+plt.savefig(folder+'maleFertility_vs_gam.pdf',
+            format='pdf',dpi=300)
+
+
+# # plt.ylabel('Relative male fertility', fontsize=20)
+# figure.savefig(folder+'maleFertility_vs_gam.pdf', dpi=300)
+
 plt.close()
 
 
+### plot for fmale
+female_tmp=joint_df_required.copy()
+rename_sex={'Female':'Female','Male':'Male','Female and male':'Both sexes'}
+female_tmp['gam']=female_tmp['gam'].replace(rename_sex)
+female_tmp['Gametocyte']=female_tmp['gam'].copy()
+female_tmp['Relative female fertility']=female_tmp['GCKO2_RGR'].copy()
+female_tmp['Phenotypes']=female_tmp['GCKO2_pheno_new'].copy()
 
-df_MG=compute_ttest(joint_df_required,col="GCKO2_RGR")
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="gam", y="GCKO2_RGR", data=joint_df_required,color="black", edgecolor="gray")
 
-sns_plot = sns.violinplot(x="gam", y="GCKO2_RGR", data=joint_df_required,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'femaleFertility_vs_gam.pdf', dpi=300)
+
+df_FG=compute_ttest(joint_df_required,col='RFP_log2change')
+# colors=['#F7F7F7', '#CCCCCC', '#969696']
+
+plt.figure()
+
+sns.violinplot(x="Gametocyte", y="Relative female fertility", data=female_tmp,inner='box',
+                    order=['Female','Male','Both sexes'],palette=colorv) ## 'quartile' 'box'
+# sns.swarmplot(y="Relative female fertility",
+#                 x="Gametocyte",
+#                 data=female_tmp,
+#                    hue='Phenotypes',edgecolor="gray",size=8,palette=color_gam_dict,order=['Female','Male','Both sexes'])
+sns.stripplot(y="Relative female fertility",
+                x="Gametocyte",
+                data=female_tmp,
+                   hue='Phenotypes',edgecolor="gray",size=8,palette=color_gam_dict,order=['Female','Male','Both sexes'])
+
+
+#sns.stripplot(x="Gametocyte", y="Relative female fertility", data=female_tmp,palette=color_gam_dict, hue='Phenotypes',edgecolor="gray",size=8)
+
+
+# figure = sns_plot.get_figure()
+plt.legend().remove()
+plt.tick_params(axis='x', rotation=0)
+# plt.xlabel('Gametocyte', fontsize=20,labelpad=10)
+plt.xlabel('')
+plt.ylabel('')
+plt.ylim((-18,8))
+plt.savefig(folder+'femaleFertility_vs_gam.pdf',
+            format='pdf',dpi=300)
+# figure.savefig(folder+'femaleFertility_vs_gam.pdf', dpi=300)
 plt.close()
 
 
@@ -159,7 +242,7 @@ joint_df_required.to_excel('male_female_gam.xlsx')
 
 
 
-import pdb; pdb.set_trace()
+
 
 ## for gametocyte analysis
 
@@ -171,16 +254,57 @@ tmp=res_df[res_df['O P']=='reduced']
 
 plt.clf()
 
-df_FG=compute_ttest(tmp,col='O RGR')
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="Sex", y="O RGR", data=tmp,color="black", edgecolor="gray")
 
-sns_plot = sns.violinplot(x="Sex", y="O RGR", data=tmp,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'occyst_pheno.pdf', dpi=300)
+# colors=['#F7F7F7', '#CCCCCC', '#969696']
+
+### do analysis for oocyst
+
+oocys_df=tmp.copy()
+rename_sex={'Female':'Female','Male':'Male','Female and male':'Both sexes'}
+oocys_df['Sex']=oocys_df['Sex'].replace(rename_sex)
+oocys_df['oo']=oocys_df['Sex'].copy()
+oocys_df['Relative oocyst growth']=oocys_df["O RGR"].copy()
+oocys_df['Phenotypes']=oocys_df["O P"].copy()
+
+plt.figure()
+
+sns.violinplot(x="oo", y="Relative oocyst growth", data=oocys_df,inner='box',
+                    order=['Female','Male','Both sexes'],color='#FFFFFF') ## 'quartile' 'box'
+# sns.swarmplot(y="Relative oocyst growth",
+#                 x="oo",data=oocys_df,edgecolor="gray",size=4,color='#FC8D62',order=['Female','Male','Both sexes'])
+sns.stripplot(y="Relative oocyst growth",
+                x="oo",data=oocys_df,edgecolor="gray",size=8,color='#FC8D62',order=['Female','Male','Both sexes'])
+
+#sns.stripplot(x="Gametocyte", y="Relative female fertility", data=female_tmp,palette=color_gam_dict, hue='Phenotypes',edgecolor="gray",size=8)
+
+
+# figure = sns_plot.get_figure()
+plt.legend().remove()
+plt.tick_params(axis='x', rotation=0)
+# plt.xlabel('Gametocyte', fontsize=20,labelpad=10)
+plt.xlabel('')
+plt.ylabel('')
+plt.ylim((-18,8))
+plt.savefig(folder+'occyst_pheno.pdf',
+            format='pdf',dpi=300)
+
+plt.close()
+
+df_O=compute_ttest(res_df,col='O RGR')
+
+two_df=df_MG.merge(df_FG, how='left', on=['Condition 1','Condition 2'])
+final_df=two_df.merge(df_O, how='left', on=['Condition 1','Condition 2'])
+final_df.to_csv(folder+'t_stats.txt',sep='\t')
 
 import pdb; pdb.set_trace()
+
+# sns.stripplot(x="Sex", y="O RGR", data=tmp,palette=colors, edgecolor="gray")
+#
+# sns_plot = sns.violinplot(x="Sex", y="O RGR", data=tmp,inner='box',
+#                     order=['Female','Male','Female and male'],palette=colorv) ## 'quartile' 'box'
+# figure = sns_plot.get_figure()
+# figure.savefig(folder+'occyst_pheno.pdf', dpi=300)
+
 
 
 
@@ -195,46 +319,46 @@ import pdb; pdb.set_trace()
 
 
 
-## For female gametocyte
-
-plt.clf()
-
-df_FG=compute_ttest(res_df,col='FG RGR')
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="Sex", y="FG RGR", data=res_df,color="black", edgecolor="gray")
-
-sns_plot = sns.violinplot(x="Sex", y="FG RGR", data=res_df,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'FemaleG.pdf', dpi=300)
-
-
-## For female gametocyte
-
-plt.clf()
-
-df_MG=compute_ttest(res_df,col='MG RGR')
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="Sex", y="MG RGR", data=res_df,color="black", edgecolor="gray")
-
-sns_plot = sns.violinplot(x="Sex", y="MG RGR", data=res_df,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'MaleG.pdf', dpi=300)
-
-
-## for occyst
-plt.clf()
-
-df_O=compute_ttest(res_df,col='O RGR')
-colors=['#F7F7F7', '#CCCCCC', '#969696']
-sns.stripplot(x="Sex", y="O RGR", data=res_df,color="black", edgecolor="gray")
-
-sns_plot = sns.violinplot(x="Sex", y="O RGR", data=res_df,inner='box',
-                    order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
-figure = sns_plot.get_figure()
-figure.savefig(folder+'occyst.pdf', dpi=300)
-
-two_df=df_MG.merge(df_FG, how='left', on=['Condition 1','Condition 2'])
-final_df=two_df.merge(df_O, how='left', on=['Condition 1','Condition 2'])
-final_df.to_csv(folder+'t_stats.txt',sep='\t')
+# ## For female gametocyte
+#
+# plt.clf()
+#
+# df_FG=compute_ttest(res_df,col='FG RGR')
+# colors=['#F7F7F7', '#CCCCCC', '#969696']
+# sns.stripplot(x="Sex", y="FG RGR", data=res_df,color="black", edgecolor="gray")
+#
+# sns_plot = sns.violinplot(x="Sex", y="FG RGR", data=res_df,inner='box',
+#                     order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
+# figure = sns_plot.get_figure()
+# figure.savefig(folder+'FemaleG.pdf', dpi=300)
+#
+#
+# ## For female gametocyte
+#
+# plt.clf()
+#
+# df_MG=compute_ttest(res_df,col='MG RGR')
+# # colors=['#F7F7F7', '#CCCCCC', '#969696']
+# sns.stripplot(x="Sex", y="MG RGR", data=res_df,color="black", edgecolor="gray")
+#
+# sns_plot = sns.violinplot(x="Sex", y="MG RGR", data=res_df,inner='box',
+#                     order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
+# figure = sns_plot.get_figure()
+# figure.savefig(folder+'MaleG.pdf', dpi=300)
+#
+#
+# ## for occyst
+# plt.clf()
+#
+# df_O=compute_ttest(res_df,col='O RGR')
+# # colors=['#F7F7F7', '#CCCCCC', '#969696']
+# sns.stripplot(x="Sex", y="O RGR", data=res_df,color="black", edgecolor="gray")
+#
+# sns_plot = sns.violinplot(x="Sex", y="O RGR", data=res_df,inner='box',
+#                     order=['Female','Male','Female and male'],palette=colors) ## 'quartile' 'box'
+# figure = sns_plot.get_figure()
+# figure.savefig(folder+'occyst.pdf', dpi=300)
+#
+# two_df=df_MG.merge(df_FG, how='left', on=['Condition 1','Condition 2'])
+# final_df=two_df.merge(df_O, how='left', on=['Condition 1','Condition 2'])
+# final_df.to_csv(folder+'t_stats.txt',sep='\t')

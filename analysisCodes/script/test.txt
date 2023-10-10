@@ -1,0 +1,44 @@
+	gene	GFP_result	RFP_result	gam	GCKO2_pheno_new
+15	PBANKA_070990	No power	Reduced	Female	Reduced
+23	PBANKA_091020	Not reduced	Reduced	Female	Reduced
+32	PBANKA_114480	Not reduced	Reduced	Female	Reduced
+38	PBANKA_010530	Reduced	Reduced	Female and male	Reduced
+46	PBANKA_141810	Not reduced	Reduced	Female	Reduced
+56	PBANKA_121470	Not reduced	Reduced	Female	Reduced
+75	PBANKA_140440	Reduced	Reduced	Female and male	Reduced
+88	PBANKA_142890	No power	Reduced	Female	Reduced
+92	PBANKA_041830	Reduced	Not reduced	Male	Reduced
+102	PBANKA_082430	Reduced	Reduced	Female and male	Reduced
+105	PBANKA_142590	Reduced	Reduced	Female and male	Reduced
+108	PBANKA_090240	Not reduced	Reduced	Female	Reduced
+116	PBANKA_143520	Not reduced	Reduced	Female	Reduced
+119	PBANKA_010620	Reduced	Reduced	Female and male	Not reduced
+138	PBANKA_041340	Reduced	Not reduced	Male	Not reduced
+140	PBANKA_071650	Reduced	Not reduced	Male	Not reduced
+161	PBANKA_143120	Reduced	Reduced	Female and male	Not reduced
+170	PBANKA_082940	Reduced	Reduced	Female and male	Not reduced
+171	PBANKA_144790	Reduced	Not reduced	Male	Not reduced
+174	PBANKA_082750	Reduced	Reduced	Female and male	Not reduced
+176	PBANKA_020830	Reduced	Reduced	Female and male	Not reduced
+187	PBANKA_030890	Reduced	Reduced	Female and male	Not reduced
+202	PBANKA_071350	Reduced	Not reduced	Male	Not reduced
+203	PBANKA_123560	Reduced	Not reduced	Male	Not reduced
+209	PBANKA_040940	Reduced	Not reduced	Male	Not reduced
+213	PBANKA_082030	Reduced	Not reduced	Male	Not reduced
+224	PBANKA_133180	Reduced	Reduced	Female and male	Reduced
+228	PBANKA_100240	Reduced	Reduced	Female and male	Reduced
+230	PBANKA_131670	Reduced	Reduced	Female and male	Reduced
+234	PBANKA_010220	Reduced	Reduced	Female and male	Reduced
+235	PBANKA_103430	Reduced	Reduced	Female and male	Reduced
+238	PBANKA_123590	Reduced	No power	Male	Reduced
+244	PBANKA_134720	No power	Reduced	Female	Reduced
+247	PBANKA_071230	No power	Reduced	Female	Reduced
+248	PBANKA_031490	No power	Reduced	Female	Reduced
+249	PBANKA_031220	Reduced	No power	Male	Reduced
+251	PBANKA_082800	No power	Reduced	Female	Reduced
+253	PBANKA_135940	Reduced	Reduced	Female and male	Reduced
+256	PBANKA_146460	Reduced	Reduced	Female and male	Reduced
+262	PBANKA_051630	Reduced	Reduced	Female and male	Reduced
+263	PBANKA_121770	Reduced	Reduced	Female and male	Reduced
+264	PBANKA_143750	Reduced	Reduced	Female and male	Reduced
+266	PBANKA_110480	No power	Reduced	Female	Reduced

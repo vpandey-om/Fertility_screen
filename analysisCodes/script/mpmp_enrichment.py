@@ -65,6 +65,8 @@ for k in mpmp_remove[0].to_list():
 
 print(len(pathway_to_genes))
 
+# pickle.dump(pathway_to_genes,open('/Users/vpandey/projects/enrichmentData/pbe/mpmp_pbe_clean.pickle','wb'))
+# mpmp_data2=pickle.load(open('/Users/vpandey/projects/enrichmentData/pbe/mpmp_pbe_clean.pickle','rb'))
 
 ##
 ## read input file
@@ -72,9 +74,19 @@ input_df=pd.read_csv("/Users/vpandey/projects/githubs/Fertility_screen/preFinals
 genelist=input_df.loc[:,0].to_list()
 
 
+
 ## number of background genes it could be total genes or screen genens
 flat_list = [item for k,sublist in pathway_to_genes.items() for item in sublist]
 M=len(set(flat_list)) ## number of genes are screened
+
+##
+input_df=pd.read_csv("/Users/vpandey/projects/githubs/Fertility_screen_2/preFinals/notreduced_motality.txt",sep= "\t",header=None)
+genelist=input_df.loc[:,0].to_list()
+outfile="/Users/vpandey/projects/githubs/Fertility_screen_2/preFinals/notreduced_motality_enrich.txt"
+outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
+
+
+
 outfile="/Users/vpandey/projects/githubs/Fertility_screen/preFinals/male_mpmp_enrich.txt"
 outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
 
@@ -88,7 +100,7 @@ outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
 
 
 ##
-input_df=pd.read_csv("//Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_genes.txt",sep= "\t",header=None)
+input_df=pd.read_csv("/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_genes.txt",sep= "\t",header=None)
 genelist=input_df.loc[:,0].to_list()
 outfile="/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_mpmp_enrich.txt"
 outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
