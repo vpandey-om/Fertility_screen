@@ -4,3 +4,14 @@
 __pycache__/
 .DS_Store
 *.pdf
+# Ignore .snakemake directory
+.snakemake/
+
+# Ignore .git directory (Git submodules)
+.git/
+
+# Ignore Python cache files and directories
+__pycache__/
+
+*.pyo
+*.p
