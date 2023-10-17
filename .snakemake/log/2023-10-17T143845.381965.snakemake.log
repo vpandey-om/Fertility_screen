@@ -1,7 +1,0 @@
-Config file config.yaml is extended by additional config specified via the command line.
-Building DAG of jobs...
-MissingInputException in rule mca_gene_plot in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 175:
-Missing input files for rule mca_gene_plot:
-    output: output/male_mca.pdf, output/female_mca.pdf
-    affected files:
-        data/phenotype/ginny_gene_mca.xlsx

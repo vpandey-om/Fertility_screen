@@ -1,4 +1,0 @@
-Config file config.yaml is extended by additional config specified via the command line.
-NameError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 83:
-name 'input_vectors' is not defined
-  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 83, in <module>

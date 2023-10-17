@@ -1,8 +1,0 @@
-name: rawbarseq
-channels:
-  - defaults
-dependencies:
-  - python=3.9
-  - pandas
-  - screed
-  - regex

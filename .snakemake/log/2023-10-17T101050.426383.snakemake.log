@@ -1,3 +1,0 @@
-NameError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 56:
-name 'params' is not defined
-  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 56, in <module>

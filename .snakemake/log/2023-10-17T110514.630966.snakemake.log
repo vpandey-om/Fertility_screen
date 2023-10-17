@@ -1,4 +1,0 @@
-Config file config.yaml is extended by additional config specified via the command line.
-SystemExit in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 49:
-Exiting Snakemake due to a specific condition
-  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 49, in <module>
