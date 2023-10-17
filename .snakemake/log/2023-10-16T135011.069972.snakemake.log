@@ -1,0 +1,38 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+motility_screen        1
+total                  1
+
+Select jobs to execute...
+
+[Mon Oct 16 13:50:12 2023]
+rule motility_screen:
+    input: data/barcode_counts_table_050221_male_pool.txt
+    output: output/motility_disp.xlsx, output/motility_slow.xlsx
+    jobid: 0
+    reason: Forced execution
+    priority: 1
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+[Mon Oct 16 13:50:13 2023]
+Error in rule motility_screen:
+    jobid: 0
+    input: data/barcode_counts_table_050221_male_pool.txt
+    output: output/motility_disp.xlsx, output/motility_slow.xlsx
+    conda-env: /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+
+RuleException:
+CalledProcessError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 113:
+Command 'source /Users/vpandey/opt/miniconda3/bin/activate '/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_'; set -euo pipefail;  python /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/scripts/tmpw_3shpgf.motility_screen.py' returned non-zero exit status 1.
+  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 113, in __rule_motility_screen
+  File "/Users/vpandey/opt/miniconda3/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-16T135011.069972.snakemake.log

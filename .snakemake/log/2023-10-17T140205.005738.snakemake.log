@@ -1,0 +1,6 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+MissingInputException in rule all in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 79:
+Missing input files for rule all:
+    affected files:
+        {params.output_dir}/barcode_counts_table.csv

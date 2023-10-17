@@ -1,0 +1,41 @@
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however crucial for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Creating conda environment environment.yaml...
+Downloading and installing remote packages.
+Environment for /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/environment.yaml created (location: .snakemake/conda/93f0c250e598262f8b4cb5839c02bbd2_)
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+run_script1        1
+total              1
+
+Select jobs to execute...
+
+[Thu Oct 12 12:05:24 2023]
+rule run_script1:
+    input: data/input_vector.txt, data/input_pool2.txt, data/input_pool3.txt, data/input_pool4.txt, data/input_pool6.txt, data/input_pool5.txt, data/input_pool7.txt, data/input_pool5_2.txt, data/input_pool7_2.txt
+    output: output/final_phenocall.txt
+    jobid: 0
+    reason: Missing output files: output/final_phenocall.txt
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/93f0c250e598262f8b4cb5839c02bbd2_
+Activating conda environment: .snakemake/conda/93f0c250e598262f8b4cb5839c02bbd2_
+[Thu Oct 12 12:05:34 2023]
+Error in rule run_script1:
+    jobid: 0
+    input: data/input_vector.txt, data/input_pool2.txt, data/input_pool3.txt, data/input_pool4.txt, data/input_pool6.txt, data/input_pool5.txt, data/input_pool7.txt, data/input_pool5_2.txt, data/input_pool7_2.txt
+    output: output/final_phenocall.txt
+    conda-env: /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/93f0c250e598262f8b4cb5839c02bbd2_
+
+RuleException:
+CalledProcessError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 40:
+Command 'source /Users/vpandey/opt/miniconda3/bin/activate '/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/93f0c250e598262f8b4cb5839c02bbd2_'; set -euo pipefail;  python /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/scripts/tmphirl075c.combine_all_pool.py' returned non-zero exit status 1.
+  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 40, in __rule_run_script1
+  File "/Users/vpandey/opt/miniconda3/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-12T120308.025047.snakemake.log

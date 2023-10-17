@@ -3101,6 +3101,8 @@ def gaussianMeanAndVariance(rel_fit,rel_err):
         var_max=pd.concat([var1, var2], axis=1).max(axis=1)
         sd_max=var_max.apply(np.sqrt)
 
+
+
     return [mean_df,sd_max,var_max]
 
 

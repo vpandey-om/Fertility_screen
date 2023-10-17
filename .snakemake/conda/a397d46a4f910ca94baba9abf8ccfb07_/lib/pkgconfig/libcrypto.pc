@@ -1,0 +1,12 @@
+prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/a397d46a4f910ca94baba9abf8ccfb07_
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+enginesdir=${libdir}/engines-1.1
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 1.1.1w
+Libs: -L${libdir} -lcrypto
+Libs.private:  
+Cflags: -I${includedir}

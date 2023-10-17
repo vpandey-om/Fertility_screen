@@ -1,0 +1,2 @@
+SyntaxError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 58:
+No rule keywords allowed after run/shell/script/notebook/wrapper/template_engine/cwl in rule r2. (Snakefile, line 58)

@@ -1,0 +1,11 @@
+prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/aeef6c10441d2ca3f69bf64ab71746be_
+exec_prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/aeef6c10441d2ca3f69bf64ab71746be_
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libbrotlicommon
+URL: https://github.com/google/brotli
+Description: Brotli common dictionary library
+Version: 1.0.9
+Libs: -L${libdir} -lbrotlicommon
+Cflags: -I${includedir}

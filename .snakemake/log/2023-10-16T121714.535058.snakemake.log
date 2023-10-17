@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+mpmp_violin        1
+total              1
+
+Select jobs to execute...
+
+[Mon Oct 16 12:17:16 2023]
+rule mpmp_violin:
+    input: data/mpmp/mpmp_pbe.pickle, data/mpmp/MPMP.xlsx, data/mpmp/male_mpmp_enrich.txt, data/mpmp/female_mpmp_enrich.txt, data/phenotype/Phenotype_call_final_100621.xlsx
+    output: output/male_female_mpmp_violin.pdf
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/368bc4f6aff78b56620c150f58f03484_
+Activating conda environment: .snakemake/conda/368bc4f6aff78b56620c150f58f03484_
+[Mon Oct 16 12:17:22 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-10-16T121714.535058.snakemake.log

@@ -1,0 +1,4 @@
+Config file config.yaml is extended by additional config specified via the command line.
+KeyError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 146:
+'motility_vectors'
+  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 146, in <module>

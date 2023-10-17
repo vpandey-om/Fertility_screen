@@ -1,0 +1,7 @@
+name: rawbarseq
+channels:
+  - defaults
+dependencies:
+  - python
+  - pandas
+  - screed

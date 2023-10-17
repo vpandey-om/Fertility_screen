@@ -1,0 +1,22 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+raw_barseq        1
+total             1
+
+Select jobs to execute...
+
+[Tue Oct 17 09:56:54 2023]
+rule raw_barseq:
+    output: {params.output_dir}
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+RuleException in rule raw_barseq in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 44:
+AttributeError: 'Params' object has no attribute 'output', when formatting the following:
+python barseq-raw/barseq.py -i {params.input_file} -b {params.barcode_file} -r {params.output}

@@ -1,0 +1,560 @@
+{
+  "build": "py39hecd8cb5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "numpy >=1.4.0",
+    "python >=3.9,<3.10.0a0",
+    "six"
+  ],
+  "extracted_package_dir": "/Users/vpandey/opt/miniconda3/pkgs/patsy-0.5.3-py39hecd8cb5_0",
+  "features": "",
+  "files": [
+    "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/PKG-INFO",
+    "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/SOURCES.txt",
+    "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/dependency_links.txt",
+    "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/requires.txt",
+    "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/top_level.txt",
+    "lib/python3.9/site-packages/patsy/__init__.py",
+    "lib/python3.9/site-packages/patsy/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/build.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/builtins.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/categorical.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/compat.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/compat_ordereddict.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/constraint.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/contrasts.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/desc.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/design_info.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/eval.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/highlevel.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/infix_parser.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/mgcv_cubic_splines.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/missing.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/origin.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/parse_formula.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/redundancy.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/splines.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/state.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_build.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_highlevel.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_regressions.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_splines_bs_data.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_splines_crs_data.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/test_state.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/tokens.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/user_util.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/util.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/__pycache__/version.cpython-39.pyc",
+    "lib/python3.9/site-packages/patsy/build.py",
+    "lib/python3.9/site-packages/patsy/builtins.py",
+    "lib/python3.9/site-packages/patsy/categorical.py",
+    "lib/python3.9/site-packages/patsy/compat.py",
+    "lib/python3.9/site-packages/patsy/compat_ordereddict.py",
+    "lib/python3.9/site-packages/patsy/constraint.py",
+    "lib/python3.9/site-packages/patsy/contrasts.py",
+    "lib/python3.9/site-packages/patsy/desc.py",
+    "lib/python3.9/site-packages/patsy/design_info.py",
+    "lib/python3.9/site-packages/patsy/eval.py",
+    "lib/python3.9/site-packages/patsy/highlevel.py",
+    "lib/python3.9/site-packages/patsy/infix_parser.py",
+    "lib/python3.9/site-packages/patsy/mgcv_cubic_splines.py",
+    "lib/python3.9/site-packages/patsy/missing.py",
+    "lib/python3.9/site-packages/patsy/origin.py",
+    "lib/python3.9/site-packages/patsy/parse_formula.py",
+    "lib/python3.9/site-packages/patsy/redundancy.py",
+    "lib/python3.9/site-packages/patsy/splines.py",
+    "lib/python3.9/site-packages/patsy/state.py",
+    "lib/python3.9/site-packages/patsy/test_build.py",
+    "lib/python3.9/site-packages/patsy/test_highlevel.py",
+    "lib/python3.9/site-packages/patsy/test_regressions.py",
+    "lib/python3.9/site-packages/patsy/test_splines_bs_data.py",
+    "lib/python3.9/site-packages/patsy/test_splines_crs_data.py",
+    "lib/python3.9/site-packages/patsy/test_state.py",
+    "lib/python3.9/site-packages/patsy/tokens.py",
+    "lib/python3.9/site-packages/patsy/user_util.py",
+    "lib/python3.9/site-packages/patsy/util.py",
+    "lib/python3.9/site-packages/patsy/version.py"
+  ],
+  "fn": "patsy-0.5.3-py39hecd8cb5_0.conda",
+  "legacy_bz2_md5": "6dd489180b160f5854001e40c77c31fa",
+  "legacy_bz2_size": 390710,
+  "license": "BSD-2-Clause AND PSF-2.0",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/vpandey/opt/miniconda3/pkgs/patsy-0.5.3-py39hecd8cb5_0",
+    "type": 1
+  },
+  "md5": "117f1974804b412c16e014f6889ac1b8",
+  "name": "patsy",
+  "package_tarball_full_path": "/Users/vpandey/opt/miniconda3/pkgs/patsy-0.5.3-py39hecd8cb5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/PKG-INFO",
+        "path_type": "hardlink",
+        "sha256": "4a9a1d2e7465cf827ef0704a7e3688065683c102d6df20fdd6953bdf94e1e4f0",
+        "sha256_in_prefix": "4a9a1d2e7465cf827ef0704a7e3688065683c102d6df20fdd6953bdf94e1e4f0",
+        "size_in_bytes": 3219
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/SOURCES.txt",
+        "path_type": "hardlink",
+        "sha256": "a562844d0f8737d483d35db410de52722c0de303260fb2dbfb7628705821bf29",
+        "sha256_in_prefix": "a562844d0f8737d483d35db410de52722c0de303260fb2dbfb7628705821bf29",
+        "size_in_bytes": 2253
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/dependency_links.txt",
+        "path_type": "hardlink",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "sha256_in_prefix": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "size_in_bytes": 1
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/requires.txt",
+        "path_type": "hardlink",
+        "sha256": "d1f684ecec996b049adf4c2ae3584b03b931686a8021c4db2a4cb0a33be5431a",
+        "sha256_in_prefix": "d1f684ecec996b049adf4c2ae3584b03b931686a8021c4db2a4cb0a33be5431a",
+        "size_in_bytes": 47
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy-0.5.3-py3.9.egg-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "b7029f37829b78781ab902f6e485d94721e4b8ee23b34c0878a4a7cd7cd8076a",
+        "sha256_in_prefix": "b7029f37829b78781ab902f6e485d94721e4b8ee23b34c0878a4a7cd7cd8076a",
+        "size_in_bytes": 6
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "41c4bcef9f02a7cce6f26b8f3fa9bd6a704cce24f2cdebb4477b96fa3e1e3cfe",
+        "sha256_in_prefix": "41c4bcef9f02a7cce6f26b8f3fa9bd6a704cce24f2cdebb4477b96fa3e1e3cfe",
+        "size_in_bytes": 3507
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ce4579bc0414fff719bd859bc18331ff180aa5dcf97b88468cdb4e26946b6642",
+        "sha256_in_prefix": "ce4579bc0414fff719bd859bc18331ff180aa5dcf97b88468cdb4e26946b6642",
+        "size_in_bytes": 2939
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/build.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8e47b2b1ea22304440c0109b2f1ed8c80865eb26e28725ee8a05b0d176517daa",
+        "sha256_in_prefix": "8e47b2b1ea22304440c0109b2f1ed8c80865eb26e28725ee8a05b0d176517daa",
+        "size_in_bytes": 27319
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/builtins.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "782ca282cbe98029ba4b5d7f426812e78c23fad89c787b6803ab653896be62f4",
+        "sha256_in_prefix": "782ca282cbe98029ba4b5d7f426812e78c23fad89c787b6803ab653896be62f4",
+        "size_in_bytes": 3131
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/categorical.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "c6fec80d22f70df80051fce20b2f7d95191e1488924e6c9c6522d374e4018c6b",
+        "sha256_in_prefix": "c6fec80d22f70df80051fce20b2f7d95191e1488924e6c9c6522d374e4018c6b",
+        "size_in_bytes": 11415
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/compat.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "3e8d34e477bf3254fcf53c9530eac9c3ea7e04bb08aa8e18465fab690912b85f",
+        "sha256_in_prefix": "3e8d34e477bf3254fcf53c9530eac9c3ea7e04bb08aa8e18465fab690912b85f",
+        "size_in_bytes": 840
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/compat_ordereddict.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4567e7c1d081b2ebb7f9cf8956ecac0ba4615d12afb34f419392bfd7c981de7b",
+        "sha256_in_prefix": "4567e7c1d081b2ebb7f9cf8956ecac0ba4615d12afb34f419392bfd7c981de7b",
+        "size_in_bytes": 8457
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/constraint.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "2b53ebe36400bff52fe17c933c83dd873dbd8cf350c92f2f0f93826767d614ab",
+        "sha256_in_prefix": "2b53ebe36400bff52fe17c933c83dd873dbd8cf350c92f2f0f93826767d614ab",
+        "size_in_bytes": 16069
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/contrasts.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "88ffb3c40b28a1420a6c35f1c526a83da27cec544a6ba62f50f19b421565607f",
+        "sha256_in_prefix": "88ffb3c40b28a1420a6c35f1c526a83da27cec544a6ba62f50f19b421565607f",
+        "size_in_bytes": 19013
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/desc.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "52523570ced011d0ddd29672f86856b8129586d07b23e1e69a4d01f535b5f2e6",
+        "sha256_in_prefix": "52523570ced011d0ddd29672f86856b8129586d07b23e1e69a4d01f535b5f2e6",
+        "size_in_bytes": 18235
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/design_info.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "b1c8d758899110d995d1bfea5e3f10fc6765c20a2bf07a0aca181ffe3ffe076e",
+        "sha256_in_prefix": "b1c8d758899110d995d1bfea5e3f10fc6765c20a2bf07a0aca181ffe3ffe076e",
+        "size_in_bytes": 35803
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/eval.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "e81e7170e976f491adcd7c37e6bc0540e8071629c2bd65daa9b54fb2fa1dce09",
+        "sha256_in_prefix": "e81e7170e976f491adcd7c37e6bc0540e8071629c2bd65daa9b54fb2fa1dce09",
+        "size_in_bytes": 26216
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/highlevel.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "92215fffafdddc74d27788e43f77e80ddddb48018b601caa526bb092820cde3b",
+        "sha256_in_prefix": "92215fffafdddc74d27788e43f77e80ddddb48018b601caa526bb092820cde3b",
+        "size_in_bytes": 10125
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/infix_parser.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4714c30ffe2ccbb277a00de2834f3e8a9f501393351ac748002a3d47b310987f",
+        "sha256_in_prefix": "4714c30ffe2ccbb277a00de2834f3e8a9f501393351ac748002a3d47b310987f",
+        "size_in_bytes": 7037
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/mgcv_cubic_splines.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "1cc62a6d3dd3ea1d619b6ed23befe00ee67ac8bcd7c8dbcbb13405b03ab5d676",
+        "sha256_in_prefix": "1cc62a6d3dd3ea1d619b6ed23befe00ee67ac8bcd7c8dbcbb13405b03ab5d676",
+        "size_in_bytes": 32583
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/missing.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "77287fc70fd80ce0e21e8619e27f5cc18197fff83bd55487beca732d36da372e",
+        "sha256_in_prefix": "77287fc70fd80ce0e21e8619e27f5cc18197fff83bd55487beca732d36da372e",
+        "size_in_bytes": 9268
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/origin.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "062427c9e46fbcfc3192db670f5a7f49ebe63e958579d0b74089ec55212eb184",
+        "sha256_in_prefix": "062427c9e46fbcfc3192db670f5a7f49ebe63e958579d0b74089ec55212eb184",
+        "size_in_bytes": 4888
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/parse_formula.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "2ec04a53d2923c63f79af44e6281a624fad5a235f5136814efce883f32d2e8e2",
+        "sha256_in_prefix": "2ec04a53d2923c63f79af44e6281a624fad5a235f5136814efce883f32d2e8e2",
+        "size_in_bytes": 7056
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/redundancy.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ea4ae56a4b7ad1cbb1e7d893e57cbba93fee2c16d5e1a5e6d5ebc3de2233a9f1",
+        "sha256_in_prefix": "ea4ae56a4b7ad1cbb1e7d893e57cbba93fee2c16d5e1a5e6d5ebc3de2233a9f1",
+        "size_in_bytes": 6723
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/splines.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "36cc13227bfbd4cf793b78ad037ed98e028d47332a7f006848bb1ef4454ef1b6",
+        "sha256_in_prefix": "36cc13227bfbd4cf793b78ad037ed98e028d47332a7f006848bb1ef4454ef1b6",
+        "size_in_bytes": 10564
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/state.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "b4e2c1fca4e6247bca7959fc9d5bab093e3874006b91d13a74d10dc17e55642c",
+        "sha256_in_prefix": "b4e2c1fca4e6247bca7959fc9d5bab093e3874006b91d13a74d10dc17e55642c",
+        "size_in_bytes": 4416
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_build.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "0f91ef96983d55cc67b47cc4a5bcd342864ad3ec32a9a239bc0fb8310a3226bc",
+        "sha256_in_prefix": "0f91ef96983d55cc67b47cc4a5bcd342864ad3ec32a9a239bc0fb8310a3226bc",
+        "size_in_bytes": 20225
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_highlevel.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "db97ef82186eff992be96db6e4484bf954fc7ba63f310c70e1247d75f7d8ae4a",
+        "sha256_in_prefix": "db97ef82186eff992be96db6e4484bf954fc7ba63f310c70e1247d75f7d8ae4a",
+        "size_in_bytes": 19726
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_regressions.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "a585d667207972187461a61bed97dad4dcaa0d53ed4af8c2b1361125b9d369b6",
+        "sha256_in_prefix": "a585d667207972187461a61bed97dad4dcaa0d53ed4af8c2b1361125b9d369b6",
+        "size_in_bytes": 782
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_splines_bs_data.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "6f58dc5bdb65fb4c594152fe5e8b28d1e1eaafee19721058c9a8c62fe10556fe",
+        "sha256_in_prefix": "6f58dc5bdb65fb4c594152fe5e8b28d1e1eaafee19721058c9a8c62fe10556fe",
+        "size_in_bytes": 143974
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_splines_crs_data.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "71b60311d99c30b1389ee4f0d4f6de3e856158621136856845b06d719e183e35",
+        "sha256_in_prefix": "71b60311d99c30b1389ee4f0d4f6de3e856158621136856845b06d719e183e35",
+        "size_in_bytes": 133094
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/test_state.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4a04cac1f1c8c0c2b4470d531b70434681cf43f4a7ac498f70b33f167ee23a84",
+        "sha256_in_prefix": "4a04cac1f1c8c0c2b4470d531b70434681cf43f4a7ac498f70b33f167ee23a84",
+        "size_in_bytes": 5076
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/tokens.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "7ed78239dc3903c5c5773868162c0d26e9d19d9f846cefca85b12d51ad76f778",
+        "sha256_in_prefix": "7ed78239dc3903c5c5773868162c0d26e9d19d9f846cefca85b12d51ad76f778",
+        "size_in_bytes": 4335
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/user_util.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "a114eb7b61e7120cf31cd604e7db9b5d50f304f4a7c7e7fd2c58fcfb3d9881af",
+        "sha256_in_prefix": "a114eb7b61e7120cf31cd604e7db9b5d50f304f4a7c7e7fd2c58fcfb3d9881af",
+        "size_in_bytes": 8982
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/util.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "5c02691fa8353d5101c1c51cc23534b31710df6496259fa521862a3c5d1b97b4",
+        "sha256_in_prefix": "5c02691fa8353d5101c1c51cc23534b31710df6496259fa521862a3c5d1b97b4",
+        "size_in_bytes": 17954
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/__pycache__/version.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "e7ea1b145eb4d854eff92ac1524429e85a5c8e1cb34f9fbdb310eed07c42e11b",
+        "sha256_in_prefix": "e7ea1b145eb4d854eff92ac1524429e85a5c8e1cb34f9fbdb310eed07c42e11b",
+        "size_in_bytes": 156
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/build.py",
+        "path_type": "hardlink",
+        "sha256": "e50562c45e19ec98e5b372972ab7901a14e0587d0e79515f0189d95a3ddf96ec",
+        "sha256_in_prefix": "e50562c45e19ec98e5b372972ab7901a14e0587d0e79515f0189d95a3ddf96ec",
+        "size_in_bytes": 42758
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/builtins.py",
+        "path_type": "hardlink",
+        "sha256": "9e3dd7f54e30a48db21bc390a607c0cc65aa33ab7d1a6d80598e585323ae6914",
+        "sha256_in_prefix": "9e3dd7f54e30a48db21bc390a607c0cc65aa33ab7d1a6d80598e585323ae6914",
+        "size_in_bytes": 3131
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/categorical.py",
+        "path_type": "hardlink",
+        "sha256": "1fe61affa66df5d3ba72614f4a6699922c8bd3425b3fc2fa40f43ff7f7c18df6",
+        "sha256_in_prefix": "1fe61affa66df5d3ba72614f4a6699922c8bd3425b3fc2fa40f43ff7f7c18df6",
+        "size_in_bytes": 19026
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/compat.py",
+        "path_type": "hardlink",
+        "sha256": "417d6e076a4d3a543d04ff0bfaee64f2895bf1afb3ecd5d565a8871dbf5d89a0",
+        "sha256_in_prefix": "417d6e076a4d3a543d04ff0bfaee64f2895bf1afb3ecd5d565a8871dbf5d89a0",
+        "size_in_bytes": 1989
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/compat_ordereddict.py",
+        "path_type": "hardlink",
+        "sha256": "ed3e34916c4a0914d9da63cd9b8476bfcc396d1095d0e841ec749c5c9b3c9bd4",
+        "sha256_in_prefix": "ed3e34916c4a0914d9da63cd9b8476bfcc396d1095d0e841ec749c5c9b3c9bd4",
+        "size_in_bytes": 9170
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/constraint.py",
+        "path_type": "hardlink",
+        "sha256": "eafe69c0f6a388ebfb04189a6304f312c669bb72708cae5f8404731f90381496",
+        "sha256_in_prefix": "eafe69c0f6a388ebfb04189a6304f312c669bb72708cae5f8404731f90381496",
+        "size_in_bytes": 20280
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/contrasts.py",
+        "path_type": "hardlink",
+        "sha256": "544bdfa0d8256595aa4a2d4ffffc52661a44d8595d02a68902649874fd4b63d2",
+        "sha256_in_prefix": "544bdfa0d8256595aa4a2d4ffffc52661a44d8595d02a68902649874fd4b63d2",
+        "size_in_bytes": 24161
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/desc.py",
+        "path_type": "hardlink",
+        "sha256": "3538e37d64060a0620ec1758e3028ba8b3e80d3f1bd60648358d31510a0d8145",
+        "sha256_in_prefix": "3538e37d64060a0620ec1758e3028ba8b3e80d3f1bd60648358d31510a0d8145",
+        "size_in_bytes": 22475
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/design_info.py",
+        "path_type": "hardlink",
+        "sha256": "4aad4037577dea405bf0d611c07e8ace787f2fd7121d0d6241108d8babee19ee",
+        "sha256_in_prefix": "4aad4037577dea405bf0d611c07e8ace787f2fd7121d0d6241108d8babee19ee",
+        "size_in_bytes": 50692
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/eval.py",
+        "path_type": "hardlink",
+        "sha256": "243c26286b7d1e2dd72c0958b1a00105060b61485aff0ac5edcc39493d59b9b8",
+        "sha256_in_prefix": "243c26286b7d1e2dd72c0958b1a00105060b61485aff0ac5edcc39493d59b9b8",
+        "size_in_bytes": 32412
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/highlevel.py",
+        "path_type": "hardlink",
+        "sha256": "ec2f079d8a89e44697b83b228fd6e1cd335baa78396a1385f81823695699fc77",
+        "sha256_in_prefix": "ec2f079d8a89e44697b83b228fd6e1cd335baa78396a1385f81823695699fc77",
+        "size_in_bytes": 14716
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/infix_parser.py",
+        "path_type": "hardlink",
+        "sha256": "15806b001b429a60e9078bb8c58a0ec51c6c9eec0abc6465a98a93766418f861",
+        "sha256_in_prefix": "15806b001b429a60e9078bb8c58a0ec51c6c9eec0abc6465a98a93766418f861",
+        "size_in_bytes": 9780
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/mgcv_cubic_splines.py",
+        "path_type": "hardlink",
+        "sha256": "445a699d5da47f542067297269e8d738bb1705d22c991d2f8a079117861ed429",
+        "sha256_in_prefix": "445a699d5da47f542067297269e8d738bb1705d22c991d2f8a079117861ed429",
+        "size_in_bytes": 45105
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/missing.py",
+        "path_type": "hardlink",
+        "sha256": "f1cad1209547a00b26a2e7abd1064c20e682399b8a4c156c382a975a83a0f64a",
+        "sha256_in_prefix": "f1cad1209547a00b26a2e7abd1064c20e682399b8a4c156c382a975a83a0f64a",
+        "size_in_bytes": 11580
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/origin.py",
+        "path_type": "hardlink",
+        "sha256": "c4917ea88eadf3dd2e8599dc37ea4b80436b5cde42e03fe6c6f5012dffb88f81",
+        "sha256_in_prefix": "c4917ea88eadf3dd2e8599dc37ea4b80436b5cde42e03fe6c6f5012dffb88f81",
+        "size_in_bytes": 4590
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/parse_formula.py",
+        "path_type": "hardlink",
+        "sha256": "78f8f7b32e3f4ecef1ecdf1a296e0f46762f0a7f91de44c3f0a38a699e061bc7",
+        "sha256_in_prefix": "78f8f7b32e3f4ecef1ecdf1a296e0f46762f0a7f91de44c3f0a38a699e061bc7",
+        "size_in_bytes": 9744
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/redundancy.py",
+        "path_type": "hardlink",
+        "sha256": "d9a24727c2b67099eb8ed5469443ed0ab6713242f2f656ae04959d9f1698cd84",
+        "sha256_in_prefix": "d9a24727c2b67099eb8ed5469443ed0ab6713242f2f656ae04959d9f1698cd84",
+        "size_in_bytes": 10658
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/splines.py",
+        "path_type": "hardlink",
+        "sha256": "4078443bad752f1993fc285d880c584b211bbbf797bccb101fbb43da6eaac339",
+        "sha256_in_prefix": "4078443bad752f1993fc285d880c584b211bbbf797bccb101fbb43da6eaac339",
+        "size_in_bytes": 17527
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/state.py",
+        "path_type": "hardlink",
+        "sha256": "57fd1ad3f14de0334c8ed1e430b550d284276be976ecdf2ee8a72cdcc1b21ea1",
+        "sha256_in_prefix": "57fd1ad3f14de0334c8ed1e430b550d284276be976ecdf2ee8a72cdcc1b21ea1",
+        "size_in_bytes": 6869
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_build.py",
+        "path_type": "hardlink",
+        "sha256": "1e4da7628beaf589f9555bef1185de308dc0474cd9c0f158367522703df39e6a",
+        "sha256_in_prefix": "1e4da7628beaf589f9555bef1185de308dc0474cd9c0f158367522703df39e6a",
+        "size_in_bytes": 31025
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_highlevel.py",
+        "path_type": "hardlink",
+        "sha256": "e948f96a0c199cdb5df0f7bf6a97433b16b1656ab14330eb8def82f9bae21489",
+        "sha256_in_prefix": "e948f96a0c199cdb5df0f7bf6a97433b16b1656ab14330eb8def82f9bae21489",
+        "size_in_bytes": 28721
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_regressions.py",
+        "path_type": "hardlink",
+        "sha256": "16d23c31fece865efd74047c4402be10fbd4469278b73b71d3a1165fb14a0482",
+        "sha256_in_prefix": "16d23c31fece865efd74047c4402be10fbd4469278b73b71d3a1165fb14a0482",
+        "size_in_bytes": 855
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_splines_bs_data.py",
+        "path_type": "hardlink",
+        "sha256": "f6494b18847d685ba382ca903d6ae435ebf53cd28d96a5665c0b2563d8143f8a",
+        "sha256_in_prefix": "f6494b18847d685ba382ca903d6ae435ebf53cd28d96a5665c0b2563d8143f8a",
+        "size_in_bytes": 144006
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_splines_crs_data.py",
+        "path_type": "hardlink",
+        "sha256": "74324db81efbb45f6b6d4c59ab812d0655bb565b5550fa1d170961d6c6b41ea9",
+        "sha256_in_prefix": "74324db81efbb45f6b6d4c59ab812d0655bb565b5550fa1d170961d6c6b41ea9",
+        "size_in_bytes": 133218
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/test_state.py",
+        "path_type": "hardlink",
+        "sha256": "7aa829f3d8ef6123c4688514f6c504fa32533439d4cda0816a4531ed02d31de1",
+        "sha256_in_prefix": "7aa829f3d8ef6123c4688514f6c504fa32533439d4cda0816a4531ed02d31de1",
+        "size_in_bytes": 8018
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/tokens.py",
+        "path_type": "hardlink",
+        "sha256": "a2fc209e6d3c7c789338ce83756ffca5a0255b48db4a6d6104753028de3ceaf1",
+        "sha256_in_prefix": "a2fc209e6d3c7c789338ce83756ffca5a0255b48db4a6d6104753028de3ceaf1",
+        "size_in_bytes": 8163
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/user_util.py",
+        "path_type": "hardlink",
+        "sha256": "bb5f4438ee219a745f7428be44682aea3f54ac7aa11e7850a56bf4ec43143644",
+        "sha256_in_prefix": "bb5f4438ee219a745f7428be44682aea3f54ac7aa11e7850a56bf4ec43143644",
+        "size_in_bytes": 9082
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/util.py",
+        "path_type": "hardlink",
+        "sha256": "169c1c088020d3efd20b5929e683960198073b8bd77452b22848b6662bf2821f",
+        "sha256_in_prefix": "169c1c088020d3efd20b5929e683960198073b8bd77452b22848b6662bf2821f",
+        "size_in_bytes": 28478
+      },
+      {
+        "_path": "lib/python3.9/site-packages/patsy/version.py",
+        "path_type": "hardlink",
+        "sha256": "9e918043acb4e72d29595fb3bc1a30484ba2d2dc8a24379cc5287acd8707e9c1",
+        "sha256_in_prefix": "9e918043acb4e72d29595fb3bc1a30484ba2d2dc8a24379cc5287acd8707e9c1",
+        "size_in_bytes": 823
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "9ccc5cbe1b32562446e15d2a8696a80900f9effd2ea95739e1b0a53d00eb1056",
+  "size": 290271,
+  "subdir": "osx-64",
+  "timestamp": 1674586076143,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/patsy-0.5.3-py39hecd8cb5_0.conda",
+  "version": "0.5.3"
+}

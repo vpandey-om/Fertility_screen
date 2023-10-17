@@ -1,0 +1,70 @@
+{
+  "build": "ha357a0b_43547",
+  "build_number": 43547,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=14.0.6"
+  ],
+  "extracted_package_dir": "/Users/vpandey/opt/miniconda3/pkgs/intel-openmp-2023.1.0-ha357a0b_43547",
+  "features": "",
+  "files": [
+    "lib/libiomp5.dylib",
+    "lib/libiomp5_db.dylib",
+    "lib/libiompstubs5.dylib",
+    "licensing/compiler/openmp/third-party-programs.txt"
+  ],
+  "fn": "intel-openmp-2023.1.0-ha357a0b_43547.conda",
+  "legacy_bz2_md5": "78baea934985ccd9514a366cc7e80ed4",
+  "legacy_bz2_size": 727499,
+  "license": "LicenseRef-ProprietaryIntel",
+  "license_family": "Proprietary",
+  "link": {
+    "source": "/Users/vpandey/opt/miniconda3/pkgs/intel-openmp-2023.1.0-ha357a0b_43547",
+    "type": 1
+  },
+  "md5": "aa6031369dd8c8cc6b2f393a0b2d9f0c",
+  "name": "intel-openmp",
+  "package_tarball_full_path": "/Users/vpandey/opt/miniconda3/pkgs/intel-openmp-2023.1.0-ha357a0b_43547.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/libiomp5.dylib",
+        "path_type": "hardlink",
+        "sha256": "8c5626569a63519aa7dc237634b5eebfd3780a51063c878111900af70d0b23a9",
+        "sha256_in_prefix": "8c5626569a63519aa7dc237634b5eebfd3780a51063c878111900af70d0b23a9",
+        "size_in_bytes": 1868400
+      },
+      {
+        "_path": "lib/libiomp5_db.dylib",
+        "path_type": "hardlink",
+        "sha256": "70358ace8ebbc6bfe6fd5d9695886de8f4601662fd7bf3d9552e07b395e1fa3b",
+        "sha256_in_prefix": "70358ace8ebbc6bfe6fd5d9695886de8f4601662fd7bf3d9552e07b395e1fa3b",
+        "size_in_bytes": 215216
+      },
+      {
+        "_path": "lib/libiompstubs5.dylib",
+        "path_type": "hardlink",
+        "sha256": "5a966486c11648cf0d267b108e3cddf2dd193dd7eb971a39c29c78b6e1c1e043",
+        "sha256_in_prefix": "5a966486c11648cf0d267b108e3cddf2dd193dd7eb971a39c29c78b6e1c1e043",
+        "size_in_bytes": 194112
+      },
+      {
+        "_path": "licensing/compiler/openmp/third-party-programs.txt",
+        "path_type": "hardlink",
+        "sha256": "db84dcf1cdd450f7d10495f41027baed8a3d69388ceddb0bd97162e0c78ba655",
+        "sha256_in_prefix": "db84dcf1cdd450f7d10495f41027baed8a3d69388ceddb0bd97162e0c78ba655",
+        "size_in_bytes": 31668
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "c6bf00abb99c1312e18c7d7376cce20c0b886defd6ebdf6d7bd947c1828f8236",
+  "size": 650084,
+  "subdir": "osx-64",
+  "timestamp": 1681801225190,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/intel-openmp-2023.1.0-ha357a0b_43547.conda",
+  "version": "2023.1.0"
+}

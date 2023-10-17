@@ -1,0 +1,8 @@
+name: fertility_screen
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  
+pip:
+  - -r requirements.txt

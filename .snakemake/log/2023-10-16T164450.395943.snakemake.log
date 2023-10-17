@@ -1,0 +1,2 @@
+SyntaxError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 54:
+Multiple run/shell/script/notebook/wrapper/template_engine/cwl keywords in rule raw_barseq. (Snakefile, line 54)

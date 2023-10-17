@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+mpmp_enrichment        1
+total                  1
+
+Select jobs to execute...
+
+[Thu Oct 12 16:59:51 2023]
+rule mpmp_enrichment:
+    input: data/mpmp/mpmp_pbe.pickle, data/mpmp/MPMP.xlsx, data/mpmp/male_only_genes.txt, data/mpmp/female_only_genes.txt, data/mpmp/notreduced_motality.txt
+    output: output/male_mpmp_enrich.txt, output/female_mpmp_enrich.txt, output/notreduced_motality_enrich.txt
+    jobid: 0
+    reason: Forced execution
+    priority: 10
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+[Thu Oct 12 16:59:55 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-10-12T165949.591162.snakemake.log

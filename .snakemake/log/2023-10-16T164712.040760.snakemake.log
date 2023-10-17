@@ -1,0 +1,15 @@
+Building DAG of jobs...
+Creating conda environment rawbarseq_environment.yaml...
+Downloading and installing remote packages.
+CreateCondaEnvironmentException:
+Could not create conda environment from /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/rawbarseq_environment.yaml:
+Command:
+conda env create --quiet --file "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/dd9bc34fe22e4e4e0eaf31b16f47fcd8_.yaml" --prefix "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/dd9bc34fe22e4e4e0eaf31b16f47fcd8_"
+Output:
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... failed
+
+ResolvePackageNotFound: 
+  - utils
+
+

@@ -1,0 +1,11 @@
+prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+toolexeclibdir=${libdir}
+includedir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_/include
+
+Name: libffi
+Description: Library supporting Foreign Function Interfaces
+Version: 3.4.4
+Libs: -L${toolexeclibdir} -lffi
+Cflags: -I${includedir}

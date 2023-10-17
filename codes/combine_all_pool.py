@@ -3,14 +3,19 @@ import sys
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
-plt.style.use('seaborn-whitegrid')
+import argparse
+# plt.style.use('seaborn-whitegrid')
+# import seaborn as sns
+
+# Set the style to 'whitegrid' from Seaborn
+sns.set_style("whitegrid")
 import numpy as np
 import statsmodels.stats.multitest as mtest
 
 code=os.getcwd()
 upLevel=code.replace('codes','') ####### we are going to upper level of code directory
 sys.path.insert(0,upLevel+'/data')
-sys.path.insert(1, upLevel+'/Figures')
+sys.path.insert(1, upLevel+'/tmps')
 
 # print(sys.path)
 
@@ -23,12 +28,17 @@ data_folder=sys.path[0]
 out_folder=sys.path[1]
 
 # ID conversion: we used plasmoDB to convert ID for P. Berghai
+## this is the pickle file which store a dictionary
+#from previous pbanka ids to new pabanka ids
 prev_to_new=pickle.load(open(data_folder+'/prevTonew_PBANKA.pickle','rb'))
+# gene to gene productsname conversions
 db_df=pd.read_csv(data_folder+'/PBANKA_id_conversion.txt', sep='\t')
 db_df=db_df.fillna('NA')
 ## end of databse information
 colorsIdx = {'No Power': '#cccccc', 'Not Reduced': '#b2e2e2','Reduced':'#d8b365', 'Increased':'#238b45'}
 
+## these are the pools done two times and separate analysis was done
+# analysis was imported
 from fertility_pool5_2 import stepwiseAnalysis  as pool5_2
 from fertility_pool7_2 import stepwiseAnalysis  as pool7_2
 
@@ -102,7 +112,7 @@ def relative_growth_rate_analysis_pilot(df,manfest_df,prev_to_new,db_df,plot_inf
     saveres=[[mean_df_d0_mf1,var_df_d0_mf1,mean_df_d0_mf2,var_df_d0_mf2],[mean_df_d13_mf1,var_df_d13_mf1,mean_df_d13_mf2,var_df_d13_mf2]]
 
     pickle.dump(saveres,open(plot_info['pool']+'.p','wb'))
-    
+
     ##  we are going to compute rleative growth rate  ###
 
     ### plot propagated relative abundance.
@@ -139,7 +149,6 @@ def relative_growth_rate_analysis_pilot(df,manfest_df,prev_to_new,db_df,plot_inf
 
 def pilot():
     ''' We are going do analyis of pilot study for Claire data'''
-
     ### these are the input files
     manifests_df=pd.read_csv(data_folder+"/data_pilot/manifest_pilot_small.txt",sep='\t')
 
@@ -154,7 +163,7 @@ def pilot():
     count_df=df_modi.copy()
     input_df=pd.read_csv(data_folder+'/data_pilot/PbSTM168_cross_phenotypes_final.csv', sep=';')
 
-    comm_genes=set(input_df['Gene_ID'])&set(count_df.index)
+    comm_genes=list(set(input_df['Gene_ID'])&set(count_df.index))
 
     filter_count_df=count_df.loc[comm_genes,:].copy()
 
@@ -200,11 +209,14 @@ def pool1():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifests_pool1.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/result_240120_barcode_counts_table.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_vector.txt', sep='\t')
 
+    # manifests_df=pd.read_csv(data_folder+"/manifests_pool1.txt",sep='\t')
 
+    # count_df=pd.read_csv(data_folder+ "/result_240120_barcode_counts_table.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_vector.txt', sep='\t')
+    manifests_df=pd.read_csv(snakemake.params.manifest[0],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[0],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[0],sep='\t')
     #### end of the input section
     # final_count_df: read1 and read2 are added
     # final_count_df_two_read: reads are sperated
@@ -251,10 +263,12 @@ def pool2():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool2.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_170620_pool2.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool2.txt', sep='\t')
-
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool2.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_170620_pool2.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool2.txt', sep='\t')
+    manifests_df=pd.read_csv(snakemake.params.manifest[1],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[1],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[1],sep='\t')
 
     #### end of the input section
     # final_count_df: read1 and read2 are added
@@ -303,11 +317,13 @@ def pool3():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool3.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_200720_pool3.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool3.txt', sep='\t')
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool3.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_200720_pool3.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool3.txt', sep='\t')
 
-
+    manifests_df=pd.read_csv(snakemake.params.manifest[2],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[2],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[2],sep='\t')
     #### end of the input section
     # final_count_df: read1 and read2 are added
     # final_count_df_two_read: reads are sperated
@@ -355,10 +371,12 @@ def pool4():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool4.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_170620_pool4.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool4.txt', sep='\t')
-
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool4.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_170620_pool4.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool4.txt', sep='\t')
+    manifests_df=pd.read_csv(snakemake.params.manifest[3],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[3],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[3],sep='\t')
 
     #### end of the input section
     # final_count_df: read1 and read2 are added
@@ -403,10 +421,13 @@ def pool6():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool6.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_280720_pool6.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool6.txt', sep='\t')
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool6.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_280720_pool6.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool6.txt', sep='\t')
 
+    manifests_df=pd.read_csv(snakemake.params.manifest[4],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[4],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[4],sep='\t')
 
     #### end of the input section
     # final_count_df: read1 and read2 are added
@@ -455,10 +476,13 @@ def pool5():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool5_1.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool5.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool5.txt', sep='\t')
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool5_1.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool5.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool5.txt', sep='\t')
 
+    manifests_df=pd.read_csv(snakemake.params.manifest[5],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[5],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[5],sep='\t')
 
     #### end of the input section
     # final_count_df: read1 and read2 are added
@@ -508,11 +532,13 @@ def pool7():
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool7_1.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool7.txt', sep='\t')
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool7_1.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool7.txt', sep='\t')
 
-
+    manifests_df=pd.read_csv(snakemake.params.manifest[6],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[6],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[6],sep='\t')
     #### end of the input section
     # final_count_df: read1 and read2 are added
     # final_count_df_two_read: reads are sperated
@@ -588,39 +614,49 @@ def calPvalQval(pheno_call_df,cutoff=0):
 
 def combinepools():
     ''' Combining all pools relative abundance and relative growth rate  '''
+    ## Analysis for pilot screen
+
     pheno_call_pilot,input_df_pilot=pilot()
     pheno_call_pilot.index.name='pbanka_id'
     pheno_call_pilot['pool']='pilot'
     print ('pilot finished\n\n')
-
+    ## Analysis for pool1
     pheno_call_pool1,input_df_pool1=pool1()
     pheno_call_pool1['pool']='pool1'
     print ('pool1 finished\n\n')
-
+    ## Analysis for pool2
     pheno_call_pool2,input_df_pool2=pool2()
     pheno_call_pool2['pool']='pool2'
     print ('pool2 finished\n\n')
+    ## Analysis for pool3
     pheno_call_pool3,input_df_pool3=pool3()
     pheno_call_pool3['pool']='pool3'
     print ('pool3 finished\n\n')
+
+    ## Analysis for pool4
+
     pheno_call_pool4,input_df_pool4=pool4()
     pheno_call_pool4['pool']='pool4'
     print ('pool4 finished\n\n')
+    ## Analysis for pool6
     pheno_call_pool6,input_df_pool6=pool6()
     pheno_call_pool6['pool']='pool6'
     print ('pool6 finished\n\n')
-    ###
+    ## Analysis for pool5
     pheno_call_pool5,input_df_pool5=pool5()
     pheno_call_pool5['pool']='pool5'
     print ('pool5 finished\n\n')
-
+    ## Analysis for pool7
     pheno_call_pool7,input_df_pool7=pool7()
     pheno_call_pool7['pool']='pool7'
     print ('pool7 finished\n\n')
-    pheno_call_pool5_2,input_df_pool5_2=pool5_2()
+    ## Analysis for pool5 second times
+    pheno_call_pool5_2,input_df_pool5_2=pool5_2(snakemake)
     pheno_call_pool5_2['pool']='pool5_2'
     print ('pool5_2 finished\n\n')
-    pheno_call_pool7_2,input_df_pool7_2=pool7_2()
+    ## Analysis for pool7 second times
+
+    pheno_call_pool7_2,input_df_pool7_2=pool7_2(snakemake)
     pheno_call_pool7_2['pool']='pool7_2'
     print ('pool7_2 finished\n\n')
 
@@ -724,7 +760,8 @@ def combinepools():
         for item in xx.columns[xx.columns.str.contains(b)].to_list():
             order_col.append(item)
     yy=xx[order_col]
-    yy.to_csv(out_folder+'/Phenotype_call_final.txt',sep='\t')
+    yy.to_csv(snakemake.output[0],sep='\t')
+    # yy.to_csv(out_folder+'/Phenotype_call_final.txt',sep='\t')
 
 
 
@@ -793,7 +830,7 @@ def test_for_input_cutoff(input_df_pilot,input_df_pool1, input_df_pool2,input_df
 
 def pilot_call():
     pheno_call_pilot=pilot()
-    import pdb; pdb.set_trace()
+
     pheno_call_pilot.index.name='pbanka_id'
     pheno_call_pilot['pool']='pilot'
     print ('pilot finished\n\n')

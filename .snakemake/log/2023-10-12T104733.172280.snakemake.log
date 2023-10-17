@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however crucial for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+run_script1        1
+total              1
+
+Select jobs to execute...
+
+[Thu Oct 12 10:47:35 2023]
+rule run_script1:
+    input: codes/combine_all_pool.py, data/input_vector.txt, data/input_pool2.txt, data/input_pool3.txt, data/input_pool4.txt, data/input_pool6.txt, data/input_pool5.txt, data/input_pool7.txt, data/input_pool5_2.txt, data/input_pool7_2.txt, data/manifests_pool1.txt, data/manifest_pool2.txt, data/manifest_pool3.txt, data/manifest_pool4.txt, data/manifest_pool6.txt, data/manifest_pool5_1.txt, data/manifest_pool7_1.txt, data/manifest_pool5_2.txt, data/manifest_pool7_2.txt, data/result_240120_barcode_counts_table.txt, data/barcode_counts_table_170620_pool2.txt, data/barcode_counts_table_200720_pool3.txt, data/barcode_counts_table_170620_pool4.txt, data/barcode_counts_table_280720_pool6.txt, data/barcode_counts_table_20920_pool5.txt, data/barcode_counts_table_20920_pool7.txt, data/barcode_counts_table_20920_pool5.txt, data/barcode_counts_table_20920_pool7.txt
+    output: output/final_phenocall.txt
+    jobid: 0
+    reason: Missing output files: output/final_phenocall.txt
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+[Thu Oct 12 10:47:35 2023]
+Error in rule run_script1:
+    jobid: 0
+    input: codes/combine_all_pool.py, data/input_vector.txt, data/input_pool2.txt, data/input_pool3.txt, data/input_pool4.txt, data/input_pool6.txt, data/input_pool5.txt, data/input_pool7.txt, data/input_pool5_2.txt, data/input_pool7_2.txt, data/manifests_pool1.txt, data/manifest_pool2.txt, data/manifest_pool3.txt, data/manifest_pool4.txt, data/manifest_pool6.txt, data/manifest_pool5_1.txt, data/manifest_pool7_1.txt, data/manifest_pool5_2.txt, data/manifest_pool7_2.txt, data/result_240120_barcode_counts_table.txt, data/barcode_counts_table_170620_pool2.txt, data/barcode_counts_table_200720_pool3.txt, data/barcode_counts_table_170620_pool4.txt, data/barcode_counts_table_280720_pool6.txt, data/barcode_counts_table_20920_pool5.txt, data/barcode_counts_table_20920_pool7.txt, data/barcode_counts_table_20920_pool5.txt, data/barcode_counts_table_20920_pool7.txt
+    output: output/final_phenocall.txt
+    conda-env: /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/fa9f96e2e32003f15ff7fed709a8b2da_
+
+RuleException:
+NameError in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 41:
+The name 'input' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile", line 41, in __rule_run_script1
+  File "/Users/vpandey/opt/miniconda3/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-12T104733.172280.snakemake.log

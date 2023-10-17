@@ -1,0 +1,15 @@
+Building DAG of jobs...
+MissingInputException in rule error_plot in file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/Snakefile, line 118:
+Missing input files for rule error_plot:
+    output: output/error_analysis.pdf
+    affected files:
+        data/errorP/pool2.p
+        data/errorP/pool3.p
+        data/errorP/pool6.p
+        data/errorP/pool7_2.p
+        data/errorP/pilot.p
+        data/errorP/pool1.p
+        data/errorP/pool7_1.p
+        data/errorP/pool5_1
+        data/errorP/pool4.p
+        data/errorP/pool5_2.p

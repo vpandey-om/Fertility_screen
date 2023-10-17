@@ -1,0 +1,35 @@
+==> 2023-10-16 16:56:17 <==
+# cmd: /Users/vpandey/opt/miniconda3/bin/conda-env create --quiet --file /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/f696da09af97b1d127eacde69bcc6d34_.yaml --prefix /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/f696da09af97b1d127eacde69bcc6d34_
+# conda version: 23.9.0
++conda-forge/noarch::screed-1.1.2-pyhd8ed1ab_0
++defaults/noarch::python-dateutil-2.8.2-pyhd3eb1b0_0
++defaults/noarch::six-1.16.0-pyhd3eb1b0_1
++defaults/osx-64::blas-1.0-mkl
++defaults/osx-64::bottleneck-1.3.5-py37h67323c0_0
++defaults/osx-64::ca-certificates-2023.08.22-hecd8cb5_0
++defaults/osx-64::certifi-2022.12.7-py37hecd8cb5_0
++defaults/osx-64::intel-openmp-2021.4.0-hecd8cb5_3538
++defaults/osx-64::libcxx-14.0.6-h9765a3e_0
++defaults/osx-64::libffi-3.4.4-hecd8cb5_0
++defaults/osx-64::mkl-2021.4.0-hecd8cb5_637
++defaults/osx-64::mkl-service-2.4.0-py37h9ed2024_0
++defaults/osx-64::mkl_fft-1.3.1-py37h4ab4a9b_0
++defaults/osx-64::mkl_random-1.2.2-py37hb2f4e1b_0
++defaults/osx-64::ncurses-6.4-hcec6c5f_0
++defaults/osx-64::numexpr-2.8.4-py37he696674_0
++defaults/osx-64::numpy-1.21.5-py37h2e5f0a9_3
++defaults/osx-64::numpy-base-1.21.5-py37h3b1a694_3
++defaults/osx-64::openssl-1.1.1w-hca72f7f_0
++defaults/osx-64::packaging-22.0-py37hecd8cb5_0
++defaults/osx-64::pandas-1.3.5-py37h743cdd8_0
++defaults/osx-64::pip-22.3.1-py37hecd8cb5_0
++defaults/osx-64::python-3.7.16-h218abb5_0
++defaults/osx-64::pytz-2022.7-py37hecd8cb5_0
++defaults/osx-64::readline-8.2-hca72f7f_0
++defaults/osx-64::setuptools-65.6.3-py37hecd8cb5_0
++defaults/osx-64::sqlite-3.41.2-h6c40b1e_0
++defaults/osx-64::tk-8.6.12-h5d9f67b_0
++defaults/osx-64::wheel-0.38.4-py37hecd8cb5_0
++defaults/osx-64::xz-5.4.2-h6c40b1e_0
++defaults/osx-64::zlib-1.2.13-h4dc903c_0
+# update specs: ['python=3.7', 'pandas', 'screed']

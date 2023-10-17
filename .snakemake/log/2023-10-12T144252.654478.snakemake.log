@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+run_script2        1
+total              1
+
+Select jobs to execute...
+
+[Thu Oct 12 14:42:54 2023]
+rule run_script2:
+    input: data/phenotype/Phenotype_call_final_100621.xlsx
+    output: output/s_curve_male.pdf, output/s_curve_female.pdf, output/half_circle_male_female_scatter.pdf
+    jobid: 0
+    reason: Missing output files: output/s_curve_male.pdf, output/half_circle_male_female_scatter.pdf, output/s_curve_female.pdf
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+[Thu Oct 12 14:42:58 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-10-12T144252.654478.snakemake.log

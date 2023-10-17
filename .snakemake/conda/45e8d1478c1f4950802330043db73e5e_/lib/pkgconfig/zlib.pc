@@ -1,0 +1,13 @@
+prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/45e8d1478c1f4950802330043db73e5e_
+exec_prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/45e8d1478c1f4950802330043db73e5e_
+libdir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/45e8d1478c1f4950802330043db73e5e_/lib
+sharedlibdir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/45e8d1478c1f4950802330043db73e5e_/lib
+includedir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/45e8d1478c1f4950802330043db73e5e_/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

@@ -1,0 +1,39 @@
+input_vectors:
+  - ['data/input_vector.txt','data/input_pool2.txt',
+  'data/input_pool3.txt','data/input_pool4.txt','data/input_pool6.txt',
+  'data/input_pool5.txt','data/input_pool7.txt','data/input_pool5_2.txt',
+  'data/input_pool7_2.txt']
+barcode_count_files:
+  - ['data/result_240120_barcode_counts_table.txt',
+  'data/barcode_counts_table_170620_pool2.txt',
+  'data/barcode_counts_table_200720_pool3.txt',
+  'data/barcode_counts_table_170620_pool4.txt',
+  'data/barcode_counts_table_280720_pool6.txt',
+  'data/barcode_counts_table_20920_pool5.txt',
+  'data/barcode_counts_table_20920_pool7.txt',
+  'data/barcode_counts_table_20920_pool5.txt',
+  'data/barcode_counts_table_20920_pool7.txt',
+  ]
+
+## these are experimental designs. This will help us to do variability analysis
+manifest_files:
+  - ['data/manifests_pool1.txt','data/manifest_pool2.txt',
+    'data/manifest_pool3.txt','data/manifest_pool4.txt',
+    'data/manifest_pool6.txt','data/manifest_pool5_1.txt',
+    'data/manifest_pool7_1.txt','data/manifest_pool5_2.txt',
+    'data/manifest_pool7_2.txt'
+    ]
+
+motility_vectors:
+  - ['data/input_male_pool_dis.txt','data/input_male_pool_slow.txt']
+motility_barcode:
+  - ['data/barcode_counts_table_050221_male_pool.txt']
+motility_manifest:
+  - ['data/manifest_male_pool_dis.txt','data/manifest_male_pool_slow.txt']
+##
+
+output_dir: results/
+threads: 4
+other_parameters:
+  - [param1, value1]
+  - [param2, value2]

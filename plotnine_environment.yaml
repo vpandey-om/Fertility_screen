@@ -1,0 +1,9 @@
+name: plotnine
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pandas
+  - seaborn
+  - openpyxl
+  - plotnine

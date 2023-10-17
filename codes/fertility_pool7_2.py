@@ -4,7 +4,7 @@ import sys
 code=os.getcwd()
 upLevel=code.replace('codes','') ####### we are going to upper level of code directory
 sys.path.insert(0,upLevel+'/data')
-sys.path.insert(1, upLevel+'/Figures')
+sys.path.insert(1, upLevel+'/tmps')
 
 # print(sys.path)
 
@@ -26,14 +26,16 @@ db_df=db_df.fillna('NA')
 
 
 
-def stepwiseAnalysis():
+def stepwiseAnalysis(snakemake=None):
     ''' We are going do analyis of pool1 data of Claire '''
 
     ### these are the input files
-    manifests_df=pd.read_csv(data_folder+"/manifest_pool7_2.txt",sep='\t')
-    count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
-    input_df=pd.read_csv(data_folder+'/input_pool7_2.txt', sep='\t')
-
+    # manifests_df=pd.read_csv(data_folder+"/manifest_pool7_2.txt",sep='\t')
+    # count_df=pd.read_csv(data_folder+ "/barcode_counts_table_20920_pool7.txt",sep='\t')
+    # input_df=pd.read_csv(data_folder+'/input_pool7_2.txt', sep='\t')
+    manifests_df=pd.read_csv(snakemake.params.manifest[8],sep='\t')
+    count_df=pd.read_csv(snakemake.params.barcode[8],sep='\t')
+    input_df=pd.read_csv(snakemake.params.vectors[8],sep='\t')
 
     #### end of the input section
     # final_count_df: read1 and read2 are added

@@ -1,0 +1,538 @@
+{
+  "build": "py39hecd8cb5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "matplotlib-base >=3.5.0",
+    "numpy >=1.19.0",
+    "pandas >=1.3.5",
+    "python >=3.9,<3.10.0a0",
+    "scipy >=1.5.0"
+  ],
+  "extracted_package_dir": "/Users/vpandey/opt/miniconda3/pkgs/mizani-0.9.2-py39hecd8cb5_0",
+  "features": "",
+  "files": [
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/LICENSE",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/METADATA",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/RECORD",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/WHEEL",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/mizani-0.9.2.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/mizani/__init__.py",
+    "lib/python3.9/site-packages/mizani/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/bounds.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/breaks.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/formatters.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/palettes.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/scale.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/transforms.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/typing.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/__pycache__/utils.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/bounds.py",
+    "lib/python3.9/site-packages/mizani/breaks.py",
+    "lib/python3.9/site-packages/mizani/colors/__init__.py",
+    "lib/python3.9/site-packages/mizani/colors/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/__pycache__/color_palette.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/brewer/__init__.py",
+    "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/diverging.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/qualitative.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/sequential.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/colors/brewer/diverging.py",
+    "lib/python3.9/site-packages/mizani/colors/brewer/qualitative.py",
+    "lib/python3.9/site-packages/mizani/colors/brewer/sequential.py",
+    "lib/python3.9/site-packages/mizani/colors/color_palette.py",
+    "lib/python3.9/site-packages/mizani/external/__init__.py",
+    "lib/python3.9/site-packages/mizani/external/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/external/__pycache__/crayon_rgb.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/external/__pycache__/husl.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/external/__pycache__/xkcd_rgb.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/external/crayon_rgb.py",
+    "lib/python3.9/site-packages/mizani/external/husl.py",
+    "lib/python3.9/site-packages/mizani/external/xkcd_rgb.py",
+    "lib/python3.9/site-packages/mizani/formatters.py",
+    "lib/python3.9/site-packages/mizani/palettes.py",
+    "lib/python3.9/site-packages/mizani/scale.py",
+    "lib/python3.9/site-packages/mizani/tests/__init__.py",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_bounds.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_breaks.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_formatters.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_palettes.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_scale.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_transforms.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/__pycache__/test_utils.cpython-39.pyc",
+    "lib/python3.9/site-packages/mizani/tests/test_bounds.py",
+    "lib/python3.9/site-packages/mizani/tests/test_breaks.py",
+    "lib/python3.9/site-packages/mizani/tests/test_formatters.py",
+    "lib/python3.9/site-packages/mizani/tests/test_palettes.py",
+    "lib/python3.9/site-packages/mizani/tests/test_scale.py",
+    "lib/python3.9/site-packages/mizani/tests/test_transforms.py",
+    "lib/python3.9/site-packages/mizani/tests/test_utils.py",
+    "lib/python3.9/site-packages/mizani/transforms.py",
+    "lib/python3.9/site-packages/mizani/typing.py",
+    "lib/python3.9/site-packages/mizani/utils.py"
+  ],
+  "fn": "mizani-0.9.2-py39hecd8cb5_0.conda",
+  "legacy_bz2_md5": "7e6a56c97b9f63916f517a9526b48259",
+  "legacy_bz2_size": 136875,
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/vpandey/opt/miniconda3/pkgs/mizani-0.9.2-py39hecd8cb5_0",
+    "type": 1
+  },
+  "md5": "2458a106489494c1f3d4607da6a027c2",
+  "name": "mizani",
+  "package_tarball_full_path": "/Users/vpandey/opt/miniconda3/pkgs/mizani-0.9.2-py39hecd8cb5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "f6ff5b100a004d57249d41e8fffd816870fdbc9981e505eafda4ed4085b20b33",
+        "sha256_in_prefix": "f6ff5b100a004d57249d41e8fffd816870fdbc9981e505eafda4ed4085b20b33",
+        "size_in_bytes": 1478
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "fa397e73e908b039368282df03a471af19df777c9ec82d94291f0a4a7fbb3ac6",
+        "sha256_in_prefix": "fa397e73e908b039368282df03a471af19df777c9ec82d94291f0a4a7fbb3ac6",
+        "size_in_bytes": 4646
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "41b12e4be7687c9a41bb2b0dfbadba9df232e9638629031e83f6be9181ac359e",
+        "sha256_in_prefix": "41b12e4be7687c9a41bb2b0dfbadba9df232e9638629031e83f6be9181ac359e",
+        "size_in_bytes": 4317
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "db07a93359e4e034b8785a58ad6d534ea3dca0635f1e184efe2e66e1c3a299ba",
+        "sha256_in_prefix": "db07a93359e4e034b8785a58ad6d534ea3dca0635f1e184efe2e66e1c3a299ba",
+        "size_in_bytes": 92
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "37e6428c55f5a20a6bf7ee3eaeb4594eb4581e552cd511b31e9c3b1d20b5d217",
+        "sha256_in_prefix": "37e6428c55f5a20a6bf7ee3eaeb4594eb4581e552cd511b31e9c3b1d20b5d217",
+        "size_in_bytes": 137
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani-0.9.2.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "6a8050f940d19aeefd883993532476ed6f64e88570e6d55e18bf4957a3dab308",
+        "sha256_in_prefix": "6a8050f940d19aeefd883993532476ed6f64e88570e6d55e18bf4957a3dab308",
+        "size_in_bytes": 7
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "a2206e1d65942e674434720bcb03fa00d1c9b1b74d12066b287387fa37c4c53d",
+        "sha256_in_prefix": "a2206e1d65942e674434720bcb03fa00d1c9b1b74d12066b287387fa37c4c53d",
+        "size_in_bytes": 172
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "2dd345c9265af4015516d88004b4c53b0e92e93c0552f00038b6ca4d5d7bb0d1",
+        "sha256_in_prefix": "2dd345c9265af4015516d88004b4c53b0e92e93c0552f00038b6ca4d5d7bb0d1",
+        "size_in_bytes": 279
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/bounds.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "9a8351cc0c93388994dbf0bc95fbef1a992511c755cb181d3cda0fc13ccb9c61",
+        "sha256_in_prefix": "9a8351cc0c93388994dbf0bc95fbef1a992511c755cb181d3cda0fc13ccb9c61",
+        "size_in_bytes": 14165
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/breaks.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "686d4bb1a6541adff15c66171ff40bdc582437c5b69c121d6d7b680f4bfcf7af",
+        "sha256_in_prefix": "686d4bb1a6541adff15c66171ff40bdc582437c5b69c121d6d7b680f4bfcf7af",
+        "size_in_bytes": 25015
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/formatters.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "011bba21fa56fa4a23fde5260ed74d21f9b8a8f50e7fbe88f48a078d7e215f85",
+        "sha256_in_prefix": "011bba21fa56fa4a23fde5260ed74d21f9b8a8f50e7fbe88f48a078d7e215f85",
+        "size_in_bytes": 23999
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/palettes.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "6315692845d47c1982d966545851935e770ac7b1b128c8768103eaae4ec7af61",
+        "sha256_in_prefix": "6315692845d47c1982d966545851935e770ac7b1b128c8768103eaae4ec7af61",
+        "size_in_bytes": 24084
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/scale.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "729a7e2d31a6d3507d78fa48c95b335a6a97f1abd5e3d28a8488f38b7ecffe43",
+        "sha256_in_prefix": "729a7e2d31a6d3507d78fa48c95b335a6a97f1abd5e3d28a8488f38b7ecffe43",
+        "size_in_bytes": 7594
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/transforms.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "1537506e7906dfd4ab44b591ed44d4d8238bfd7978d442732c4fbd7e63b90bf6",
+        "sha256_in_prefix": "1537506e7906dfd4ab44b591ed44d4d8238bfd7978d442732c4fbd7e63b90bf6",
+        "size_in_bytes": 23057
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/typing.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "d2f3795a14b07eef63eb83bf532aba709012f7f61b60b79d9dc896ac18fd078c",
+        "sha256_in_prefix": "d2f3795a14b07eef63eb83bf532aba709012f7f61b60b79d9dc896ac18fd078c",
+        "size_in_bytes": 778
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/__pycache__/utils.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "2ec172c18b2a6d6dd146a7f678c1628ef0d7a05da94eabf9e38d6662a66920a6",
+        "sha256_in_prefix": "2ec172c18b2a6d6dd146a7f678c1628ef0d7a05da94eabf9e38d6662a66920a6",
+        "size_in_bytes": 7711
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/bounds.py",
+        "path_type": "hardlink",
+        "sha256": "58f0a1e24472b2e4c7a345a66b5776771c278051b88eee20f268fc445acd1312",
+        "sha256_in_prefix": "58f0a1e24472b2e4c7a345a66b5776771c278051b88eee20f268fc445acd1312",
+        "size_in_bytes": 15042
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/breaks.py",
+        "path_type": "hardlink",
+        "sha256": "affb4170dffb6f5d99e5400fd56c25b1c5b23ed74fdfda63dd7275d46741cc63",
+        "sha256_in_prefix": "affb4170dffb6f5d99e5400fd56c25b1c5b23ed74fdfda63dd7275d46741cc63",
+        "size_in_bytes": 26005
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "f711611a820080fd3a229df3b913c80945dc7572d2a71935ddb94e175e7fd5f4",
+        "sha256_in_prefix": "f711611a820080fd3a229df3b913c80945dc7572d2a71935ddb94e175e7fd5f4",
+        "size_in_bytes": 144
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/__pycache__/color_palette.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "03f038ae1567247ae66a50b317ad51b58cccaace2788d5e6a32552bfb3972cfc",
+        "sha256_in_prefix": "03f038ae1567247ae66a50b317ad51b58cccaace2788d5e6a32552bfb3972cfc",
+        "size_in_bytes": 2636
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "b553fc22354c7eade14af7bc76cb2b127362269b99cc3453d4abd5e138cd6b7a",
+        "sha256_in_prefix": "b553fc22354c7eade14af7bc76cb2b127362269b99cc3453d4abd5e138cd6b7a",
+        "size_in_bytes": 1717
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "03ab2d6a638ee47b1371c485f113a62bfb9e0836e5fd4b755768a559a2365e4f",
+        "sha256_in_prefix": "03ab2d6a638ee47b1371c485f113a62bfb9e0836e5fd4b755768a559a2365e4f",
+        "size_in_bytes": 1838
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/diverging.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "a5811e09942cbebed84503267a3ce9719d61d82018eeb7fc9c332b0d1f4ac492",
+        "sha256_in_prefix": "a5811e09942cbebed84503267a3ce9719d61d82018eeb7fc9c332b0d1f4ac492",
+        "size_in_bytes": 5663
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/qualitative.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8ff058337111c9dd4a4c1952ca1ca8b0417281e33b4dace6ccd57d0947f68684",
+        "sha256_in_prefix": "8ff058337111c9dd4a4c1952ca1ca8b0417281e33b4dace6ccd57d0947f68684",
+        "size_in_bytes": 3895
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/__pycache__/sequential.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "17504ca7fa7e234f09062526894c4e606204aa248d3ab54e0edef1fbf4c0d547",
+        "sha256_in_prefix": "17504ca7fa7e234f09062526894c4e606204aa248d3ab54e0edef1fbf4c0d547",
+        "size_in_bytes": 8677
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/diverging.py",
+        "path_type": "hardlink",
+        "sha256": "5f466ce9eb3d2cfee51563fe3c5bc0d55332be3ba04bbd08ae90c8aaa2c8abd6",
+        "sha256_in_prefix": "5f466ce9eb3d2cfee51563fe3c5bc0d55332be3ba04bbd08ae90c8aaa2c8abd6",
+        "size_in_bytes": 17728
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/qualitative.py",
+        "path_type": "hardlink",
+        "sha256": "3315bbb241243cce22d1e6441bf8d1ea5782c6c2a3251219292c2498e76edf98",
+        "sha256_in_prefix": "3315bbb241243cce22d1e6441bf8d1ea5782c6c2a3251219292c2498e76edf98",
+        "size_in_bytes": 11725
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/brewer/sequential.py",
+        "path_type": "hardlink",
+        "sha256": "c14ad80ea021d81900cc620e1885e2c58cba5c1f35ae984c008b0540a2c8a513",
+        "sha256_in_prefix": "c14ad80ea021d81900cc620e1885e2c58cba5c1f35ae984c008b0540a2c8a513",
+        "size_in_bytes": 24032
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/colors/color_palette.py",
+        "path_type": "hardlink",
+        "sha256": "497da073ff6252276b839a440e292ff38a5b90c53bf879b33c5878b007eeb231",
+        "sha256_in_prefix": "497da073ff6252276b839a440e292ff38a5b90c53bf879b33c5878b007eeb231",
+        "size_in_bytes": 1942
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "5bca454ff8e304b5802f9ef90bd27c706e43d7e63b002c255026dce6b2f0f3ca",
+        "sha256_in_prefix": "5bca454ff8e304b5802f9ef90bd27c706e43d7e63b002c255026dce6b2f0f3ca",
+        "size_in_bytes": 104
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8a7d0f63dd3eb4f0221c99b0bdfea531818ebe5d2424983b2ed36fe20c799b49",
+        "sha256_in_prefix": "8a7d0f63dd3eb4f0221c99b0bdfea531818ebe5d2424983b2ed36fe20c799b49",
+        "size_in_bytes": 239
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/__pycache__/crayon_rgb.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ee0abde503b028f0815e719e9f780b6dcd5818c720ed95c3989970a61ec5a8c9",
+        "sha256_in_prefix": "ee0abde503b028f0815e719e9f780b6dcd5818c720ed95c3989970a61ec5a8c9",
+        "size_in_bytes": 4562
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/__pycache__/husl.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "85f259e0fd421f30b02b232e32dd16a2832ace004b4c612e097f775d6710861e",
+        "sha256_in_prefix": "85f259e0fd421f30b02b232e32dd16a2832ace004b4c612e097f775d6710861e",
+        "size_in_bytes": 7899
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/__pycache__/xkcd_rgb.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "35a97f4b880df889f3663157f59de76c48e782b12e6f5bd7a2a80472c2325e9b",
+        "sha256_in_prefix": "35a97f4b880df889f3663157f59de76c48e782b12e6f5bd7a2a80472c2325e9b",
+        "size_in_bytes": 25803
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/crayon_rgb.py",
+        "path_type": "hardlink",
+        "sha256": "ea5a49757ed8f4b3973a6a3c565be3aada0db4554fee416adc13a302e6133104",
+        "sha256_in_prefix": "ea5a49757ed8f4b3973a6a3c565be3aada0db4554fee416adc13a302e6133104",
+        "size_in_bytes": 5055
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/husl.py",
+        "path_type": "hardlink",
+        "sha256": "e24f31e22fba9d8c3b5bdd0fae06c7e976a5a62bc67e7caa6a2e7a231b3c83ec",
+        "sha256_in_prefix": "e24f31e22fba9d8c3b5bdd0fae06c7e976a5a62bc67e7caa6a2e7a231b3c83ec",
+        "size_in_bytes": 6488
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/external/xkcd_rgb.py",
+        "path_type": "hardlink",
+        "sha256": "83e793cc5fd2bd67e79a5f1d2678557093051d80c3acd8bc6588aa2fc4298b8b",
+        "sha256_in_prefix": "83e793cc5fd2bd67e79a5f1d2678557093051d80c3acd8bc6588aa2fc4298b8b",
+        "size_in_bytes": 28029
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/formatters.py",
+        "path_type": "hardlink",
+        "sha256": "33cdf2e0f4473b9eb0593b5869d06ef837f35586e5b73eff39956c4e9e05ec85",
+        "sha256_in_prefix": "33cdf2e0f4473b9eb0593b5869d06ef837f35586e5b73eff39956c4e9e05ec85",
+        "size_in_bytes": 22973
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/palettes.py",
+        "path_type": "hardlink",
+        "sha256": "28d8dd171a2151f6897b51b0dee0f63f7eb19e03ee25a23d33b8ed27040e6d6f",
+        "sha256_in_prefix": "28d8dd171a2151f6897b51b0dee0f63f7eb19e03ee25a23d33b8ed27040e6d6f",
+        "size_in_bytes": 22688
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/scale.py",
+        "path_type": "hardlink",
+        "sha256": "45599ffba4eae6a86f01bc646bc339a6c4ebca993db3eb5f049bb8ba454c3e40",
+        "sha256_in_prefix": "45599ffba4eae6a86f01bc646bc339a6c4ebca993db3eb5f049bb8ba454c3e40",
+        "size_in_bytes": 7476
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "f847ba5789a38dd1cf2da856fb865c08e81f227c84c7ca1cd6bb11cbec3f0491",
+        "sha256_in_prefix": "f847ba5789a38dd1cf2da856fb865c08e81f227c84c7ca1cd6bb11cbec3f0491",
+        "size_in_bytes": 143
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_bounds.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "94e90e40b4f0a14b2561e57e7105c5242573b066078a18889e50d7f21b178bb2",
+        "sha256_in_prefix": "94e90e40b4f0a14b2561e57e7105c5242573b066078a18889e50d7f21b178bb2",
+        "size_in_bytes": 11918
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_breaks.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "085cd48eeb51609e03827da27f14cec747f47bf3964e293160a76dd9081ae8bf",
+        "sha256_in_prefix": "085cd48eeb51609e03827da27f14cec747f47bf3964e293160a76dd9081ae8bf",
+        "size_in_bytes": 8405
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_formatters.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "182bc63d1fb3d8b38ed45b11a75775e9bf1c96e7f55e627ecc8bcfe572506dd0",
+        "sha256_in_prefix": "182bc63d1fb3d8b38ed45b11a75775e9bf1c96e7f55e627ecc8bcfe572506dd0",
+        "size_in_bytes": 8557
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_palettes.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "44923f8542ae264d7053a4d591a4360e356b6b0ffd319ec3c7e96ca459f2933c",
+        "sha256_in_prefix": "44923f8542ae264d7053a4d591a4360e356b6b0ffd319ec3c7e96ca459f2933c",
+        "size_in_bytes": 9152
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_scale.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "af5acb7a3c533f6bf4e5e2a6d722a7445c374c5ca0a05b1100583050b93d406d",
+        "sha256_in_prefix": "af5acb7a3c533f6bf4e5e2a6d722a7445c374c5ca0a05b1100583050b93d406d",
+        "size_in_bytes": 2757
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_transforms.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ff3edf9c85f57dfa13b9812c74f3fced71c2f20721517b078388b7d43db4b704",
+        "sha256_in_prefix": "ff3edf9c85f57dfa13b9812c74f3fced71c2f20721517b078388b7d43db4b704",
+        "size_in_bytes": 10065
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/__pycache__/test_utils.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "79b1119ec8b508408dd974f891ee31339d3cbe897fbdd9516f0bcdca66c8c6ef",
+        "sha256_in_prefix": "79b1119ec8b508408dd974f891ee31339d3cbe897fbdd9516f0bcdca66c8c6ef",
+        "size_in_bytes": 4094
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_bounds.py",
+        "path_type": "hardlink",
+        "sha256": "57e76338ca99b8f7094923396f8248834efb897890ce817c5e004c47b10e3a26",
+        "sha256_in_prefix": "57e76338ca99b8f7094923396f8248834efb897890ce817c5e004c47b10e3a26",
+        "size_in_bytes": 13788
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_breaks.py",
+        "path_type": "hardlink",
+        "sha256": "a812ba4ccd6863ad8d99b0a97d39153133aa0d1b89450885c2a88268d67b0214",
+        "sha256_in_prefix": "a812ba4ccd6863ad8d99b0a97d39153133aa0d1b89450885c2a88268d67b0214",
+        "size_in_bytes": 8243
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_formatters.py",
+        "path_type": "hardlink",
+        "sha256": "fb7c3ec2325b5acead20de1f94e242e819bd65360da3ef3020ab2b565979d10e",
+        "sha256_in_prefix": "fb7c3ec2325b5acead20de1f94e242e819bd65360da3ef3020ab2b565979d10e",
+        "size_in_bytes": 8548
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_palettes.py",
+        "path_type": "hardlink",
+        "sha256": "b5ae05c57f6d8bc0d1a24477d07f601921c714781098ca8be2e41d810a5fff89",
+        "sha256_in_prefix": "b5ae05c57f6d8bc0d1a24477d07f601921c714781098ca8be2e41d810a5fff89",
+        "size_in_bytes": 6085
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_scale.py",
+        "path_type": "hardlink",
+        "sha256": "b897e0c03d1dca1c9d56daa6e0e4136d3d8858781f615c995f23237c54c513e2",
+        "sha256_in_prefix": "b897e0c03d1dca1c9d56daa6e0e4136d3d8858781f615c995f23237c54c513e2",
+        "size_in_bytes": 3719
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_transforms.py",
+        "path_type": "hardlink",
+        "sha256": "a21ad3ec7267ba0b112b14fedd802aeaf13644dca4091ef84954b4b81c54293e",
+        "sha256_in_prefix": "a21ad3ec7267ba0b112b14fedd802aeaf13644dca4091ef84954b4b81c54293e",
+        "size_in_bytes": 7102
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/tests/test_utils.py",
+        "path_type": "hardlink",
+        "sha256": "b3573af865ae4ab5a12a3e01a502cfa7c2ea17669f7a04c32d5feaf1a37e2115",
+        "sha256_in_prefix": "b3573af865ae4ab5a12a3e01a502cfa7c2ea17669f7a04c32d5feaf1a37e2115",
+        "size_in_bytes": 4229
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/transforms.py",
+        "path_type": "hardlink",
+        "sha256": "3fd4e13535f8a595ff9c568da9cd900f7a46b7f37bfabc409d1f87c488c277e1",
+        "sha256_in_prefix": "3fd4e13535f8a595ff9c568da9cd900f7a46b7f37bfabc409d1f87c488c277e1",
+        "size_in_bytes": 21685
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/typing.py",
+        "path_type": "hardlink",
+        "sha256": "cfbff88b50275bbde7b60a4fd66a24b74ac32b972d9668a5a509ceb6a319e5bb",
+        "sha256_in_prefix": "cfbff88b50275bbde7b60a4fd66a24b74ac32b972d9668a5a509ceb6a319e5bb",
+        "size_in_bytes": 698
+      },
+      {
+        "_path": "lib/python3.9/site-packages/mizani/utils.py",
+        "path_type": "hardlink",
+        "sha256": "027985fe58873a09a4fd258dea22f31dda611a97e987c41be513492298c743f4",
+        "sha256_in_prefix": "027985fe58873a09a4fd258dea22f31dda611a97e987c41be513492298c743f4",
+        "size_in_bytes": 7757
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "322ac30bd5b0427d1ed2ca1e5411aa01ead6b3d1259820cb339000dcb0f86d65",
+  "size": 152167,
+  "subdir": "osx-64",
+  "timestamp": 1689947895479,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/mizani-0.9.2-py39hecd8cb5_0.conda",
+  "version": "0.9.2"
+}

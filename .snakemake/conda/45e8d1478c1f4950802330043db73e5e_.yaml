@@ -1,0 +1,13 @@
+name: fertility_screen
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - pandas
+  - seaborn
+  - plotly
+  - statsmodels
+  - scikit-learn
+
+pip:
+  - -r requirements.txt

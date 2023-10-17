@@ -1,0 +1,4 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+MissingRuleException:
+No rule to produce barseq-raw/result2/barcode_counts_table.csv (if you use input functions make sure that they don't raise unexpected exceptions).

@@ -1,0 +1,14 @@
+prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_
+exec_prefix=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_
+libdir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_/lib
+includedir=/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.3.18
+Requires: 
+Requires.private: 
+Libs: -L/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_/lib -lfreetype
+Libs.private: -lz -L/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/368bc4f6aff78b56620c150f58f03484_/lib -lpng16 -lz
+Cflags: -I${includedir}/freetype2

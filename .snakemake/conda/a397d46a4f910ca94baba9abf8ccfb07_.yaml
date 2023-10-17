@@ -1,0 +1,5 @@
+name: rawbarseq
+channels:
+  - defaults
+dependencies:
+  - python=3.7

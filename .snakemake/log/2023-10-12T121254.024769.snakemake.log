@@ -1,0 +1,16 @@
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however crucial for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Creating conda environment environment.yaml...
+Downloading and installing remote packages.
+CreateCondaEnvironmentException:
+Could not create conda environment from /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/environment.yaml:
+Command:
+conda env create --quiet --file "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/e2a7158916e6b277515ec018d733847f_.yaml" --prefix "/Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/conda/e2a7158916e6b277515ec018d733847f_"
+Output:
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... failed
+
+ResolvePackageNotFound: 
+  - requirements.txt
+
+

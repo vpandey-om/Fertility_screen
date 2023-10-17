@@ -1,0 +1,46 @@
+{
+  "build": "hca72f7f_7",
+  "build_number": 7,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "libbrotlidec 1.0.9 hca72f7f_7",
+    "libbrotlienc 1.0.9 hca72f7f_7"
+  ],
+  "extracted_package_dir": "/Users/vpandey/opt/miniconda3/pkgs/brotli-bin-1.0.9-hca72f7f_7",
+  "features": "",
+  "files": [
+    "bin/brotli"
+  ],
+  "fn": "brotli-bin-1.0.9-hca72f7f_7.conda",
+  "legacy_bz2_md5": "caf1073dc2ca5aeb832a2877394eae12",
+  "legacy_bz2_size": 18233,
+  "license": "MIT",
+  "link": {
+    "source": "/Users/vpandey/opt/miniconda3/pkgs/brotli-bin-1.0.9-hca72f7f_7",
+    "type": 1
+  },
+  "md5": "110bdca1a20710820e61f7fa3047f737",
+  "name": "brotli-bin",
+  "package_tarball_full_path": "/Users/vpandey/opt/miniconda3/pkgs/brotli-bin-1.0.9-hca72f7f_7.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/brotli",
+        "path_type": "hardlink",
+        "sha256": "724fd97e351d44762dd9187833fb9b2c78384fcdc7a377510963309916cc65ce",
+        "sha256_in_prefix": "724fd97e351d44762dd9187833fb9b2c78384fcdc7a377510963309916cc65ce",
+        "size_in_bytes": 27144
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "768c9e04a9358868fe078a98aa5613b97b5b6456b8003433bdf8d88590565990",
+  "size": 17336,
+  "subdir": "osx-64",
+  "timestamp": 1659616216769,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/brotli-bin-1.0.9-hca72f7f_7.conda",
+  "version": "1.0.9"
+}

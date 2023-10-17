@@ -1,0 +1,30 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+mca_gene_plot        1
+total                1
+
+Select jobs to execute...
+
+[Tue Oct 17 14:47:08 2023]
+rule mca_gene_plot:
+    input: data/ginny_gene_mca.xlsx, data/phenotype/Phenotype_call_final_100621.xlsx, data/mpmp/male_only_genes.txt, data/mpmp/female_only_genes.txt
+    output: output/male_mca.pdf, output/female_mca.pdf
+    jobid: 0
+    reason: Forced execution
+    priority: 10
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+python -c "from __future__ import print_function; import sys, json; print(json.dumps([sys.version_info.major, sys.version_info.minor]))"
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+python /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/.snakemake/scripts/tmpdtmyr1yb.mca_gene_cluster.py
+Activating conda environment: .snakemake/conda/4eb951927f5eb2cb65827da9e6cdd6fd_
+[Tue Oct 17 14:47:16 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-10-17T144706.241101.snakemake.log

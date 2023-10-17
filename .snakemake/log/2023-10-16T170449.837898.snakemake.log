@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Creating conda environment plotnine_environment.yaml...
+Downloading and installing remote packages.
+Environment for /Users/vpandey/projects/githubs/Fertility_screen_final/Fertility_screen/plotnine_environment.yaml created (location: .snakemake/conda/d5e1df83665e377a0d84af0f2af940ae_)
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+mpmp_violin        1
+total              1
+
+Select jobs to execute...
+
+[Mon Oct 16 17:07:51 2023]
+rule mpmp_violin:
+    input: data/mpmp/mpmp_pbe.pickle, data/mpmp/MPMP.xlsx, data/mpmp/male_mpmp_enrich.txt, data/mpmp/female_mpmp_enrich.txt, data/phenotype/Phenotype_call_final_100621.xlsx
+    output: output/male_female_mpmp_violin.pdf
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/var/folders/ty/spqw6k0n4dn1yvpgn_swvjm80000gn/T
+
+Activating conda environment: .snakemake/conda/d5e1df83665e377a0d84af0f2af940ae_
+Activating conda environment: .snakemake/conda/d5e1df83665e377a0d84af0f2af940ae_
+[Mon Oct 16 17:08:35 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-10-16T170449.837898.snakemake.log
