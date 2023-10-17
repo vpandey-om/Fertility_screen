@@ -45,7 +45,7 @@ configfile: "config.yaml"
 # input_file=config["input_file"]
 # barcode_file=config["barcode_file"]
 # output_dir=config["output_dir"]
-# print(config)
+print(config['input_file'])
 # sys.exit("Exiting Snakemake due to a specific condition")
 
 # Rule to run script1 on input files
@@ -83,17 +83,15 @@ rule remove_zeros:
 #         "{params.output_dir}/barcode_counts_table.csv"
 
 rule combine_pools:
-    # input:
-    #     [input_vectors,barcode_count_files,manifest_files]
-    output:
-        "output/final_phenocall.txt"
     conda:
         "environment.yaml"
-    priority: 1
+    priority: 10
     params:
         vectors=config['input_vectors'],
         barcode=config['barcode_count_files'],
         manifest=config['manifest_files']
+    output:
+        "output/final_phenocall.txt"
     script:
         "codes/combine_all_pool.py"
 

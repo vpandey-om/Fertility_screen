@@ -99,7 +99,7 @@ outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
 input_df=pd.read_csv(snakemake.input[4],sep= "\t",header=None)
 genelist=input_df.loc[:,0].to_list()
 #outfile="/Users/vpandey/projects/githubs/Fertility_screen_2/preFinals/notreduced_motality_enrich.txt"
-outfile=snakemake.output[0]
+outfile=snakemake.output[2]
 outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
 
 
@@ -111,7 +111,7 @@ outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
 
 
 ##
-input_df=pd.read_csv("/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_genes.txt",sep= "\t",header=None)
-genelist=input_df.loc[:,0].to_list()
-outfile="/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_mpmp_enrich.txt"
-outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)
+# input_df=pd.read_csv("/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_genes.txt",sep= "\t",header=None)
+# genelist=input_df.loc[:,0].to_list()
+# outfile="/Users/vpandey/projects/githubs/Fertility_screen/preFinals/female_male_mpmp_enrich.txt"
+# outdf=apply_enrich(pathway_to_genes,genelist,M,outfile)

@@ -3,8 +3,8 @@ channels:
   - defaults
 dependencies:
   - python=3.7
-  - pandas
   - seaborn
+  - pandas
   - plotly
   - statsmodels
   - scikit-learn
