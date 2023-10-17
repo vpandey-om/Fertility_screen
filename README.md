@@ -5,20 +5,22 @@ This repository contains the analysis of bar-seq data aimed at studying fertilit
 ## Overview
 We used barcoded PlasmoGEM vectors to mutagenize P. berghei strains that produce exclusively fertile male or female gametocytes. Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. The outcome of our study revealed the identification of numerous genes with specific functions in sexual reproduction.
 
-Within this repository, you will find scripts and datasets detailing our analysis of raw bar-seq data and the computation of fertility-related metrics. Additionally, we have included the scripts used to generate figures featured in our research paper.
+Within this repository, you will find scripts and datasets detailing our analysis of raw bar-seq data and the computation of fertility phenotype metrics. Additionally, we have included the scripts used to generate figures featured in our research paper.
 
 
 ## Prerequisites
 
-List any prerequisites or dependencies that users need to install before using the Snakemake workflow.
+Users need to install before using the Snakemake workflow.
 
 - Python (>=3.7)
 - Snakemake (7.32.4)
 
 ## Installation
 
-Install snakemake.
-- pip install snakemake
+Install Snakemake using pip.
+  ~~~
+  pip install snakemake
+  ~~~
 
 ## Usage
 
