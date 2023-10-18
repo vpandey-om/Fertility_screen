@@ -1,6 +1,6 @@
 # Fertility_screen
 
-This repository contains the analysis of bar-seq data aimed at studying fertility phenotypes in a strain of Plasmodium berghei, a rodent malaria parasite.
+This repository contains the analysis of BARseq data aimed at studying fertility phenotypes in a strain of Plasmodium berghei, a rodent malaria parasite.
 
 ## Overview
 We used barcoded PlasmoGEM vectors to mutagenize P. berghei strains that produce exclusively fertile male or female gametocytes. Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. The outcome of our study revealed the identification of numerous genes with specific functions in sexual reproduction.
@@ -18,14 +18,23 @@ Users need to install before using the Snakemake workflow.
 ## Installation
 
 Install Snakemake using pip.
-  ~~~
-  pip install snakemake
-  ~~~
+~~~
+pip install snakemake
+~~~
 
 ## Usage
+### Convert Fastq to count matrix
+To convert paired forward and reverse reads from BARseq experiments into a count matrix, we employ the following command.
+~~~
+snakemake --use-conda --conda-frontend conda raw_barseq  --cores 1 -F --config input_file=barseq-raw/testdata/sequence barcode_file=barcode_to_gene_210920.csv output_dir=barseq-raw/testRes -p  
+~~~
+The process requires two key inputs: a directory (e.g., `barseq-raw/testdata/sequence`) where all the fastq files for the samples are stored and a CSV file (e.g., `barcode_to_gene_210920.csv`) containing barcode information for each gene or mutant. The resulting output is directed to another directory (e.g., `barseq-raw/testRes`), where both the mutant count matrix file and a log file are generated.
 
-Provide instructions for running the Snakemake workflow. Include sample commands and arguments, if applicable.
-
+To identify and remove mutants with zero counts in all samples, use the following command. This will generate the file `removed_zeros_barcode_counts_table.csv`
+in the `barseq-raw/testRes` directory.
+~~~
+snakemake --use-conda --conda-frontend conda remove_zeros  --cores 1 -F --config output_dir=barseq-raw/testRes -p
+~~~
 
 ## Descriptions
 Barseq experiment was done in 7 pools from pool1 to pool7. We have pool5 and pool7 was done two times. For combining all pools from pool1 to pool7 one could use script form codes ‘combine_all_pool.py’.
