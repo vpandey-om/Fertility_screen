@@ -21,15 +21,28 @@ Install Snakemake using pip.
 ~~~
 pip install snakemake
 ~~~
-## Descriptions
+## Concepts and Descriptions
+In this section, we will explain the terminology and concepts that were employed in the calculation of male and female fertility.
 
-Scripts from the location ‘analysisCodes/scripts’ are used to plot figures in papers.
+### Relative abundance
+To calculate the abundance of mutants in each sample, we averaged the forward and reverse reads. Subsequently, we computed the abundance for each pool. For example, for a pool of 3 mutants/genes, the count matrix can be generated as shown in the following table.
+
+| Genes | Sample  1 | Sample  2 |
+|----------|----------|----------|
+| Gene1 | 10.5 | 11.5 |
+| Gene2 | 30 | 10.5 |
+| Gene3|  20.5| 5.5 |
 
 
-1)	For plotting ordered relative fertility error one could use script ‘plot_s_curve.py’ which is in folder: analysisCodes/scripts.
-2)	MPMP pathway enrichment analysis was done by using the script: mpmp_enrichment.py form the folder: ‘analysisCodes/scripts’  
-3)	 Comparison of fertility screen data with different screens we used (violin plots are generated) scripts: ‘violin_and_proteomics.py’ and ‘phospho_proteome.py’
-4)	 combined error analysis to see noise in data we used script ‘error_combine_analysis.py’
+
+We determine the relative abundance by dividing the abundance of a specific feature by the total abundance in the sample. The resulting relative abundance table is as
+follows:
+
+| Genes | Sample  1 | Sample  2 |
+|----------|----------|----------|
+| Gene1 | 10.5/60 | 11.5/31 |
+| Gene2 | 30/60 | 10/31 |
+| Gene3|  20.5/60| 5.5/31 |
 
 ## Usage
 ### Convert Fastq to count matrix
