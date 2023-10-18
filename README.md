@@ -1,4 +1,4 @@
-# Fertility_screen
+# Fertility Screen
 
 This repository contains the analysis of BARseq data aimed at studying fertility phenotypes in a strain of Plasmodium berghei, a rodent malaria parasite.
 
@@ -21,6 +21,15 @@ Install Snakemake using pip.
 ~~~
 pip install snakemake
 ~~~
+## Descriptions
+
+Scripts from the location ‘analysisCodes/scripts’ are used to plot figures in papers.
+
+
+1)	For plotting ordered relative fertility error one could use script ‘plot_s_curve.py’ which is in folder: analysisCodes/scripts.
+2)	MPMP pathway enrichment analysis was done by using the script: mpmp_enrichment.py form the folder: ‘analysisCodes/scripts’  
+3)	 Comparison of fertility screen data with different screens we used (violin plots are generated) scripts: ‘violin_and_proteomics.py’ and ‘phospho_proteome.py’
+4)	 combined error analysis to see noise in data we used script ‘error_combine_analysis.py’
 
 ## Usage
 ### Convert Fastq to count matrix
@@ -36,13 +45,51 @@ in the `barseq-raw/testRes` directory.
 snakemake --use-conda --conda-frontend conda remove_zeros  --cores 1 -F --config output_dir=barseq-raw/testRes -p
 ~~~
 
-## Descriptions
-Barseq experiment was done in 7 pools from pool1 to pool7. We have pool5 and pool7 was done two times. For combining all pools from pool1 to pool7 one could use script form codes ‘combine_all_pool.py’.
-
-Scripts from the location ‘analysisCodes/scripts’ are used to plot figures in papers.
 
 
-1)	For plotting ordered relative fertility error one could use script ‘plot_s_curve.py’ which is in folder: analysisCodes/scripts.
-2)	MPMP pathway enrichment analysis was done by using the script: mpmp_enrichment.py form the folder: ‘analysisCodes/scripts’  
-3)	 Comparison of fertility screen data with different screens we used (violin plots are generated) scripts: ‘violin_and_proteomics.py’ and ‘phospho_proteome.py’
-4)	 combined error analysis to see noise in data we used script ‘error_combine_analysis.py’
+
+### Combine fertility screen data
+
+In the Barseq experiment, we analyzed over 1200 mutants distributed across seven pools labeled as Pool1 to Pool7. Notably, Pool5 and Pool7 were studied twice. To consolidate the data from all these pools (Pool1 to Pool7), you can use the following command.
+~~~
+snakemake --use-conda --conda-frontend conda combine_pools  --cores 1 -F
+~~~
+This command/script will calculate male and female fertility, their variances, and male and female phenotypes (e.g., Reduced, Not reduced).
+
+### Motility screen data
+We conducted a BARseq experiment, focusing on the pool with the most strongest male fertility phenotypes. Subsequently, we collected barcodes from purified microgametes as part of a motility screen.
+
+~~~
+snakemake --use-conda --conda-frontend conda motility_screen  --cores 1 -F
+~~~
+This command/script will calculate motility rate, their variances, and motility phenotype (e.g., Reduced, Not reduced).
+
+### Generate Visualizations
+To visualize ranked male fertility and female fertility, as well as create a scatter plot of male vs. female fertility, you can utilize the following command.
+~~~
+snakemake --use-conda --conda-frontend conda plot_fertility  --cores 1 -F
+~~~
+
+We performed an enrichment analysis using the Malaria Parasite Metabolic Pathways (MPMP) for male and female-only fertility phenotypes. For this use following command.
+
+~~~
+snakemake --use-conda --conda-frontend conda mpmp_enrichment  --cores 1 -F
+~~~
+
+We visualize the enrichment of top-ranked pathways (male/female) using violin plots with the following commands.
+
+~~~
+snakemake --use-conda --conda-frontend conda mpmp_violin  --cores 1 -F
+~~~
+
+To investigate the relationship between fertility phenotypes and gene expression, we visualized genes associated with male and female-only fertility phenotypes within the Malaria Cell Atlas (mca) gene expression-based clusters.
+
+~~~
+snakemake --use-conda --conda-frontend conda mca_gene_plot  --cores 1 -F
+~~~
+
+To filter out noisy data, we generated a plot of relative abundance against relative error. Our analysis revealed that data with a relative abundance below the cutoff value of log2(-12) exhibited unacceptably high errors, making it unsuitable for further analysis.
+
+~~~
+snakemake --use-conda --conda-frontend conda error_plot  --cores 1 -F
+~~~
