@@ -1,19 +1,19 @@
 # Fertility Screen
 
-This repository contains the analysis of BARseq data aimed at studying fertility phenotypes in a strain of Plasmodium berghei, a rodent malaria parasite.
+This repository contains the analysis of barcode sequencing (barseq) data aimed at studying fertility phenotypes in a rodent malaria parasite, Plasmodium berghei.
 
 ## Overview
-We used barcoded PlasmoGEM vectors to mutagenize P. berghei strains that produce exclusively fertile male or female gametocytes. Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. The outcome of our study revealed the identification of numerous genes with specific functions in sexual reproduction.
+We used barcoded PlasmoGEM knockout (KO) vectors to mutagenize two P. berghei background lines including one that produces only fertile male gametocytes (male) and one that produces only fertile female gameotcytes (female). Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. Our study identified hundreds of genes with specific functions in sexual reproduction.  
 
-In our study, we divided the mutants into pools, and each pool was used for transfection in two groups of mice. Subsequently, we prepared two groups of infected mice for mosquito feeding.
+In our study, we divided the barcoded KO vectors into pools that were transfected into male and female background lines separately, which were used to infect two groups of mice. Subsequently, we prepared two groups of mice infected with male and female mutants for mosquito feeding.
 
-On day 0, there were two distinct groups of infected mice available for mosquito feeding: "Mosquito Feed 1" (MF1, indicated by blue dots) and "Mosquito Feed 2" (MF2, indicated by red dots). For each mosquito feed, we collected two PCR duplicate samples. Therefore, on day 0, we had a total of four samples.
+On day 0, the male and female mutants were separately fed to mosquitoes in duplicate: "Mosquito Feed 1" (MF1, indicated by blue dots) and "Mosquito Feed 2" (MF2, indicated by red dots). For each mosquito feed, we collected one day 0 input sample. Therefore, on day 0, we generated a total of four samples.
 
-Each mosquito feed was offered by two separate batches of mosquitoes. Consequently, by day 13, we accumulated a total of eight samples when considering both mosquito feeds and PCR replicates.
+On day 13 or 14, we collected output samples from each mosquito feed in duplicate. Consequently, on day 13 or 14, we generated a total of eight samples. 
 
 ![Sample description](https://github.com/vpandey-om/Fertility_screen/blob/master/output/sample.png)
 
-Within this repository, you will find scripts and datasets detailing our analysis of raw bar-seq data and the computation of fertility phenotype metrics. Additionally, we have included the scripts used to generate figures featured in our research paper.
+Within this repository, you will find scripts and datasets detailing our analysis of raw barseq data and the computation of fertility phenotype metrics. Additionally, we have included the scripts used to generate figures featured in our research paper.
 
 
 ## Prerequisites
