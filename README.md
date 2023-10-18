@@ -5,6 +5,14 @@ This repository contains the analysis of BARseq data aimed at studying fertility
 ## Overview
 We used barcoded PlasmoGEM vectors to mutagenize P. berghei strains that produce exclusively fertile male or female gametocytes. Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. The outcome of our study revealed the identification of numerous genes with specific functions in sexual reproduction.
 
+In our study, we divided the mutants into pools, and each pool was used for transfection in two groups of mice. Subsequently, we prepared two groups of infected mice for mosquito feeding.
+
+On day 0, there were two distinct groups of infected mice available for mosquito feeding: "Mosquito Feed 1" (MF1, indicated by blue dots) and "Mosquito Feed 2" (MF2, indicated by red dots). For each mosquito feed, we collected two PCR duplicate samples. Therefore, on day 0, we had a total of four samples.
+
+Each mosquito feed was offered by two separate batches of mosquitoes. Consequently, by day 13, we accumulated a total of eight samples when considering both mosquito feeds and PCR replicates.
+
+![Sample description](https://github.com/vpandey-om/Fertility_screen/blob/master/output/sample.png)
+
 Within this repository, you will find scripts and datasets detailing our analysis of raw bar-seq data and the computation of fertility phenotype metrics. Additionally, we have included the scripts used to generate figures featured in our research paper.
 
 
@@ -44,8 +52,7 @@ follows:
 | Gene2 | 30/60 | 10/31 |
 | Gene3|  20.5/60| 5.5/31 |
 
-Throughout the screens, we assessed biological variance by transmitting each pool at least twice from different infected mice. We further monitored sampling errors by subsampling each transmission experiment in two batches of mosquitoes and by amplifying and counting barcodes twice from each DNA sample. Data from all types of replicates were entered into the final analysis and used to determine independently for each sex the confidence with which a mutant’s transmission rate was determined.
-![Sample description](https://github.com/vpandey-om/Fertility_screen/blob/master/output/sample.png)
+
 ## Usage
 ### Convert Fastq to count matrix
 To convert paired forward and reverse reads from BARseq experiments into a count matrix, we employ the following command.
