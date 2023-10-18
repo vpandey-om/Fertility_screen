@@ -52,8 +52,21 @@ follows:
 | Gene2 | 30/60 | 10/31 |
 | Gene3|  20.5/60| 5.5/31 |
 
+### Fertility
+
+#### Step 1: Compute mean and variance for each mutant
+On day 0 and day 13, we utilized relative abundance to calculate the mean and variance for each set of PCR duplicates. Subsequently, we applied a logarithmic transformation to the mean values (log2(mean)) and computed the relative variability represented by the coefficient of variation squared (CV^2).
+
+#### Step 2: Inverse-variance weighting   
+Inverse-variance weighting is a statistical technique that combines multiple random variables to reduce the variance of the weighted average. It is particularly useful in our analysis where we calculate the change in barcode abundance between day0 and day13. This change is computed as the difference between the logarithms of the mean abundance at day13 and day0. Additionally, we consider the variance of the data, which is propagated as the sum of relative variances at day0 and day13. This allows us to effectively assess changes in barcode abundance while accounting for the variability in the data.
+
+#### Step 3: Normalized by spike-in controls
+In our study, we included spike-in controls to normalize the change in barcode abundance. This normalized change in barcode abundance, which we refer as "fertility".
+
+For each pool, we computed the fertility of mutants. Mutants were categorized as `Reduced` if their fertility, plus two times the standard deviation, fell below a certain cutoff value; otherwise, they were categorized as `Not Reduced`. Since spike-in controls were included in all pools, we employed inverse-variance weighting to obtain a consolidated measure of fertility and the associated error for this variable. This approach allowed us to effectively combine data from multiple pools while considering variations introduced by the spike-in controls.
 
 ## Usage
+
 ### Convert Fastq to count matrix
 To convert paired forward and reverse reads from BARseq experiments into a count matrix, we employ the following command.
 ~~~
