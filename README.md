@@ -44,6 +44,8 @@ follows:
 | Gene2 | 30/60 | 10/31 |
 | Gene3|  20.5/60| 5.5/31 |
 
+Throughout the screens, we assessed biological variance by transmitting each pool at least twice from different infected mice. We further monitored sampling errors by subsampling each transmission experiment in two batches of mosquitoes and by amplifying and counting barcodes twice from each DNA sample. Data from all types of replicates were entered into the final analysis and used to determine independently for each sex the confidence with which a mutant’s transmission rate was determined.
+
 ## Usage
 ### Convert Fastq to count matrix
 To convert paired forward and reverse reads from BARseq experiments into a count matrix, we employ the following command.
