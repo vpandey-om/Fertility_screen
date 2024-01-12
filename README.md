@@ -1,6 +1,6 @@
 # Fertility Screen
 
-This repository contains the analysis of barcode sequencing (barseq) data aimed at studying fertility phenotypes in a rodent malaria parasite, Plasmodium berghei[Preprint](https://www.biorxiv.org/content/10.1101/2023.12.25.572958v1)
+This repository contains the analysis of barcode sequencing (barseq) data aimed at studying fertility phenotypes in a rodent malaria parasite, Plasmodium berghei [Preprint](https://www.biorxiv.org/content/10.1101/2023.12.25.572958v1).
 
 ## Overview
 We used barcoded PlasmoGEM knockout (KO) vectors to mutagenize two P. berghei background lines including one that produces only fertile male gametocytes (male) and one that produces only fertile female gameotcytes (female). Our comprehensive screening covered over 1200 targetable genes, allowing us to probe sex-specific phenotypes. Our study identified hundreds of genes with specific functions in sexual reproduction.  
